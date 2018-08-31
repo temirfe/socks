@@ -16,8 +16,12 @@ class m180830_132538_tour extends Migration
         $this->createTable('tour', [
             'id' => $this->primaryKey(),
             'title' => $this->string('255')->notNull(),
+            'title_ru' => $this->string('255')->notNull(),
+            'title_ko' => $this->string('255')->notNull(),
             'image' => $this->string('50')->notNull(),
             'description' => $this->text()->notNull(),
+            'description_ru' => $this->text()->notNull(),
+            'description_ko' => $this->text()->notNull(),
             'days'=>$this->smallInteger(2),
             'category_id'=>$this->integer(),
             'destination_id'=>$this->integer(),

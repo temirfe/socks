@@ -26,7 +26,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup','img-delete'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -37,6 +37,11 @@ class SiteController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['img-delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
                     ],
                 ],
             ],
@@ -211,5 +216,60 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+
+
+    public function actionImgDelete($id,$model_name)
+    {
+        $key=Yii::$app->request->post('key');
+        $webroot=Yii::getAlias('@webroot');
+        if(is_dir($dir=$webroot."/images/{$model_name}/".$id))
+        {
+            if(is_file($dir.'/'.$key)){
+                $expl=explode('_',$key);
+                $full=$expl[1];
+                @unlink($dir.'/'.$key);
+                @unlink($dir.'/'.$full);
+                $dao=Yii::$app->db;
+                $row = $dao->createCommand("SELECT images FROM {$model_name} WHERE id='{$id}'")->queryOne();
+                $exp=explode(';',$row['images']);
+                $newSet=[];
+                foreach($exp as $img){
+                    if($img!=$key){$newSet[]=$img;}
+                }
+                $newSetStr=implode(';',$newSet);
+                Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$newSetStr}' WHERE id='{$id}'")->execute();
+            }
+        }
+        Yii::$app->response->format=\yii\web\Response::FORMAT_JSON;
+        return true;
+    }
+
+    public function actionImgSort(){
+        $request=Yii::$app->request;
+        $model=$request->post('model_name');
+        $id=$request->post('model_id');
+        $webroot=Yii::getAlias('@webroot');
+        $dir=$webroot."/images/{$model}/".$id;
+        $images=[];
+        if($stacks=$request->post('stack')){
+            foreach($stacks as $key=>$stack){
+                if(is_file($file=$dir.'/'.$stack['key'])){
+                    $images[]=$stack['key'];
+                }
+            }
+        }
+        if($images){
+            $images_str=implode(';',$images);
+            $dao=Yii::$app->db;
+            $dao->createCommand("UPDATE {$model} SET images='{$images_str}' WHERE id='{$id}'")->execute();
+        }
+    }
+
+    public function actionTest(){
+        $webroot=Yii::getAlias('@webroot');
+        $scan=scandir($dir=$webroot."/images/destination/3");
+        print_r($scan);
     }
 }

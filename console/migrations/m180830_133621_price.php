@@ -16,11 +16,17 @@ class m180830_133621_price extends Migration
         $this->createTable('price', [
             'id' => $this->primaryKey(),
             'title' => $this->string('50')->notNull(),
+            'title_ru' => $this->string('50')->notNull(),
+            'title_ko' => $this->string('50')->notNull(),
             'note' => $this->string('50')->notNull(),
+            'note_ru' => $this->string('50')->notNull(),
+            'note_ko' => $this->string('50')->notNull(),
             'date_start'=>$this->date(),
             'date_end'=>$this->date(),
             'price'=>$this->integer(),
+            'currency' => $this->string('3'),
             'tour_id'=>$this->integer(),
+            'group_of'=>$this->smallInteger(5),
         ],$tableOptions);
 
         $this->createIndex('idx_price_tour', 'price', 'tour_id');

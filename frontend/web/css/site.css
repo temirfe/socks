@@ -118,3 +118,46 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.file-drop-zone-title {
+    padding: 15px 10px;
+}
+.flag {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url('/images/flags.png') no-repeat;
+}
+
+
+.flag.flag-kg {
+    background-position: -24px 0;
+}
+
+.flag.flag-kr {
+    background-position: -48px 0;
+}
+
+.flag.flag-kz {
+    background-position: 0 -24px;
+}
+
+.flag.flag-ru {
+    background-position: -24px -24px;
+}
+
+.flag.flag-uz {
+    background-position: -48px -24px;
+}
+
+.form_wrap{background-color: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 10px;}
+.dotted_link{border-bottom: 1px dotted #999;}
+.dotted_link:hover{color:#000; border-bottom: 1px dotted #333; cursor:pointer;}
+.mrg-left-5, .ml5 {
+    margin-left: 5px;
+}
+.trans300 {
+    transition: 0.3s ease-in-out;
+}
+.fs9{font-size:9px;}

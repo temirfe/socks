@@ -24,6 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?php
+    if($model->images){
+        $images=explode(';',$model->images);
+        foreach($images as $image){
+            echo Html::img('/images/destination/'.$model->id.'/s_'.$image);
+        }
+    }
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,

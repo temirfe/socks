@@ -16,9 +16,15 @@ class m180830_122816_destination extends Migration
         $this->createTable('destination', [
             'id' => $this->primaryKey(),
             'title' => $this->string('255')->notNull(),
+            'title_ru' => $this->string('255')->notNull(),
+            'title_ko' => $this->string('255')->notNull(),
             'image' => $this->string('50')->notNull(),
             'intro' => $this->string('500')->notNull(),
+            'intro_ru' => $this->string('500')->notNull(),
+            'intro_ko' => $this->string('500')->notNull(),
             'text' => $this->text()->notNull(),
+            'text_ru' => $this->text()->notNull(),
+            'text_ko' => $this->text()->notNull(),
         ],$tableOptions);
     }
 

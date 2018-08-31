@@ -16,9 +16,15 @@ class m180830_124956_category_desc extends Migration
         $this->createTable('category_desc', [
             'id' => $this->primaryKey(),
             'title' => $this->string('255')->notNull(),
+            'title_ru' => $this->string('255')->notNull(),
+            'title_ko' => $this->string('255')->notNull(),
             'image' => $this->string('50')->notNull(),
             'intro' => $this->string('500')->notNull(),
+            'intro_ru' => $this->string('500')->notNull(),
+            'intro_ko' => $this->string('500')->notNull(),
             'description' => $this->text()->notNull(),
+            'description_ru' => $this->text()->notNull(),
+            'description_ko' => $this->text()->notNull(),
             'category_id'=>$this->integer(),
             'destination_id'=>$this->integer(),
         ],$tableOptions);

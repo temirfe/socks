@@ -16,6 +16,8 @@ class m180830_122348_category extends Migration
         $this->createTable('category', [
             'id' => $this->primaryKey(),
             'title' => $this->string('255')->notNull(),
+            'title_ru' => $this->string('255')->notNull(),
+            'title_ko' => $this->string('255')->notNull(),
         ],$tableOptions);
     }
 

@@ -18,8 +18,8 @@ class PriceSearch extends Price
     public function rules()
     {
         return [
-            [['id', 'price', 'tour_id'], 'integer'],
-            [['title', 'note', 'date_start', 'date_end'], 'safe'],
+            [['id', 'price', 'tour_id', 'group_of'], 'integer'],
+            [['title', 'title_ru', 'title_ko', 'note', 'note_ru', 'note_ko', 'date_start', 'date_end', 'currency'], 'safe'],
         ];
     }
 
@@ -64,10 +64,16 @@ class PriceSearch extends Price
             'date_end' => $this->date_end,
             'price' => $this->price,
             'tour_id' => $this->tour_id,
+            'group_of' => $this->group_of,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'note', $this->note]);
+            ->andFilterWhere(['like', 'title_ru', $this->title_ru])
+            ->andFilterWhere(['like', 'title_ko', $this->title_ko])
+            ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'note_ru', $this->note_ru])
+            ->andFilterWhere(['like', 'note_ko', $this->note_ko])
+            ->andFilterWhere(['like', 'currency', $this->currency]);
 
         return $dataProvider;
     }

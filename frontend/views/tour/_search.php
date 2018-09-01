@@ -22,11 +22,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
+    <?= $form->field($model, 'title_ru') ?>
+
+    <?= $form->field($model, 'title_ko') ?>
+
     <?= $form->field($model, 'image') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?php // echo $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'days') ?>
+    <?php // echo $form->field($model, 'description_ru') ?>
+
+    <?php // echo $form->field($model, 'description_ko') ?>
+
+    <?php // echo $form->field($model, 'days') ?>
 
     <?php // echo $form->field($model, 'category_id') ?>
 

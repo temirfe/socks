@@ -2,20 +2,19 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Destinations');
+$this->title = Yii::t('app', 'Descriptions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="destination-index">
+<div class="description-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Destination'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Description'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,9 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'title_ru',
             'title_ko',
+            'image',
+            //'intro',
+            //'intro_ru',
+            //'intro_ko',
+            //'description:ntext',
+            //'description_ru:ntext',
+            //'description_ko:ntext',
+            //'category_id',
+            //'destination_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 </div>

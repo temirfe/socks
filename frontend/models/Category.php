@@ -3,14 +3,17 @@
 namespace frontend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "category".
  *
  * @property int $id
  * @property string $title
+ * @property string $title_ru
+ * @property string $title_ko
  *
- * @property CategoryDesc[] $categoryDescs
+ * @property Description[] $Description
  * @property Tour[] $tours
  */
 class Category extends \yii\db\ActiveRecord
@@ -30,7 +33,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title'], 'string', 'max' => 255],
+            [['title','title_ru','title_ko'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,16 +44,18 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
+            'title' => Yii::t('app', 'Title (en)'),
+            'title_ru' => Yii::t('app', 'Title (ru)'),
+            'title_ko' => Yii::t('app', 'Title (ko)'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategoryDescs()
+    public function getDescription()
     {
-        return $this->hasMany(CategoryDesc::className(), ['category_id' => 'id']);
+        return $this->hasMany(Description::className(), ['category_id' => 'id']);
     }
 
     /**
@@ -59,5 +64,9 @@ class Category extends \yii\db\ActiveRecord
     public function getTours()
     {
         return $this->hasMany(Tour::className(), ['category_id' => 'id']);
+    }
+
+    public static function getList(){
+        return ArrayHelper::map(Category::find()->select(['id','title'])->asArray()->all(),'id','title');
     }
 }

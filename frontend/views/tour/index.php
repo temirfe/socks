@@ -28,9 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
+            'title_ru',
+            'title_ko',
             'image',
-            'description:ntext',
-            'days',
+            //'description:ntext',
+            //'description_ru:ntext',
+            //'description_ko:ntext',
+            //'days',
             //'category_id',
             //'destination_id',
 

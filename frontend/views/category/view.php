@@ -12,9 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="iblock mt0"><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <p class="pull-right">
+        <?= Html::a(Yii::t('app', 'Add description'), ['/description/create', 'category_id' => $model->id], ['class' => 'btn btn-default']) ?>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

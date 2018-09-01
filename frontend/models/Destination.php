@@ -6,6 +6,7 @@ use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "destination".
@@ -14,7 +15,6 @@ use Imagine\Image\Box;
  * @property string $title
  * @property string $title_ru
  * @property string $title_ko
- * @property string $image
  * @property string $images
  * @property string $intro
  * @property string $intro_ru
@@ -49,7 +49,6 @@ class Destination extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['text','text_ru','text_ko','images'], 'string'],
             [['title','title_ru','title_ko'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 50],
             [['intro','intro_ru','intro_ko'], 'string', 'max' => 500],
             [['imageFile'], 'file', 'extensions' => 'jpg,jpeg,gif,png'],
             [['imageFiles'], 'file', 'extensions' => 'jpg,jpeg,gif,png', 'maxSize'=>20*1024*1024, 'maxFiles'=>10],
@@ -66,7 +65,7 @@ class Destination extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title (en)'),
             'title_ru' => Yii::t('app', 'Title (ru)'),
             'title_ko' => Yii::t('app', 'Title (ko)'),
-            'image' => Yii::t('app', 'Image'),
+            'images' => Yii::t('app', 'Images'),
             'intro' => Yii::t('app', 'Intro'),
             'intro_ru' => Yii::t('app', 'Intro'),
             'intro_ko' => Yii::t('app', 'Intro'),
@@ -195,5 +194,9 @@ class Destination extends \yii\db\ActiveRecord
             }
             @rmdir($dir);
         }
+    }
+
+    public static function getList(){
+        return ArrayHelper::map(Destination::find()->select(['id','title'])->asArray()->all(),'id','title');
     }
 }

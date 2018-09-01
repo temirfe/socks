@@ -19,7 +19,7 @@ class TourSearch extends Tour
     {
         return [
             [['id', 'days', 'category_id', 'destination_id'], 'integer'],
-            [['title', 'image', 'description'], 'safe'],
+            [['title', 'title_ru', 'title_ko', 'image', 'description', 'description_ru', 'description_ko'], 'safe'],
         ];
     }
 
@@ -66,8 +66,12 @@ class TourSearch extends Tour
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'title_ru', $this->title_ru])
+            ->andFilterWhere(['like', 'title_ko', $this->title_ko])
             ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'description_ru', $this->description_ru])
+            ->andFilterWhere(['like', 'description_ko', $this->description_ko]);
 
         return $dataProvider;
     }

@@ -4,18 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model frontend\models\Tour */
+/* @var $model frontend\models\Description */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tours'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Descriptions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tour-view">
+<div class="description-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id], ['class' => 'btn btn-default']) ?>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -33,11 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'title_ru',
             'title_ko',
-            'images',
+            'image',
+            'intro',
+            'intro_ru',
+            'intro_ko',
             'description:ntext',
             'description_ru:ntext',
             'description_ko:ntext',
-            'days',
             'category_id',
             'destination_id',
         ],

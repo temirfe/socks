@@ -18,7 +18,7 @@ class m180830_132538_tour extends Migration
             'title' => $this->string('255')->notNull(),
             'title_ru' => $this->string('255')->notNull(),
             'title_ko' => $this->string('255')->notNull(),
-            'image' => $this->string('50')->notNull(),
+            'images' => $this->string('500')->notNull(),
             'description' => $this->text()->notNull(),
             'description_ru' => $this->text()->notNull(),
             'description_ko' => $this->text()->notNull(),

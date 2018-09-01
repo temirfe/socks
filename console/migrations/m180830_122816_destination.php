@@ -18,7 +18,7 @@ class m180830_122816_destination extends Migration
             'title' => $this->string('255')->notNull(),
             'title_ru' => $this->string('255')->notNull(),
             'title_ko' => $this->string('255')->notNull(),
-            'image' => $this->string('50')->notNull(),
+            'images' => $this->string('500')->notNull(),
             'intro' => $this->string('500')->notNull(),
             'intro_ru' => $this->string('500')->notNull(),
             'intro_ko' => $this->string('500')->notNull(),

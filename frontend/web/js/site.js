@@ -21,3 +21,5 @@ function imgSorted(e, params){
         });
     }
 }
+
+//Тур для группы из 6 человек

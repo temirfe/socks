@@ -9,11 +9,17 @@ use Yii;
  *
  * @property int $id
  * @property string $title
+ * @property string $title_ru
+ * @property string $title_ko
  * @property string $note
+ * @property string $note_ru
+ * @property string $note_ko
  * @property string $date_start
  * @property string $date_end
  * @property int $price
+ * @property string $currency
  * @property int $tour_id
+ * @property int $group_of
  *
  * @property Tour $tour
  */
@@ -33,10 +39,11 @@ class Price extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'note'], 'required'],
+            [['price'], 'required'],
             [['date_start', 'date_end'], 'safe'],
-            [['price', 'tour_id'], 'integer'],
-            [['title', 'note'], 'string', 'max' => 50],
+            [['price', 'tour_id', 'group_of'], 'integer'],
+            [['title', 'title_ru', 'title_ko', 'note', 'note_ru', 'note_ko'], 'string', 'max' => 50],
+            [['currency'], 'string', 'max' => 3],
             [['tour_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tour_id' => 'id']],
         ];
     }
@@ -48,12 +55,18 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'note' => Yii::t('app', 'Note'),
+            'title' => Yii::t('app', 'Title En'),
+            'title_ru' => Yii::t('app', 'Title Ru'),
+            'title_ko' => Yii::t('app', 'Title Ko'),
+            'note' => Yii::t('app', 'Note En'),
+            'note_ru' => Yii::t('app', 'Note Ru'),
+            'note_ko' => Yii::t('app', 'Note Ko'),
             'date_start' => Yii::t('app', 'Date Start'),
             'date_end' => Yii::t('app', 'Date End'),
             'price' => Yii::t('app', 'Price'),
-            'tour_id' => Yii::t('app', 'Tour ID'),
+            'currency' => Yii::t('app', 'Currency'),
+            'tour_id' => Yii::t('app', 'Tour'),
+            'group_of' => Yii::t('app', 'Group Of'),
         ];
     }
 

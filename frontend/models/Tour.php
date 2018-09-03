@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string $title_ru
  * @property string $title_ko
  * @property string $images
+ * @property string $slug
  * @property string $description
  * @property string $description_ru
  * @property string $description_ko
@@ -24,8 +25,10 @@ use yii\helpers\ArrayHelper;
  * @property int $destination_id
  *
  * @property Price[] $prices
+ * @property Day[] $day
  * @property Category $category
  * @property Destination $destination
+ * @property Package $package
  */
 class Tour extends \yii\db\ActiveRecord
 {
@@ -45,7 +48,7 @@ class Tour extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['description', 'description_ru', 'description_ko'], 'string'],
+            [['description', 'description_ru', 'description_ko','slug'], 'string'],
             [['days', 'category_id', 'destination_id'], 'integer'],
             [['title', 'title_ru', 'title_ko'], 'string', 'max' => 255],
             [['images'], 'string', 'max' => 500],
@@ -99,11 +102,24 @@ class Tour extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Destination::className(), ['id' => 'destination_id']);
     }
+    public function getPackage()
+    {
+        return $this->hasOne(Package::className(), ['tour_id' => 'id']);
+    }
+    public function getDay()
+    {
+        return $this->hasMany(Day::className(), ['tour_id' => 'id']);
+    }
     public function afterSave($insert, $changedAttributes){
         parent::afterSave($insert, $changedAttributes);
 
         $this->saveImage();
         //$this->optimizeImage();
+    }
+    function beforeSave($insert)
+    {
+        $this->slug=Tour::slugify($this->title);
+        return parent::beforeSave($insert);
     }
 
     protected function saveImage(){
@@ -190,6 +206,33 @@ class Tour extends \yii\db\ActiveRecord
 
     public static function getList(){
         return ArrayHelper::map(Tour::find()->select(['id','title'])->asArray()->all(),'id','title');
+    }
+
+    public static function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 
 }

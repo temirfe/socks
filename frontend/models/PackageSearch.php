@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Tour;
+use frontend\models\Package;
 
 /**
- * TourSearch represents the model behind the search form of `frontend\models\Tour`.
+ * PackageSearch represents the model behind the search form of `frontend\models\Package`.
  */
-class TourSearch extends Tour
+class PackageSearch extends Package
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class TourSearch extends Tour
     public function rules()
     {
         return [
-            [['id', 'days', 'category_id', 'destination_id'], 'integer'],
-            [['title', 'title_ru', 'title_ko', 'images', 'description', 'description_ru', 'description_ko'], 'safe'],
+            [['id', 'tour_id'], 'integer'],
+            [['included', 'included_ru', 'included_ko', 'not_included', 'not_included_ru', 'not_included_ko'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TourSearch extends Tour
      */
     public function search($params)
     {
-        $query = Tour::find();
+        $query = Package::find();
 
         // add conditions that should always apply here
 
@@ -60,18 +60,15 @@ class TourSearch extends Tour
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'days' => $this->days,
-            'category_id' => $this->category_id,
-            'destination_id' => $this->destination_id,
+            'tour_id' => $this->tour_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'title_ru', $this->title_ru])
-            ->andFilterWhere(['like', 'title_ko', $this->title_ko])
-            ->andFilterWhere(['like', 'images', $this->images])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'description_ru', $this->description_ru])
-            ->andFilterWhere(['like', 'description_ko', $this->description_ko]);
+        $query->andFilterWhere(['like', 'included', $this->included])
+            ->andFilterWhere(['like', 'included_ru', $this->included_ru])
+            ->andFilterWhere(['like', 'included_ko', $this->included_ko])
+            ->andFilterWhere(['like', 'not_included', $this->not_included])
+            ->andFilterWhere(['like', 'not_included_ru', $this->not_included_ru])
+            ->andFilterWhere(['like', 'not_included_ko', $this->not_included_ko]);
 
         return $dataProvider;
     }

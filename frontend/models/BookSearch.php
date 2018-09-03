@@ -5,12 +5,12 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Tour;
+use frontend\models\Book;
 
 /**
- * TourSearch represents the model behind the search form of `frontend\models\Tour`.
+ * BookSearch represents the model behind the search form of `frontend\models\Book`.
  */
-class TourSearch extends Tour
+class BookSearch extends Book
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class TourSearch extends Tour
     public function rules()
     {
         return [
-            [['id', 'days', 'category_id', 'destination_id'], 'integer'],
-            [['title', 'title_ru', 'title_ko', 'images', 'description', 'description_ru', 'description_ko'], 'safe'],
+            [['id', 'price', 'tour_id', 'price_id', 'group_of', 'payment_method', 'status'], 'integer'],
+            [['name', 'surname', 'email', 'note', 'admin_note', 'date_start', 'birthday', 'currency'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TourSearch extends Tour
      */
     public function search($params)
     {
-        $query = Tour::find();
+        $query = Book::find();
 
         // add conditions that should always apply here
 
@@ -60,18 +60,22 @@ class TourSearch extends Tour
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'days' => $this->days,
-            'category_id' => $this->category_id,
-            'destination_id' => $this->destination_id,
+            'date_start' => $this->date_start,
+            'birthday' => $this->birthday,
+            'price' => $this->price,
+            'tour_id' => $this->tour_id,
+            'price_id' => $this->price_id,
+            'group_of' => $this->group_of,
+            'payment_method' => $this->payment_method,
+            'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'title_ru', $this->title_ru])
-            ->andFilterWhere(['like', 'title_ko', $this->title_ko])
-            ->andFilterWhere(['like', 'images', $this->images])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'description_ru', $this->description_ru])
-            ->andFilterWhere(['like', 'description_ko', $this->description_ko]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'surname', $this->surname])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'admin_note', $this->admin_note])
+            ->andFilterWhere(['like', 'currency', $this->currency]);
 
         return $dataProvider;
     }

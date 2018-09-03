@@ -28,17 +28,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'title_ru',
-            'title_ko',
-            'image',
+            //'title_ru',
+            //'title_ko',
             //'description:ntext',
             //'description_ru:ntext',
             //'description_ko:ntext',
-            //'days',
-            //'category_id',
-            //'destination_id',
+            'days',
+            'category_id',
+            'destination_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{addPrice} &nbsp;{view}&nbsp; {update}&nbsp; {delete}',
+                'buttons' => [
+                    'addPrice' => function ($url,$model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-plus-sign"></span>',
+                            ['price/create', 'tour_id' => $model->id],
+                            [
+                                'title' => 'Add price',
+                                'data-pjax' => '0',
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

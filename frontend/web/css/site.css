@@ -206,12 +206,12 @@ h1{font-size:30px;}
 .day_info{
     overflow: hidden;
 }
-.day_info h4.title{margin-top:0; color: green;}
-.day_info h4{     color: palevioletred;
+.day_info h4.title{margin-top:0; color: #01384C;}
+.day_info h4{     color: #9bc73c;
     margin-bottom: 3px;}
 .title2{}
 .title2 i{}
-.green{color:green;}
+.green{color:#007946;}
 .red{color:red;}
 .included ul,.not_included ul{
     list-style: none;
@@ -258,3 +258,43 @@ h1{font-size:30px;}
     left: 0;
 }
 .link{color:#419641; cursor:pointer;}
+.book_box_wrap{
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.09);
+    overflow: hidden;}
+.book_box{
+    height: 120px;
+    padding: 0 20px 20px;
+    border: 1px solid #eaeaea;}
+.book_box_info{    background-color: #fbfbfb; border-right:none;}
+.book_box_info h3 .date{font-size: 15px;
+    line-height: 27px;
+    color: #888;}
+.book_box_info .note{}
+.book_box_info .booked{margin-top: 5px;
+    font-size: 13px;
+    font-style: italic;
+    color: #999;}
+.book_box_price{
+    text-align: center;}
+.book_box_price h3{font-weight: bold;font-size: 25px;
+    color: #444;}
+.book_box_price a{    text-transform: uppercase;
+    /* font-weight: bold; */
+    padding: 8px 40px;}
+h3{color:#01384C;}
+h3.bb{    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;}
+h3.bb span{border-bottom: 2px solid #d1e5a6;
+    padding-bottom: 9px;}
+.clr-light{color:#9bc73c;}
+.clr-dark{color:#007946;}
+.clr-dark-blue{color:#01384C;}
+.right_book_box{    background-color: #01384C;
+    height: 360px;
+    padding: 50px 25px;}
+.right_book_box h3{    margin-top: 0;    color: #fff;
+    text-transform: uppercase;}
+.right_book_box h3 span{font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    display: block;}

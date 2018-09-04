@@ -12,6 +12,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tours'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $dao=Yii::$app->db;
+$lowest_price=0;
 ?>
 <div class="tour-view">
     <p class="pull-right">
@@ -71,13 +72,13 @@ $dao=Yii::$app->db;
                 else echo "<div class='swiper-container mb20'>".Html::img('/images/tour/'.$model->id.'/'.$model->images,['class'=>'img-responsive'])."</div>";
             }
             ?>
-            <h3><?=Yii::t('app','Tour description')?></h3>
+            <h3 class="bb"><span><?=Yii::t('app','Tour description')?></span></h3>
             <p><?=$model->description?></p>
 
             <?php
             if($days=$model->day){
                 $d=1;
-                echo "<h3>".Yii::t('app','Tour program')."</h3>";
+                echo "<h3 class='bb'><span>".Yii::t('app','Tour program')."</span></h3>";
                 foreach($days as $day){
                     ?>
                     <div class="mt15 mb15">
@@ -104,7 +105,7 @@ $dao=Yii::$app->db;
                 }
             }
             if($model->package){
-                echo "<h3>".Yii::t('app','Tour package')."</h3>";
+                echo "<h3 class='bb'><span>".Yii::t('app','Tour package')."</span></h3>";
                 ?>
                 <div class="row clearfix mb20 full_content closed">
                     <div class='col-sm-6 included'>
@@ -127,31 +128,51 @@ $dao=Yii::$app->db;
                 </div>
             <?php
             }
-
-
-            foreach($model->prices as $price){
-                echo $price->title.' '.$price->price.' '.$price->currency.'<br />';
-                echo $price->note.'<br />';
-                if($price->date_start){
-                    echo date('d.m.Y',$price->date_start).' '.date('d.m.Y',$price->date_end);
-                }
-
-                $books = $dao->createCommand("SELECT id, group_of FROM book WHERE price_id='{$price->id}'")->queryAll();
-                if($books){
-                    $booked=0;
-                    foreach($books as $book){
-                        if($book['group_of']){$booked+=$book['group_of'];}
-                        else{$booked++;}
+            if($model->prices){
+                echo "<h3 class='bb'><span>".Yii::t('app','Tour offers')."</span></h3>";
+                $currency='';
+                foreach($model->prices as $price){
+                    $booked_text='';$dates='';
+                    if($lowest_price){if($price->price<$lowest_price){$lowest_price=$price->price; $currency=$price->currency;}}
+                    else{
+                        $lowest_price=$price->price;
+                        $currency=$price->currency;
                     }
-                    echo $booked.' '.Yii::t('app', 'people booked');
-                }
-
-                echo Html::a(Yii::t('app', 'Book'), ['book/create', 'price_id' => $price->id], ['class' => 'btn btn-success']);
-                echo '<br /><br />';
+                    if($price->date_start){
+                        $dates=date('d.m.Y',strtotime($price->date_start)).' - '.date('d.m.Y',strtotime($price->date_end));
+                    }
+                    $books = $dao->createCommand("SELECT id, group_of FROM book WHERE price_id='{$price->id}'")->queryAll();
+                    if($books){
+                        $booked=0;
+                        foreach($books as $book){
+                            if($book['group_of']){$booked+=$book['group_of'];}
+                            else{$booked++;}
+                        }
+                        $booked_text=$booked.' '.Yii::t('app', 'people booked');
+                    }
+                    ?>
+                    <div class="book_box_wrap mb20">
+                        <div class="col-xs-8 book_box book_box_info">
+                            <h3><?=$price->title?><div class='date pull-right'><?=$dates?></div></h3>
+                            <div class="note"><?=$price->note?></div>
+                            <div class="booked"><?=$booked_text?></div>
+                        </div>
+                        <div class="col-xs-4 book_box book_box_price">
+                            <h3><?=$price->price?><span class="text-uppercase ml5"><?=$price->currency?></span> </h3>
+                            <?=Html::a(Yii::t('app', 'Book Now'), ['book/create', 'price_id' => $price->id], ['class' => 'btn btn-success']);?>
+                        </div>
+                    </div>
+                <?php
+                    }
             }
             ?>
         </div>
-        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="right_book_box book_box_price">
+                 <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$currency?></h3>
+                <?=Html::a(Yii::t('app', 'Book Now'), '#', ['class' => 'btn btn-success']);?>
+            </div>
+        </div>
     </div>
 
 

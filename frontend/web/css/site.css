@@ -139,8 +139,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-.navbar {
+.mynav {
     margin-bottom: 0;
+    border:none;
 }
 .navbar-brand {
     height: auto;
@@ -151,7 +152,6 @@ a.desc:after {
     display: block;
     width: 70px;
 }
-.mynav .navbar-nav{margin-left:33px;}
 .mynav .navbar-nav > li > a {
     color: #01516e;
     font-weight: 500;
@@ -162,10 +162,15 @@ a.desc:after {
     background-color: transparent;
 }
 .mynav .navbar-nav > li > a {
-    padding-bottom: 47px;
+    padding-bottom: 35px;
     padding-right: 40px;
 }
-.nav_flex{}
+.nav_flex{    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 40px;}
 .backend_bar .navbar-brand {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -367,12 +372,12 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     font-weight: normal;
     margin-bottom: 5px;
     display: block;}
-.top_contact{
+/*.top_contact{
     display: flex;
     justify-content: flex-end;
     text-align: right;
     margin-top: 3px;
-}
+}*/
 .top_contact .phone{
     margin-right: 15px;    line-height: 24px;}
 .top_contact .email{    line-height: 24px;}
@@ -382,3 +387,10 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
 .lang a{margin-left:10px;
     margin-right: 0 !important;}
 .lang img{width: 24px;}
+.top_contact {
+    padding-top: 3px;
+    background-color: #f8f8f8;
+    position: absolute;
+    left: 0;
+    width: 100%;
+}

@@ -43,8 +43,17 @@ if($curLang=='en-US'){$eng='';}
 else if($curLang=='ru-RU'){$ru='';}
 else if($curLang=='ko-KR'){$ko='';}
 
+?>
+<div class="top_contact rubik">
+    <div class="container">
+        <div class="lang pull-right"><?=$eng?><?=$ru?><?=$ko?></div>
+        <div class="email pull-right"><span class="glyphicon glyphicon-envelope mr5"></span><?=$email?></div>
+        <div class="phone pull-right"><span class="glyphicon glyphicon-earphone mr5"></span><?=$phone?></div>
+    </div>
+</div>
+<?php
 NavBar::begin([
-    'brandLabel' => Html::img('/images/ok_logo.jpg'),
+    'brandLabel' => Html::img('/images/ok_logo2.png'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar mynav',
@@ -52,11 +61,7 @@ NavBar::begin([
 ]);
 
 ?>
-    <div class="top_contact rubik">
-        <div class="phone pull-left"><span class="glyphicon glyphicon-earphone mr5"></span><?=$phone?></div>
-        <div class="email pull-left"><span class="glyphicon glyphicon-envelope mr5"></span><?=$email?></div>
-        <div class="lang pull-right"><?=$eng?><?=$ru?><?=$ko?></div>
-    </div>
+
 <div class="nav_flex">
     <?=Nav::widget([
         'options' => ['class' => 'navbar-nav rubik upper'],

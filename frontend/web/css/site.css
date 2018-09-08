@@ -41,8 +41,16 @@ body {
     width: 100%;
     top: -60%;
 }
+.jumbotron .welcome a{color:#bdda7e;}
+.jumbotron .welcome a:hover{color:#9bc73c;
+    text-decoration: none;}
 .jumbotron .banner img{
     width:100%;
+}
+@media screen and (min-width: 768px){
+    .jumbotron h1, .jumbotron .h1 {
+        font-size: 55px;
+    }
 }
 .dimmer{    position: absolute;
     width: 100%;
@@ -146,6 +154,8 @@ a.desc:after {
 .navbar-brand {
     height: auto;
     padding: 8px 15px;
+    position: relative;
+    z-index: 3;
 }
 
 .navbar-brand > img {
@@ -393,4 +403,5 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     position: absolute;
     left: 0;
     width: 100%;
+    z-index: 2;
 }

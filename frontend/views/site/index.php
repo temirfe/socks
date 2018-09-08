@@ -14,7 +14,7 @@ $banner=Html::img($file,['class'=>'img-responsive']);
     <div class="jumbotron rel">
         <div class="banner"><?=$banner;?></div>
         <div class="dimmer zind2"></div>
-        <div class="rel zind3 welcome">
+        <div class="rel zind3 welcome rubik">
             <h1><?=$page->title;?></h1>
 
             <p class="lead"><?=$page->text?></p>

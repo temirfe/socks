@@ -15,6 +15,7 @@ class m180813_121343_page extends Migration
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('page', [
             'id' => $this->primaryKey(),
+            'image' => $this->string('255')->notNull(),
             'title' => $this->string('255')->notNull(),
             'title_ru' => $this->string('255')->notNull(),
             'title_ko' => $this->string('255')->notNull(),

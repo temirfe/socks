@@ -11,8 +11,20 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'name'=>'OKTour',
-    'language'=>'ru-RU',
+    //'language'=>'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
+    'on beforeRequest' => function ($event) {
+        $cookies = Yii::$app->request->cookies;
+        $session=Yii::$app->session;
+        if ($session->has('language')){
+            Yii::$app->language = $session->get('language');
+        }
+        else if ($cookies->has('language')){
+            Yii::$app->language= $cookies->getValue('language');
+            $session->set('language', Yii::$app->language);
+        }
+
+    },
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -46,6 +58,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'contact'=>'site/contact',
+                'admin'=>'site/admin',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

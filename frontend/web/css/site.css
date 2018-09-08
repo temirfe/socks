@@ -10,6 +10,7 @@ body {
     padding: 0 0 60px;
 }
 
+
 .wrap > .container {
     padding: 0 15px 20px;
 }
@@ -24,16 +25,36 @@ body {
 .jumbotron {
     text-align: center;
     background-color: transparent;
+    overflow: hidden;
+    color:#fff;
+    height:400px;
 }
-
+.welcome{width: 840px;
+    margin: 100px auto 0;}
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
 }
-
+.jumbotron .banner{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: -60%;
+}
+.jumbotron .banner img{
+    width:100%;
+}
+.dimmer{    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0,0,0,0.3);}
 .not-set {
     color: #c55;
     font-style: italic;
+}
+.rubik{
+    font-family:'Rubik',sans-serif;
 }
 
 /* add sorting icons to gridview sort links */
@@ -118,6 +139,48 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+.navbar {
+    margin-bottom: 0;
+}
+.navbar-brand {
+    height: auto;
+    padding: 8px 15px;
+}
+
+.navbar-brand > img {
+    display: block;
+    width: 70px;
+}
+.mynav .navbar-nav{margin-left:33px;}
+.mynav .navbar-nav > li > a {
+    color: #01516e;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.mynav .navbar-nav > li > a:hover, .mynav .navbar-nav > li > a:focus {
+    color: #76aF41;
+    background-color: transparent;
+}
+.mynav .navbar-nav > li > a {
+    padding-bottom: 47px;
+    padding-right: 40px;
+}
+.nav_flex{}
+.backend_bar .navbar-brand {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position:relative;
+}
+.backend_bar .navbar-brand span {
+    position: absolute;
+    right: -34px;
+    top: 16px;
+    font-size: 12px;
+    color: #999;
+}
+.backend_bar .navbar-brand > img {
+    width: 105px;
+}
 .file-drop-zone-title {
     padding: 15px 10px;
 }
@@ -156,6 +219,7 @@ a.desc:after {
 .dotted_link:hover{color:#000; border-bottom: 1px dotted #333; cursor:pointer;}
 .mrg-left-5, .ml5 {margin-left: 5px;}
 .fs9{font-size:9px;}
+.mr5{margin-right:5px;}
 .mt0{margin-top:0;}
 .mb15{margin-bottom:15px;}
 .mt15{margin-top:15px;}
@@ -164,6 +228,8 @@ a.desc:after {
 .trans300 {
     transition: 0.3s ease-in-out;
 }
+.upper{text-transform:uppercase;}
+.gray8{color:#888;}
 .admin_panel{background-color:#000;padding: 4px 0;}
 .admin_panel a{color:#fff; margin-right:15px; padding: 3px;}
 .admin_panel a:hover{color:gold;
@@ -211,6 +277,9 @@ h1{font-size:30px;}
     margin-bottom: 3px;}
 .title2{}
 .title2 i{}
+.rel{position: relative;}
+.zind2{z-index:2;}
+.zind3{z-index:3;}
 .green{color:#007946;}
 .red{color:red;}
 .included ul,.not_included ul{
@@ -298,3 +367,18 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     font-weight: normal;
     margin-bottom: 5px;
     display: block;}
+.top_contact{
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    margin-top: 3px;
+}
+.top_contact .phone{
+    margin-right: 15px;    line-height: 24px;}
+.top_contact .email{    line-height: 24px;}
+.top_contact a{color: #9b9b9b; margin-right: 10px;}
+.top_contact a:hover{color: #76aF41; text-decoration: none;}
+.top_contact .glyphicon{color:#bdda7e;}
+.lang a{margin-left:10px;
+    margin-right: 0 !important;}
+.lang img{width: 24px;}

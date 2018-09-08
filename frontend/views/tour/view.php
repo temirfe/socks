@@ -79,6 +79,7 @@ $lowest_price=0;
             if($days=$model->day){
                 $d=1;
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour program')."</span></h3>";
+                echo "<div class='full_content closed clearfix mb20 '>";
                 foreach($days as $day){
                     ?>
                     <div class="mt15 mb15">
@@ -103,6 +104,13 @@ $lowest_price=0;
             <?php
                     $d++;
                 }
+                ?>
+
+                <div class="gradient" style="display: block;"></div>
+                <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
+                <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
+        </div>
+            <?php
             }
             if($model->package){
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour package')."</span></h3>";
@@ -129,7 +137,7 @@ $lowest_price=0;
             <?php
             }
             if($model->prices){
-                echo "<h3 class='bb'><span>".Yii::t('app','Tour offers')."</span></h3>";
+                echo "<h3 class='bb' id='prices'><span>".Yii::t('app','Tour offers')."</span></h3>";
                 $currency='';
                 foreach($model->prices as $price){
                     $booked_text='';$dates='';
@@ -170,7 +178,7 @@ $lowest_price=0;
         <div class="col-sm-4">
             <div class="right_book_box book_box_price">
                  <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$currency?></h3>
-                <?=Html::a(Yii::t('app', 'Book Now'), '#', ['class' => 'btn btn-success']);?>
+                <?=Html::a(Yii::t('app', 'Book Now'), '#prices', ['class' => 'btn btn-success']);?>
             </div>
         </div>
     </div>

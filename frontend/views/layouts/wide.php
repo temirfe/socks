@@ -8,11 +8,9 @@ use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 ?>
 <?php $this->beginContent('@app/views/layouts/base.php'); ?>
-<div class="container">
-    <?php /*echo Breadcrumbs::widget([
+<?php /*echo Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]); */ ?>
-    <?= Alert::widget() ?>
-    <?= $content ?>
-</div>
+<?= Alert::widget() ?>
+<?= $content ?>
 <?php $this->endContent(); ?>

@@ -80,4 +80,22 @@ class Day extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tour::className(), ['id' => 'tour_id']);
     }
+
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->title=$this->title_ru;
+            $this->itinerary=$this->itinerary_ru;
+            $this->accommodation=$this->accommodation_ru;
+            $this->meals=$this->meals_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->title=$this->title_ko;
+            $this->itinerary=$this->itinerary_ko;
+            $this->accommodation=$this->accommodation_ko;
+            $this->meals=$this->meals_ko;
+        }
+    }
 }

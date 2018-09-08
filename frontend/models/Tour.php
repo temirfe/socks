@@ -235,4 +235,18 @@ class Tour extends \yii\db\ActiveRecord
         return $text;
     }
 
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->title=$this->title_ru;
+            $this->description=$this->description_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->title=$this->title_ko;
+            $this->description=$this->description_ko;
+        }
+    }
+
 }

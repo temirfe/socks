@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Page;
 
 /**
  * Site controller
@@ -37,6 +38,11 @@ class SiteController extends Controller
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['admin'],
+                        'allow' => true,
+                        'roles' => ['userIndex'],
                     ],
                     [
                         'actions' => ['img-delete'],
@@ -77,7 +83,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $this->layout='wide';
+        //$page = Page::find()->where(['category'=>'main'])->one();
+        $page = Yii::$app->cache->getOrSet('page-main', function () {
+            return Page::find()->where(['category'=>'main'])->one();
+        }, 0);
+        return $this->render('index',['page'=>$page]);
+    }
+
+    public function actionAdmin()
+    {
+        $this->layout='backend';
+        return $this->render('admin');
     }
 
     /**
@@ -218,8 +235,6 @@ class SiteController extends Controller
         ]);
     }
 
-
-
     public function actionImgDelete($id,$model_name)
     {
         $key=Yii::$app->request->post('key');
@@ -271,5 +286,23 @@ class SiteController extends Controller
         $webroot=Yii::getAlias('@webroot');
         $scan=scandir($dir=$webroot."/images/destination/3");
         print_r($scan);
+    }
+
+    public function actionLang($to){
+        $session=Yii::$app->session;
+        $cookies = Yii::$app->response->cookies;
+
+        if($to=='en-US'){
+            $session->remove('language');
+            $cookies->remove('language');
+        }
+        else{
+            Yii::$app->language=$to;
+            $session->set('language', $to);
+            $cookies->add(new \yii\web\Cookie(['name' => 'language','value' => $to]));
+        }
+        Yii::$app->cache->flush();
+        $this->redirect(Yii::$app->request->referrer);
+
     }
 }

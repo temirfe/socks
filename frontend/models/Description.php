@@ -172,4 +172,20 @@ class Description extends \yii\db\ActiveRecord
             @rmdir($dir);
         }
     }
+
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->title=$this->title_ru;
+            $this->intro=$this->intro_ru;
+            $this->description=$this->description_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->title=$this->title_ko;
+            $this->intro=$this->intro_ko;
+            $this->description=$this->description_ko;
+        }
+    }
 }

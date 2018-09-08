@@ -69,4 +69,16 @@ class Category extends \yii\db\ActiveRecord
     public static function getList(){
         return ArrayHelper::map(Category::find()->select(['id','title'])->asArray()->all(),'id','title');
     }
+
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->title=$this->title_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->title=$this->title_ko;
+        }
+    }
 }

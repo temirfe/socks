@@ -65,4 +65,16 @@ class Package extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tour::className(), ['id' => 'tour_id']);
     }
+
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->included=$this->included_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->included=$this->included_ko;
+        }
+    }
 }

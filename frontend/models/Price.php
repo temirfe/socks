@@ -77,4 +77,18 @@ class Price extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tour::className(), ['id' => 'tour_id']);
     }
+
+    function afterFind()
+    {
+        parent::afterFind();
+        $curLang=Yii::$app->language;
+        if($curLang=='ru-RU'){
+            $this->title=$this->title_ru;
+            $this->note=$this->note_ru;
+        }
+        else if($curLang=='ko-KR'){
+            $this->title=$this->title_ko;
+            $this->note=$this->note_ko;
+        }
+    }
 }

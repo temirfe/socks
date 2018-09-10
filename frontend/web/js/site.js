@@ -32,23 +32,35 @@ $('#price-group_of').blur(function() {
         $('#price-title').val(en + person);
         $('#price-title_ru').val( ru_pre + person + ru_post );
         $('#price-title_ko').val(person + ko);
+    fillNote();
     });
 
 $('#price-price').blur(function() {
+    fillNote();
+});
+$('#price-currency').change(function() {
+    fillNote();
+});
+
+function fillNote(){
     let person=$('#price-group_of').val().toString();
     let en='', ru='', ko='';
+    let currency=$('#price-currency').val();
     if(person==='1'){
         en='Price per person'; ru='Цена за 1-го целовека'; ko='1 인당 가격';
     }
     else{
-        let price=$(this).val().toString();
-        let price_person=parseInt(price)/parseInt(person)+" USD";
-        en=price_person+' per person'; ru='Цена за человека '+price_person; ko='1 인당 '+price_person+' 달러';
+        let price=$('#price-price').val().toString();
+        let price_person=Math.round(parseInt(price)/parseInt(person));
+        if(!isNaN(price_person)){
+            let str=price_person+" "+currency.toUpperCase();
+            en=str+' per person'; ru='Цена за человека '+str; ko='1 인당 '+str+' 달러';
+        }
     }
     $('#price-note').val(en);
     $('#price-note_ru').val(ru);
     $('#price-note_ko').val(ko);
-});
+}
 
 $(document).ready(function () {
     //initialize swiper when document ready
@@ -59,6 +71,7 @@ $(document).ready(function () {
             let mySwiper = new Swiper ('.banner-container', {
                 // Optional parameters
                 //direction: 'vertical',
+                effect: 'fade',
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
@@ -76,6 +89,31 @@ $(document).ready(function () {
         }
     }
 });
+$(document).ready(function () {
+    //initialize swiper when document ready
+    let swiperCont=$('.country_swiper');
+    if(swiperCont.length){
+        let scount=parseInt(swiperCont.attr("data-count"));
+        if(scount>1){
+            let mySwiper = new Swiper ('.country_swiper', {
+                // Optional parameters
+                //loop:true,
+                slidesPerView: 3,
+                spaceBetween: 5,
+                freeMode: true,
+                /*autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },*/
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })
+        }
+    }
+});
+
 $(document).on('click','.js_more',function(){
     $(this).parent().removeClass('closed');
     $(this).hide();

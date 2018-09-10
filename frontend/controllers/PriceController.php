@@ -68,7 +68,11 @@ class PriceController extends Controller
         $model = new Price();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->referrer=='view'){
+                $view='view';
+            }
+            else{$view='index';}
+            return $this->redirect(['/tour/'.$view, 'id' => $model->tour_id]);
         }
 
         return $this->render('create', [
@@ -88,7 +92,11 @@ class PriceController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->referrer=='view'){
+                $view='view';
+            }
+            else{$view='index';}
+            return $this->redirect(['/tour/'.$view, 'id' => $model->tour_id]);
         }
 
         return $this->render('update', [
@@ -105,9 +113,14 @@ class PriceController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        if(Yii::$app->request->post('ref')=='view'){
+            $view=['/tour/view','id'=>$model->tour_id];
+        }
+        else{$view=['index'];}
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect($view);
     }
 
     /**

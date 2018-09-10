@@ -2,21 +2,17 @@
 
 /* @var $this yii\web\View */
 /* @var $page \frontend\models\Page */
+/* @var $destinations \frontend\models\Destination */
+/* @var $categories \frontend\models\Category */
+/* @var $tours \frontend\models\Tour */
 
 use yii\helpers\Html;
-use frontend\models\Destination;
-use frontend\models\Category;
 
 $this->title = 'OK Tour - Unforgettable tours';
 $alias=Yii::getAlias('@web');
 $file=$alias."/images/page/".$page->id.'/'.$page->image;
 $banner=Html::img($file,['class'=>'img-responsive']);
-$destinations = Yii::$app->cache->getOrSet('destination', function () {
-    return Destination::find()->all();
-}, 0);
-$categories= Yii::$app->cache->getOrSet('category', function () {
-    return Category::find()->all();
-}, 0);
+
 ?>
 <div class="site-index">
     <div class="jumbotron rel">
@@ -31,6 +27,8 @@ $categories= Yii::$app->cache->getOrSet('category', function () {
 
     <div class="body-content container">
 
+
+        <h2 class="text-center mb25">Destinations</h2>
         <div class="main_item_box">
             <?php
             foreach($destinations as $destination){
@@ -46,6 +44,8 @@ $categories= Yii::$app->cache->getOrSet('category', function () {
             ?>
         </div>
 
+        <h2 class="text-center mb25 mt35">Adventures</h2>
+
         <div class="main_item_box">
             <?php
             foreach($categories as $ctg){
@@ -54,6 +54,40 @@ $categories= Yii::$app->cache->getOrSet('category', function () {
                     <?=Html::a($ctg->getImage(),['/category/view','id'=>$ctg->id])?>
                     <div class="card_bottom abs rubik">
                         <?=$ctg->title?>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+
+        <h2 class="text-center mb25 mt35">Tours</h2>
+
+        <div class="main_item_box row">
+            <?php
+            foreach($tours as $tour){
+                ?>
+                <div class="tour_card col-sm-4 col-xs-6">
+                    <div class="image rel">
+                        <?=$tour->getImage()?>
+                        <div class="tour_card_intro">
+                            <?=Html::a($tour->intro."<span class='false_link'></span>",['/tour/view','id'=>$tour->id,'t'=>$tour->slug])?>
+                        </div>
+                        <div class='dimmer dimmer2 hiddeniraak'>
+                            <?=Html::a("<span class='false_link'></span>",['/tour/view','id'=>$tour->id,'t'=>$tour->slug])?>
+                        </div>"
+
+
+                    </div>
+                    <div class="tour_card_footer rel">
+                        <h4>
+                            <?=Html::a($tour->title."<span class='false_link'></span>",
+                                ['/tour/view','id'=>$tour->id,'t'=>$tour->slug],['class'=>'no_decor'])?>
+                        </h4>
+                        <span class="price"><?=$tour->lowestPrice?></span>
+                        <span class="days">
+                            <?php if($tour->days){echo $tour->days.' '.Yii::t('app','days');}?>
+                        </span>
                     </div>
                 </div>
             <?php

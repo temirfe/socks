@@ -19,11 +19,11 @@ $destinations = Yii::$app->cache->getOrSet('destination', function () {
 $ctgItems=[];$countryItems=[];
 foreach($categories as $category){
     if($ctgItems){$ctgItems[]='<li class="divider"></li>';}
-    $ctgItems[]=['label' => $category->title, 'url' => ['/category/view','id'=>$category->id]];
+    $ctgItems[]=['label' => $category->title, 'url' => ['/category/view','id'=>$category->id, 't'=>$category->title]];
 }
 foreach($destinations as $dest){
     if($countryItems){$countryItems[]='<li class="divider"></li>';}
-    $countryItems[]=['label' => $dest->title, 'url' => ['/destination/view','id'=>$dest->id]];
+    $countryItems[]=['label' => $dest->title, 'url' => ['/destination/view','id'=>$dest->id, 't'=>$dest->title]];
 }
 
 $menuItems = [
@@ -69,12 +69,17 @@ if($curLang=='en-US'){$eng='';}
 else if($curLang=='ru-RU'){$ru='';}
 else if($curLang=='ko-KR'){$ko='';}
 
+$isAdmin=Yii::$app->user->can('userIndex');
+if($isAdmin){$adminPanel="<div class='pull-right phone'>".Html::a('Admin panel',['/admin'])."</div>";}
+else{$adminPanel='';}
+
 ?>
 <div class="top_contact rubik">
     <div class="container">
         <div class="lang pull-right"><?=$eng?><?=$ru?><?=$ko?></div>
         <div class="email pull-right"><span class="glyphicon glyphicon-envelope mr5"></span><?=$email?></div>
         <div class="phone pull-right"><span class="glyphicon glyphicon-earphone mr5"></span><?=$phone?></div>
+        <?=$adminPanel?>
     </div>
 </div>
 <?php

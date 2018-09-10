@@ -22,7 +22,7 @@ AppAsset::register($this);
     <link rel="shortcut icon" href="/images/favicon.ico?v=1" type="image/x-icon">
     <link rel="icon" href="/images/favicon.ico?v=1" type="image/x-icon">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Admin | <?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -43,10 +43,9 @@ AppAsset::register($this);
         ['label' => 'Prices', 'url' => ['/price']],
         ['label' => 'Bookings', 'url' => ['/book']],
         ['label' => 'Countries', 'url' => ['/destination']],
-        ['label' => 'Users', 'url' => ['/user']],
         ['label' => 'Pages', 'url' => ['/page']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Lookups', 'url' => ['/lookup']],
+        ['label' => 'Users', 'url' => ['/user']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -77,7 +76,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
+<footer class="footer2">
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 

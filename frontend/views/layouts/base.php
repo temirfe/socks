@@ -20,6 +20,7 @@ AppAsset::register($this);
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,500" rel="stylesheet">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <?php $this->head() ?>
 </head>
 <body>
@@ -30,13 +31,7 @@ AppAsset::register($this);
     <?= $content ?>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<?php include_once('_footer.php'); ?>
 
 <?php $this->endBody() ?>
 </body>

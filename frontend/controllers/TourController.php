@@ -35,10 +35,21 @@ class TourController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='backend';
         $searchModel = new TourSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionAll()
+    {
+        $searchModel = new TourSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('all', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

@@ -7,6 +7,8 @@ use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "tour".
@@ -248,5 +250,31 @@ class Tour extends \yii\db\ActiveRecord
             $this->description=$this->description_ko;
         }
     }
+    public function getImage($size='s_',$class=''){
+        if($this->images){
+            $images=explode(';',$this->images);
+            $image=Html::img('/images/tour/'.$this->id.'/'.$size.$images[0],['class'=>$class]);
+        }
+        else $image='';
+        return $image;
+    }
 
+    public function getIntro(){
+        return StringHelper::truncate($this->description,255,'...');
+    }
+
+    public function getLowestPrice(){
+        $pr=0;
+        foreach($this->prices as $price){
+            if($price->price){
+                if($pr && $price->price<$pr){
+                    $pr=$price->price;
+                }
+                else{$pr=$price->price;}
+                if($price->currency=='usd'){$pr='$'.$pr;}
+                else {$pr=$pr.' '.strtoupper($price->currency);}
+            }
+        }
+        return $pr;
+    }
 }

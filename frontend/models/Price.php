@@ -25,6 +25,7 @@ use Yii;
  */
 class Price extends \yii\db\ActiveRecord
 {
+    public $referrer;
     /**
      * {@inheritdoc}
      */
@@ -40,7 +41,7 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             [['price'], 'required'],
-            [['date_start', 'date_end'], 'safe'],
+            [['date_start', 'date_end','referrer'], 'safe'],
             [['price', 'tour_id', 'group_of'], 'integer'],
             [['title', 'title_ru', 'title_ko', 'note', 'note_ru', 'note_ko'], 'string', 'max' => 50],
             [['currency'], 'string', 'max' => 3],

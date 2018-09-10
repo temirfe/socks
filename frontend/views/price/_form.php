@@ -10,6 +10,7 @@ use kartik\date\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 $tour=Yii::$app->request->get('tour_id');
 if($tour){$model->tour_id=$tour;}
+$model->referrer=Yii::$app->request->get('ref');
 ?>
 
 <div class="price-form">
@@ -22,31 +23,30 @@ if($tour){$model->tour_id=$tour;}
 
 
     <div class="row">
+        <?= $form->field($model, 'referrer')->hiddenInput()->label(false) ?>
         <div class="col-sm-3"><?= $form->field($model, 'group_of')->textInput() ?></div>
         <div class="col-sm-9"><?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?></div>
         <div class="col-sm-3"><?= $form->field($model, 'price')->textInput() ?></div>
         <div class="col-sm-3"><?= $form->field($model, 'currency')->dropDownList(['usd'=>'USD','kgs'=>'KGS']) ?></div>
-        <div class="col-sm-3">
-            <?= $form->field($model, 'date_start')->widget(DatePicker::className(), [
-                'type' => DatePicker::TYPE_INPUT,
-                //'convertFormat'=>true,
+        <div class="col-sm-6">
+            <?php
+            echo '<label class="control-label">Select date range</label>';
+            echo DatePicker::widget([
+                'model' => $model,
+                'attribute' => 'date_start',
+                'attribute2' => 'date_end',
+                'options' => ['placeholder' => 'Start date','autocomplete'=>'off'],
+                'options2' => ['placeholder' => 'End date','autocomplete'=>'off'],
+                'type' => DatePicker::TYPE_RANGE,
+                'form' => $form,
                 'pluginOptions' => [
-                    'autoclose'=>true,
-                    //'format'=>'dd/mm/yyyy',
-                    'format'=>'yyyy-mm-dd',
+                    'format' => 'yyyy-mm-dd',
+                    'autoclose' => true,
+                    'todayHighlight' => true,
                 ]
-            ])->hint('Leave blank if any date') ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($model, 'date_end')->widget(DatePicker::className(), [
-                'type' => DatePicker::TYPE_INPUT,
-                //'convertFormat'=>true,
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    //'format'=>'dd/mm/yyyy',
-                    'format'=>'yyyy-mm-dd',
-                ]
-            ]) ?>
+            ]);
+            ?>
+            <div class="hint hint-block">Leave blank if any date</div>
         </div>
     </div>
 

@@ -13,6 +13,9 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Page;
+use frontend\models\Destination;
+use frontend\models\Category;
+use frontend\models\Tour;
 
 /**
  * Site controller
@@ -88,7 +91,21 @@ class SiteController extends Controller
         $page = Yii::$app->cache->getOrSet('page-main', function () {
             return Page::find()->where(['category'=>'main'])->one();
         }, 0);
-        return $this->render('index',['page'=>$page]);
+        $destinations = Yii::$app->cache->getOrSet('destination', function () {
+            return Destination::find()->all();
+        }, 0);
+        $categories= Yii::$app->cache->getOrSet('category', function () {
+            return Category::find()->all();
+        }, 0);
+
+        $tours=Tour::find()->orderBy('id DESC')->limit(12)->all();
+
+        return $this->render('index',[
+            'page'=>$page,
+            'destinations'=>$destinations,
+            'categories'=>$categories,
+            'tours'=>$tours
+        ]);
     }
 
     public function actionAdmin()

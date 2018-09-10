@@ -13,18 +13,24 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tours'), 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 $dao=Yii::$app->db;
 $lowest_price=0;
+$isAdmin=Yii::$app->user->can('userIndex');
+
 ?>
 <div class="tour-view">
-    <p class="pull-right">
-        <?= Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id], ['class' => 'btn btn-sm btn-default']) ?>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-sm btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+    <p class="pull-right mr5a">
+        <?php
+            if($isAdmin){
+                echo Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id, 'ref'=>'view'], ['class' => 'btn btn-sm btn-default']);
+                echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']);
+                echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-sm btn-danger',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                'method' => 'post',
+                            ],
+                        ]);
+            }
+        ?>
     </p>
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -83,7 +89,7 @@ $lowest_price=0;
                 foreach($days as $day){
                     ?>
                     <div class="mt15 mb15">
-                        <div class="day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
+                        <div class="tour_day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
                         <div class="day_info">
                             <h4 class="title"><?=$day->title?></h4>
                             <?php if($day->itinerary){
@@ -160,7 +166,21 @@ $lowest_price=0;
                     }
                     ?>
                     <div class="book_box_wrap mb20">
-                        <div class="col-xs-8 book_box book_box_info">
+                        <div class="col-xs-8 book_box book_box_info rel">
+                            <?php
+                            if($isAdmin){
+                                echo "<div class='abs price_menu'>";
+                                echo Html::a(Yii::t('app', 'Update'),['price/update','id'=>$price->id,'ref'=>'view']);
+                                echo Html::a(Yii::t('app', 'Delete'), ['price/delete', 'id' => $price->id,'ref'=>'view'], [
+                                    'class' => 'text-danger',
+                                    'data' => [
+                                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                        'method' => 'post',
+                                    ],
+                                ]);
+                                echo "</div>";
+                            }
+                            ?>
                             <h3><?=$price->title?><div class='date pull-right'><?=$dates?></div></h3>
                             <div class="note"><?=$price->note?></div>
                             <div class="booked"><?=$booked_text?></div>

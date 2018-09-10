@@ -57,6 +57,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'about'=>'site/about',
                 'contact'=>'site/contact',
                 'admin'=>'site/admin',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

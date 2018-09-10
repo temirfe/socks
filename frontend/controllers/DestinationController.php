@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\models\Tour;
 
 /**
  * DestinationController implements the CRUD actions for Destination model.
@@ -53,8 +54,19 @@ class DestinationController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout='main';
+        $dataProvider = new ActiveDataProvider([
+            'query' => Tour::find()->where(['destination_id'=>$id]),
+            //'pagination' => ['pageSize' => 50],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider'=>$dataProvider
         ]);
     }
 

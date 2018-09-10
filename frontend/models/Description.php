@@ -100,6 +100,7 @@ class Description extends \yii\db\ActiveRecord
 
         $this->saveImage();
         //$this->optimizeImage();
+        Yii::$app->cache->delete('descriptions'.$this->category_id);
     }
     protected function saveImage(){
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
@@ -109,7 +110,7 @@ class Description extends \yii\db\ActiveRecord
         }
 
         $model_name=Yii::$app->controller->id;
-        if($this->imageFile || $this->imageFiles){
+        if($this->imageFile){
             $dir=Yii::getAlias('@webroot')."/images/{$model_name}/";
             if (!file_exists($dir)) {mkdir($dir);}
 
@@ -129,7 +130,7 @@ class Description extends \yii\db\ActiveRecord
                 $imagine->thumbnail(new Box(400, 300))->save($tosave.'/s_'.$imageName);
                 //Image::thumbnail($tosave.'/s_'.$imageName,270, 270)->save($tosave.'/s_'.$imageName);
 
-                Yii::$app->db->createCommand("UPDATE {$model_name} SET image='{$imageName}' WHERE id='{$this->id}'")->execute();
+                Yii::$app->db->createCommand("UPDATE category_desc SET image='{$imageName}' WHERE id='{$this->id}'")->execute();
             }
         }
     }

@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'title_ru',
-            'title_ko',
+            //'title_ru',
+            //'title_ko',
             'image',
             //'intro',
             //'intro_ru',
@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'description:ntext',
             //'description_ru:ntext',
             //'description_ko:ntext',
-            //'category_id',
-            //'destination_id',
+            'category_id',
+            'destination_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

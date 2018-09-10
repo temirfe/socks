@@ -9,6 +9,14 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+/*$descs= Yii::$app->cache->getOrSet('descriptions'.$model->id, function () use($model) {
+    return $model->descriptions;
+}, 0);
+
+foreach($descs as $desc){
+    echo 'adf'.$desc->title."<br />";
+}*/
 ?>
 <div class="category-view">
 

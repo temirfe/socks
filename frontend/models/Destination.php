@@ -7,6 +7,7 @@ use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "destination".
@@ -98,6 +99,7 @@ class Destination extends \yii\db\ActiveRecord
 
         $this->saveImage();
         //$this->optimizeImage();
+        Yii::$app->cache->delete('destination');
     }
 
     protected function saveImage(){
@@ -198,6 +200,14 @@ class Destination extends \yii\db\ActiveRecord
 
     public static function getList(){
         return ArrayHelper::map(Destination::find()->select(['id','title'])->asArray()->all(),'id','title');
+    }
+    public function getImage($size='s_',$class=''){
+        if($this->images){
+            $images=explode(';',$this->images);
+            $image=Html::img('/images/destination/'.$this->id.'/'.$size.$images[0],['class'=>$class]);
+        }
+        else $image='';
+        return $image;
     }
 
     function afterFind()

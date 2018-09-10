@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "category".
@@ -13,7 +14,7 @@ use yii\helpers\ArrayHelper;
  * @property string $title_ru
  * @property string $title_ko
  *
- * @property Description[] $Description
+ * @property Description[] $descriptions
  * @property Tour[] $tours
  */
 class Category extends \yii\db\ActiveRecord
@@ -53,7 +54,7 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDescription()
+    public function getDescriptions()
     {
         return $this->hasMany(Description::className(), ['category_id' => 'id']);
     }
@@ -80,5 +81,20 @@ class Category extends \yii\db\ActiveRecord
         else if($curLang=='ko-KR'){
             $this->title=$this->title_ko;
         }
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        Yii::$app->cache->delete('category');
+    }
+
+    public function getImage($size='s_',$class=''){
+        $descriptions= Yii::$app->cache->getOrSet('descriptions'.$this->id, function () {
+            return $this->descriptions;
+        }, 0);
+        foreach($descriptions as $desc){
+            if($desc->image){return Html::img('/images/description/'.$desc->id.'/'.$size.$desc->image,['class'=>$class]);}
+        }
+        return '';
     }
 }

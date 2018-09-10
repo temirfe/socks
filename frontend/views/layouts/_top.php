@@ -7,11 +7,37 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use frontend\models\Lookup;
+use frontend\models\Category;
+use frontend\models\Destination;
+
+$categories = Yii::$app->cache->getOrSet('category', function () {
+    return Category::find()->all();
+}, 0);
+$destinations = Yii::$app->cache->getOrSet('destination', function () {
+    return Destination::find()->all();
+}, 0);
+$ctgItems=[];$countryItems=[];
+foreach($categories as $category){
+    if($ctgItems){$ctgItems[]='<li class="divider"></li>';}
+    $ctgItems[]=['label' => $category->title, 'url' => ['/category/view','id'=>$category->id]];
+}
+foreach($destinations as $dest){
+    if($countryItems){$countryItems[]='<li class="divider"></li>';}
+    $countryItems[]=['label' => $dest->title, 'url' => ['/destination/view','id'=>$dest->id]];
+}
 
 $menuItems = [
     ['label' => Yii::t('app','About us'), 'url' => ['/about']],
-    ['label' => Yii::t('app','Countries'), 'url' => ['/countries']],
-    ['label' => Yii::t('app','Type of tours'), 'url' => ['/tours']],
+    [
+        'label' => Yii::t('app','Countries'),
+        //'url' => ['/countries'],
+        'items' => $countryItems,
+    ],
+    [
+        'label' => Yii::t('app','Type of tours'),
+        //'url' => ['/tours'],
+        'items' => $ctgItems,
+    ],
     ['label' => Yii::t('app','Contact us'), 'url' => ['/contact']],
 ];
 

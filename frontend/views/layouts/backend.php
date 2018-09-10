@@ -30,9 +30,6 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-        if(Yii::$app->user->can('userIndex')){include_once('adminpanel.php');}
-    ?>
-    <?php
     NavBar::begin([
         'brandLabel' => Html::img('/images/ok_logo_r.png')."<span> | Admin</span>",
         'brandUrl' => '/admin',
@@ -41,7 +38,13 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Tours', 'url' => ['/tour']],
+        ['label' => 'Tour types', 'url' => ['/category']],
+        ['label' => 'Prices', 'url' => ['/price']],
+        ['label' => 'Bookings', 'url' => ['/book']],
+        ['label' => 'Countries', 'url' => ['/destination']],
+        ['label' => 'Users', 'url' => ['/user']],
+        ['label' => 'Pages', 'url' => ['/page']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];

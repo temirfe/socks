@@ -16,6 +16,7 @@ use frontend\models\Category;
  */
 class DescriptionController extends Controller
 {
+    public $layout='backend';
     /**
      * {@inheritdoc}
      */

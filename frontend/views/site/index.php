@@ -4,11 +4,19 @@
 /* @var $page \frontend\models\Page */
 
 use yii\helpers\Html;
+use frontend\models\Destination;
+use frontend\models\Category;
 
-$this->title = 'OKTour - Unforgettable tours';
+$this->title = 'OK Tour - Unforgettable tours';
 $alias=Yii::getAlias('@web');
 $file=$alias."/images/page/".$page->id.'/'.$page->image;
 $banner=Html::img($file,['class'=>'img-responsive']);
+$destinations = Yii::$app->cache->getOrSet('destination', function () {
+    return Destination::find()->all();
+}, 0);
+$categories= Yii::$app->cache->getOrSet('category', function () {
+    return Category::find()->all();
+}, 0);
 ?>
 <div class="site-index">
     <div class="jumbotron rel">
@@ -23,37 +31,34 @@ $banner=Html::img($file,['class'=>'img-responsive']);
 
     <div class="body-content container">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+        <div class="main_item_box">
+            <?php
+            foreach($destinations as $destination){
+                ?>
+                <div class="country_card pull-left rel">
+                    <?=Html::a($destination->getImage(),['/destination/view','id'=>$destination->id])?>
+                    <div class="card_bottom abs rubik">
+                        <?=$destination->title?>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+        <div class="main_item_box">
+            <?php
+            foreach($categories as $ctg){
+                ?>
+                <div class="country_card pull-left rel">
+                    <?=Html::a($ctg->getImage(),['/category/view','id'=>$ctg->id])?>
+                    <div class="card_bottom abs rubik">
+                        <?=$ctg->title?>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
 
     </div>

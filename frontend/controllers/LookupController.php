@@ -14,7 +14,6 @@ use yii\filters\VerbFilter;
  */
 class LookupController extends Controller
 {
-
     public $layout='backend';
     /**
      * {@inheritdoc}

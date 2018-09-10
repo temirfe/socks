@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class DayController extends Controller
 {
+    public $layout='backend';
     /**
      * {@inheritdoc}
      */

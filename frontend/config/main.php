@@ -10,7 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'name'=>'OKTour',
+    'name'=>'OK Tour',
     //'language'=>'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
     'on beforeRequest' => function ($event) {

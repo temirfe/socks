@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class PackageController extends Controller
 {
+    public $layout='backend';
+
     /**
      * {@inheritdoc}
      */

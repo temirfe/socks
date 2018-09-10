@@ -69,7 +69,7 @@ class Page extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
 
         $this->saveImage();
-        if($this->title=='main'){Yii::$app->cache->delete('page-main');}
+        if($this->category=='main'){Yii::$app->cache->delete('page-main');}
         //$this->optimizeImage();
     }
     protected function saveImage(){

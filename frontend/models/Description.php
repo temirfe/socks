@@ -127,8 +127,8 @@ class Description extends \yii\db\ActiveRecord
 
                 $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                 $imagine->thumbnail(new Box(1200, 800))->save($tosave.'/'.$imageName);
-                $imagine->thumbnail(new Box(400, 300))->save($tosave.'/s_'.$imageName);
-                //Image::thumbnail($tosave.'/s_'.$imageName,270, 270)->save($tosave.'/s_'.$imageName);
+                $imagine->thumbnail(Page::myBox(400, 225,$imagine->getSize()))->save($tosave.'/s_'.$imageName);
+                Image::thumbnail($tosave.'/s_'.$imageName,400, 225)->save($tosave.'/s_'.$imageName);
 
                 Yii::$app->db->createCommand("UPDATE category_desc SET image='{$imageName}' WHERE id='{$this->id}'")->execute();
             }

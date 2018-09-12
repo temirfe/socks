@@ -14,7 +14,7 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 col-xs-2">
+            <div class="col-sm-4 col-xs-6">
                 <ul class="fa-ul">
                     <?php
                     foreach($lookups as $lookup){
@@ -27,8 +27,9 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
                     }
                     ?>
                 </ul>
+                <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
             </div>
-            <div class="col-sm-4 col-xs-2">
+            <div class="col-sm-4 col-xs-6">
                 <ul class="fa-ul">
                     <?php
                     foreach($lookups as $lookup){
@@ -44,7 +45,10 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
                     ?>
                 </ul>
             </div>
+
+            <div class="col-sm-4 col-xs-6">
+                <?=Html::img('/images/ok_logo_white.png',['class'=>'logo_footer'])?>
+            </div>
         </div>
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
     </div>
 </footer>

@@ -145,8 +145,8 @@ class Destination extends \yii\db\ActiveRecord
                     $image->saveAs($tosave.'/' . $imageName);
                     $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                     $imagine->thumbnail(new Box(1500, 1000))->save($tosave.'/' .$imageName);
-                    $imagine->thumbnail(new Box(400, 300))->save($tosave.'/s_'.$imageName);
-                    //Image::thumbnail($tosave.'/'.$imageName,250, 250)->save($tosave.'/s_'.$imageName);
+                    $imagine->thumbnail(Page::myBox(400, 225,$imagine->getSize()))->save($tosave.'/s_'.$imageName);
+                    Image::thumbnail($tosave.'/s_'.$imageName,400, 225)->save($tosave.'/s_'.$imageName);
                     /*if($key==0 && !$this->image){
                         Yii::$app->db->createCommand("UPDATE {$model_name} SET image='{$imageName}' WHERE id='{$this->id}'")->execute();
                     }*/

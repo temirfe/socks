@@ -139,7 +139,7 @@ class DescriptionController extends Controller
                 $full=$expl[1];
                 @unlink($dir.'/'.$key);
                 @unlink($dir.'/'.$full);
-                Yii::$app->db->createCommand("UPDATE {$model_name} SET image='' WHERE id='{$id}'")->execute();
+                Yii::$app->db->createCommand("UPDATE category_desc SET image='' WHERE id='{$id}'")->execute();
             }
         }
         Yii::$app->response->format=\yii\web\Response::FORMAT_JSON;

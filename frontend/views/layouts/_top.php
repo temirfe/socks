@@ -44,18 +44,20 @@ $menuItems = [
 $lookups = Yii::$app->cache->getOrSet('lookup', function () {
     return Lookup::find()->all();
 }, 0);
-$phone='';$email='';
+$phone='';$email='';$fa_email='';$fa_phone='';
 foreach($lookups as $lookup){
     if($lookup->title=='phone'){
         $phones=explode(',',$lookup->text);
         foreach($phones as $ph){
             $phone.="<a href='tel:".preg_replace("/[^\+\d]/", "", $ph)."'>".$ph."</a>";
+            $fa_phone.="<a href='tel:".preg_replace("/[^\+\d]/", "", $ph)."'><span class='fas fa-phone mr5'></span></a>";
         }
     }
     else if($lookup->title=='email'){
         $emails=explode(',',$lookup->text);
         foreach($emails as $em){
             $email.="<a href='mailto:".$em."'>".$em."</a>";
+            $fa_email="<a href='mailto:".$em."'><span class='fas fa-envelope mr5'></span></a>";
         }
     }
 }
@@ -77,14 +79,14 @@ else{$adminPanel='';}
 <div class="top_contact rubik">
     <div class="container">
         <div class="lang pull-right"><?=$eng?><?=$ru?><?=$ko?></div>
-        <div class="email pull-right"><span class="glyphicon glyphicon-envelope mr5"></span><?=$email?></div>
-        <div class="phone pull-right"><span class="glyphicon glyphicon-earphone mr5"></span><?=$phone?></div>
+        <div class="email pull-right"><?=$fa_email?><span><?=$email?></span></div>
+        <div class="phone pull-right"><?=$fa_phone?><span><?=$phone?></span></div>
         <?=$adminPanel?>
     </div>
 </div>
 <?php
 NavBar::begin([
-    'brandLabel' => Html::img('/images/ok_logo2.png'),
+    'brandLabel' => Html::img('/images/ok_logo_horizont.png'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar mynav',
@@ -93,10 +95,8 @@ NavBar::begin([
 
 ?>
 
-<div class="nav_flex">
-    <?=Nav::widget([
-        'options' => ['class' => 'navbar-nav rubik upper'],
-        'items' => $menuItems,
-    ]);?>
-</div>
+<?=Nav::widget([
+    'options' => ['class' => 'navbar-nav rubik upper'],
+    'items' => $menuItems,
+]);?>
 <?php NavBar::end(); ?>

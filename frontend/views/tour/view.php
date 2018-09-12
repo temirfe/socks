@@ -17,7 +17,7 @@ $isAdmin=Yii::$app->user->can('userIndex');
 
 ?>
 <div class="tour-view">
-    <p class="pull-right mr5a">
+    <p class="pull-right mr5a xs-block">
         <?php
             if($isAdmin){
                 echo Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id, 'ref'=>'view'], ['class' => 'btn btn-sm btn-default']);
@@ -38,17 +38,17 @@ $isAdmin=Yii::$app->user->can('userIndex');
     <div class="tour_params row mb20 mt20">
         <?php if($model->destination){
             ?>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-4">
                 <div><?=Yii::t('app','Country')?>:</div>
                 <span><?=$model->destination->title?></span>
             </div>
             <?php
         } ?>
 
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-xs-4">
             <div><?=Yii::t('app','Tour type')?>:</div><span><?=$model->category->title?></span>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-xs-4">
             <div><?=Yii::t('app','Duration')?>:</div><span><?=$model->days?> <?=Yii::t('app','days')?></span>
         </div>
     </div>
@@ -166,7 +166,7 @@ $isAdmin=Yii::$app->user->can('userIndex');
                     }
                     ?>
                     <div class="book_box_wrap mb20">
-                        <div class="col-xs-8 book_box book_box_info rel">
+                        <div class="col-sm-8 book_box book_box_info rel">
                             <?php
                             if($isAdmin){
                                 echo "<div class='abs price_menu'>";
@@ -185,7 +185,7 @@ $isAdmin=Yii::$app->user->can('userIndex');
                             <div class="note"><?=$price->note?></div>
                             <div class="booked"><?=$booked_text?></div>
                         </div>
-                        <div class="col-xs-4 book_box book_box_price">
+                        <div class="col-sm-4 book_box book_box_price">
                             <h3><?=$price->price?><span class="text-uppercase ml5"><?=$price->currency?></span> </h3>
                             <?=Html::a(Yii::t('app', 'Book Now'), ['book/create', 'price_id' => $price->id], ['class' => 'btn btn-success']);?>
                         </div>
@@ -195,7 +195,7 @@ $isAdmin=Yii::$app->user->can('userIndex');
             }
             ?>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 sm-hidden">
             <div class="right_book_box book_box_price">
                  <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$currency?></h3>
                 <?=Html::a(Yii::t('app', 'Book Now'), '#prices', ['class' => 'btn btn-success']);?>

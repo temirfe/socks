@@ -2,10 +2,12 @@
 
 namespace frontend\models;
 
+use Imagine\Image\BoxInterface;
 use Yii;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 use Imagine\Image\Box;
+use Imagine\Image\Point;
 use yii\caching\TagDependency;
 
 /**
@@ -97,12 +99,37 @@ class Page extends \yii\db\ActiveRecord
 
                 $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                 $imagine->thumbnail(new Box(1500, 800))->save($tosave.'/'.$imageName);
-                $imagine->thumbnail(new Box(400, 300))->save($tosave.'/s_'.$imageName);
-                //Image::thumbnail($tosave.'/s_'.$imageName,270, 270)->save($tosave.'/s_'.$imageName);
+                //$imagine->thumbnail(new Box(400, 300))->save($tosave.'/s_'.$imageName);
+                $imagine->thumbnail(self::myBox(400, 225,$imagine->getSize()))->save($tosave.'/s_'.$imageName);
+                Image::thumbnail($tosave.'/s_'.$imageName,400, 225)->save($tosave.'/s_'.$imageName);
 
                 Yii::$app->db->createCommand("UPDATE {$model_name} SET image='{$imageName}' WHERE id='{$this->id}'")->execute();
             }
         }
+    }
+
+    public static function myBox( $targetWidth, $targetHeight, BoxInterface $orgSize)
+    {
+        // Box is Imagine Box instance
+        if ($orgSize->getWidth() > $orgSize->getHeight()) {
+            // Landscaped.. We need to crop image by horizontally
+            $w = round($orgSize->getWidth() * ( $targetHeight / $orgSize->getHeight() ));
+            $h =  $targetHeight;
+            if($w<$targetWidth){
+                $h=round(($targetHeight*$targetWidth)/$w);
+                $w=$targetWidth;
+            }
+        } else {
+            // Portrait..
+            $w = $targetWidth; // Use target box's width and crop vertically
+            $h = round($orgSize->getHeight() * ( $targetWidth / $orgSize->getWidth() ));
+            if($h<$targetHeight){
+                $w=round(($targetHeight*$targetWidth)/$h);
+                $h=$targetHeight;
+            }
+        }
+
+        return new Box($w, $h);
     }
 
     protected function optimizeImage(){

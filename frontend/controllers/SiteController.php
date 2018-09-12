@@ -30,7 +30,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup','img-delete'],
+                'only' => ['logout', 'signup','img-delete','admin'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -259,10 +259,8 @@ class SiteController extends Controller
         if(is_dir($dir=$webroot."/images/{$model_name}/".$id))
         {
             if(is_file($dir.'/'.$key)){
-                $expl=explode('_',$key);
-                $full=$expl[1];
                 @unlink($dir.'/'.$key);
-                @unlink($dir.'/'.$full);
+                @unlink($dir.'/s_'.$key);
                 $dao=Yii::$app->db;
                 $row = $dao->createCommand("SELECT images FROM {$model_name} WHERE id='{$id}'")->queryOne();
                 $exp=explode(';',$row['images']);

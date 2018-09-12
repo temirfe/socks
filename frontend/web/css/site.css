@@ -612,16 +612,6 @@ h1, .h1, h2,.h2,h4,.h4{font-family: Rubik, sans-serif; color:#01384C;}
 h3.box_title{color:#fff; font-size: 30px;}
 h3.box_title_en-US{font-family: 'Kaushan Script', cursive;}
 h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
-.adv_box:hover img, .tour_card:hover img{
-    -webkit-transform: scale(1.08);
-    -moz-transform: scale(1.08);
-    -ms-transform: scale(1.08);
-    -o-transform: scale(1.08);
-    transform: scale(1.08);
-}
-.adv_box:hover .dimmer {
-    background-color: rgba(0, 0, 0, 0.5);
-}
 
 .box_title div{display: inline-block;}
 .box_title div span{display: flex;
@@ -634,8 +624,21 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     transition: width .4s ease;
     margin-top: 9px;
 }
-.adv_box:hover .box_title span::after{
-    width: 100%;}
+@media (pointer: fine) {
+
+    .adv_box:hover img, .tour_card:hover img{
+        -webkit-transform: scale(1.08);
+        -moz-transform: scale(1.08);
+        -ms-transform: scale(1.08);
+        -o-transform: scale(1.08);
+        transform: scale(1.08);
+    }
+    .adv_box:hover .dimmer {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .adv_box:hover .box_title span::after{
+        width: 100%;}
+}
 .logo_footer{
     width: 163px;
     position: absolute;
@@ -667,4 +670,7 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 @media (max-width: 475px){
     .top_contact .phone >span, .top_contact .email > span{display: none;}
     .tour_card_intro {display: none;}
+    .logo_footer {
+        display: none;
+    }
 }

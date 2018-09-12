@@ -11,6 +11,8 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$isAdmin=Yii::$app->user->can('userIndex');
+
 /*$descs= Yii::$app->cache->getOrSet('descriptions'.$model->id, function () use($model) {
     return $model->descriptions;
 }, 0);

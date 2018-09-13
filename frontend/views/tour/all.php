@@ -21,10 +21,10 @@ $isAdmin=Yii::$app->user->can('userIndex');
 
     <?=ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'tour_card col-sm-4 col-xs-6'],
+        'itemOptions' => ['class' => 'tour_card x-md-33 x-sm-33 x-xs-50'],
         'emptyText' => Yii::t('app', 'No results found'),
         'summary'=>'',
-        'options'=>['class'=>'item-view row'],
+        'options'=>['class'=>'flex flex-wrap mr-30 xs-mr-15'],
         'itemView' => function ($model, $key, $index, $widget) {
             return $this->render('_view',['tour' => $model]);
         },

@@ -6,6 +6,9 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Day */
 /* @var $form yii\widgets\ActiveForm */
+if($model->isNewRecord && $tour_id=Yii::$app->request->get('tour_id')){
+    $model->tour_id=$tour_id;
+}
 ?>
 
 <div class="day-form">
@@ -45,7 +48,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <?= $form->field($model, 'tour_id')->textInput() ?>
+    <?= $form->field($model, 'tour_id')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

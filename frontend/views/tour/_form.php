@@ -15,24 +15,27 @@ use frontend\models\Destination;
 
 <div class="tour-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'category_id')->dropDownList(Category::getList()) ?>
     <?= $form->field($model, 'destination_id')->dropDownList(Destination::getList()) ?>
 
     <?= $form->field($model, 'days')->textInput() ?>
-
     <?= $form->field($model, 'description')->widget(Widget::className(), [
         'settings' => [
             'minHeight' => 200,
+            //'maxHeight' => 400,
+            'imageUpload' => Url::to(['/site/editor-upload']),
+            'imageManagerJson' => Url::to(['/site/editor-browse']),
             'plugins' => [
                 'clips',
                 'fullscreen',
+                'imagemanager',
+                'table',
             ],
         ],
     ]); ?>
-
     <?php
     $model_name='tour';
     $url = Url::to(['site/img-delete', 'id' => $model->id, 'model_name'=>$model_name]);
@@ -79,9 +82,14 @@ use frontend\models\Destination;
             <?= $form->field($model, 'description_ru')->widget(Widget::className(), [
                 'settings' => [
                     'minHeight' => 200,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
             ]); ?>
@@ -98,9 +106,14 @@ use frontend\models\Destination;
             <?= $form->field($model, 'description_ko')->widget(Widget::className(), [
                 'settings' => [
                     'minHeight' => 200,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
             ]); ?>

@@ -22,9 +22,14 @@ use vova07\imperavi\Widget;
     <?= $form->field($model, 'text')->widget(Widget::className(), [
         'settings' => [
             'minHeight' => 200,
+            //'maxHeight' => 400,
+            'imageUpload' => Url::to(['/site/editor-upload']),
+            'imageManagerJson' => Url::to(['/site/editor-browse']),
             'plugins' => [
                 'clips',
                 'fullscreen',
+                'imagemanager',
+                'table',
             ],
         ],
     ]); ?>
@@ -109,9 +114,14 @@ use vova07\imperavi\Widget;
             <?= $form->field($model, 'text_ru')->widget(Widget::className(), [
                 'settings' => [
                     'minHeight' => 200,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
             ]); ?>
@@ -131,9 +141,14 @@ use vova07\imperavi\Widget;
             <?= $form->field($model, 'text_ko')->widget(Widget::className(), [
                 'settings' => [
                     'minHeight' => 200,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
             ]); ?>

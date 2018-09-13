@@ -3,21 +3,23 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
+/* @var $page frontend\models\Page */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use frontend\models\Page;
+use frontend\models\Lookup;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$page=Page::find()->where(['category'=>'contacts'])->one();
+$this->title = $page->title;
+$this->params['breadcrumbs'][] = $page->title;
+$lookups = Yii::$app->cache->getOrSet('lookup', function () {
+    return Lookup::find()->all();
+}, 0);
 ?>
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
-    </p>
-
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
@@ -25,8 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'subject') ?>
 
                 <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
@@ -40,6 +40,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
         </div>
+        <div class="col-lg-7">
+           <!-- <ul class="fa-ul contact_ul">
+                <?php
+/*                foreach($lookups as $lookup){
+                    if($lookup->text && in_array($lookup->title,['phone','email','address'])){
+                        if($lookup->title=='address'){$fas='map-marker-alt';$ftitle=Html::a($lookup->text,'https://2gis.kg/search/'.$lookup->text,['target'=>'_blank']);}
+                        else if($lookup->title=='phone'){$fas='phone';$ftitle=Html::a($lookup->text,'tel:'.$lookup->text);}
+                        else if($lookup->title=='email'){$fas='at';$ftitle=Html::a($lookup->text,'mailto:'.$lookup->text);}
+                        echo "<li><span class='fa-li'><i class='fas fa-{$fas} fa-lg'></i></span>".$ftitle."</li>";
+                    }
+                }
+                */?>
+            </ul>-->
+            <?=$page->text?>
+        </div>
+
     </div>
 
 </div>

@@ -214,15 +214,17 @@ class Destination extends \yii\db\ActiveRecord
     {
         parent::afterFind();
         $curLang=Yii::$app->language;
-        if($curLang=='ru-RU'){
-            $this->title=$this->title_ru;
-            $this->intro=$this->intro_ru;
-            $this->text=$this->text_ru;
-        }
-        else if($curLang=='ko-KR'){
-            $this->title=$this->title_ko;
-            $this->intro=$this->intro_ko;
-            $this->text=$this->text_ko;
+        if(Yii::$app->controller->action->id!='update'){
+            if($curLang=='ru-RU'){
+                $this->title=$this->title_ru;
+                $this->intro=$this->intro_ru;
+                $this->text=$this->text_ru;
+            }
+            else if($curLang=='ko-KR'){
+                $this->title=$this->title_ko;
+                $this->intro=$this->intro_ko;
+                $this->text=$this->text_ko;
+            }
         }
     }
 }

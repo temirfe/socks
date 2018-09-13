@@ -29,6 +29,8 @@ class m180903_060617_book extends Migration
             'group_of'=>$this->smallInteger(5),
             'payment_method'=>$this->smallInteger(5),
             'status'=>$this->smallInteger(5),
+            'created_at'=>$this->integer(),
+            'updated_at'=>$this->integer(),
         ],$tableOptions);
 
         $this->createIndex('idx_book_tour', 'book', 'tour_id');

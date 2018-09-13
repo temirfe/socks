@@ -75,12 +75,15 @@ class Category extends \yii\db\ActiveRecord
     {
         parent::afterFind();
         $curLang=Yii::$app->language;
-        if($curLang=='ru-RU'){
-            $this->title=$this->title_ru;
+        if(Yii::$app->controller->action->id!='update'){
+            if($curLang=='ru-RU'){
+                $this->title=$this->title_ru;
+            }
+            else if($curLang=='ko-KR'){
+                $this->title=$this->title_ko;
+            }
         }
-        else if($curLang=='ko-KR'){
-            $this->title=$this->title_ko;
-        }
+
     }
 
     public function afterSave($insert, $changedAttributes){

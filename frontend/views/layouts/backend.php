@@ -38,6 +38,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Main page', 'url' => ['/']],
         ['label' => 'Tours', 'url' => ['/tour']],
         ['label' => 'Tour types', 'url' => ['/category']],
         ['label' => 'Prices', 'url' => ['/price']],

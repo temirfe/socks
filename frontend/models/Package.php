@@ -70,11 +70,15 @@ class Package extends \yii\db\ActiveRecord
     {
         parent::afterFind();
         $curLang=Yii::$app->language;
-        if($curLang=='ru-RU'){
-            $this->included=$this->included_ru;
-        }
-        else if($curLang=='ko-KR'){
-            $this->included=$this->included_ko;
+        if(Yii::$app->controller->action->id!='update'){
+            if($curLang=='ru-RU'){
+                $this->included=$this->included_ru;
+                $this->not_included=$this->not_included_ru;
+            }
+            else if($curLang=='ko-KR'){
+                $this->included=$this->included_ko;
+                $this->not_included=$this->not_included_ko;
+            }
         }
     }
 }

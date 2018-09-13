@@ -54,9 +54,9 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
-        $this->layout='main';
+        $this->layout='wide';
         $dataProvider = new ActiveDataProvider([
-            'query' => Tour::find()->where(['category_id'=>$id]),
+            'query' => Tour::find()->where(['category_id'=>$id])->andFilterWhere(['destination_id'=>Yii::$app->request->get('cid')]),
             //'pagination' => ['pageSize' => 50],
             'sort' => [
                 'defaultOrder' => [

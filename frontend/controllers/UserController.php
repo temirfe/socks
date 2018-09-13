@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use frontend\models\SignupForm;
 use common\models\UserSearch;
 use yii\filters\AccessControl;
+use yii\base\UserException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -35,8 +36,8 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index','create','delete','update','view','update-password'],
-                        'roles' => ['admin'],
+                        'actions' => ['index','create','delete','update','view','update-password','change-role'],
+                        'roles' => ['userIndex'],
                     ],
                     /*[
                         'allow' => true,
@@ -173,5 +174,23 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionChangeRole(){
+        $req=Yii::$app->request->get();
+        if(!empty($req['user_id']) && !empty($req['to'])){
+            if($req['user_id']==Yii::$app->user->id){
+                throw new UserException('You cannot change your own role!');
+            }
+            $auth = Yii::$app->authManager;
+            $roleAdmin = $auth->getRole('admin');
+            if($req['to']=='admin'){
+                $auth->assign($roleAdmin, $req['user_id']);
+            }
+            else if($req['to']=='user'){
+                $auth->revoke($roleAdmin, $req['user_id']);
+            }
+        }
+        return $this->redirect(['index']);
     }
 }

@@ -70,6 +70,14 @@ body {
         font-size: 55px;
     }
 }
+@media screen and (min-width: 768px)
+{
+    .jumbo {
+        padding-top: 30px;
+    }
+}
+.jumbo{height:250px;}
+.jumbo .welcome{margin-top:0;}
 .dimmer{    position: absolute;
     width: 100%;
     height: 100%;
@@ -264,12 +272,16 @@ a.desc:after {
 .mrg-left-5, .ml5 {margin-left: 5px;}
 .fs9{font-size:9px;}
 .mr5{margin-right:5px;}
+.mr10{margin-right:10px;}
+.mr15{margin-right:15px;}
 .mt0{margin-top:0;}
 .mb0{margin-bottom:0;}
 .mb15{margin-bottom:15px;}
+.mt5{margin-top:5px;}
 .mt10{margin-top:10px;}
 .mt15{margin-top:15px;}
 .mt35{margin-top:35px;}
+.mb5{margin-bottom:5px;}
 .mb20{margin-bottom:20px;}
 .mb25{margin-bottom:25px;}
 .mt20{margin-top:20px;}
@@ -292,9 +304,6 @@ a.desc:after {
     width: 100%;
     height: 313px;
 }
-@media (min-width: 992px){
-    .swiper-container,.right_book_box {height: 360px;}
-}
 @media (max-width: 600px){
     .swiper-container {height: 190px;}
 }
@@ -311,7 +320,6 @@ h1{font-size:30px;}
     color: #888;}
 .tour_params span{font-size: 16px;}
 .tour_day{
-    float: left;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px 15px;
@@ -330,15 +338,17 @@ h1{font-size:30px;}
 .day_info h4.title{margin-top:0; color: #01384C;}
 .day_info h4{     color: #9bc73c;
     margin-bottom: 3px;}
-.title2{}
-.title2 i{}
+.font12{font-size:12px;}
+.font16, p.font16{font-size:16px;}
 .rel{position: relative;}
 .abs{position: absolute;}
 .ohidden{overflow: hidden;}
 .zind2{z-index:2;}
 .zind3{z-index:3;}
 .green{color:#007946;}
+.white{color:#fff;}
 .red{color:red;}
+.red2{color:#ac6f7e;}
 .included ul,.not_included ul{
     list-style: none;
     padding: 0;
@@ -428,6 +438,10 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
 .right_book_box{    background-color: #01384C;
     height: 313px;
     padding: 50px 25px;}
+
+@media (min-width: 992px){
+    .swiper-container,.right_book_box {height: 360px;}
+}
 .right_book_box h3{    margin-top: 0;    color: #fff;
     text-transform: uppercase;}
 .right_book_box h3 span{font-size: 14px;
@@ -540,13 +554,46 @@ h1, .h1, h2,.h2,h4,.h4{font-family: Rubik, sans-serif; color:#01384C;}
     right: 0;
     z-index: 1;
 }
-.country_swiper {height: 240px;}
 .country_swiper img{max-height: 100%;}
 .country_swiper .swiper-slide {
-    height: 240px;
     overflow: hidden;
     text-align: center;
 }
+
+.country_swiper {height: 77px;}
+.country_swiper .swiper-slide {height: 77px;}
+@media (max-width: 420px){
+    .swiper-button-next, .swiper-button-prev {
+        width: 25px;
+        height: 23px;
+        margin-top: -13px;
+        background-size: 12px 22px;
+    }
+    .swiper-button-prev, .swiper-container-rtl .swiper-button-next {left: 1px;}
+    .swiper-button-next, .swiper-container-rtl .swiper-button-prev {right: 1px;}
+    h4, .h4 {font-size: 14px;}
+}
+
+@media (min-width: 420px){
+    .country_swiper {height: 160px;}
+    .country_swiper .swiper-slide {height: 160px;}
+}
+
+@media (min-width: 992px){
+    .country_swiper {height: 240px;}
+    .country_swiper .swiper-slide {height: 240px;}
+
+    .readable{
+        line-height: 1.75;
+        font-size: 17px;
+        color: #3e4754;
+    }
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev,
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    filter: hue-rotate(218deg) brightness(168%);
+}
+
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled {
     opacity: 0;
 }
@@ -556,13 +603,8 @@ h1, .h1, h2,.h2,h4,.h4{font-family: Rubik, sans-serif; color:#01384C;}
     align-items: center;
 }
 .country_desc{
-    width: 700px;
+    max-width: 700px;
     margin: 0 auto;
-}
-.readable{
-    line-height: 1.75;
-    font-size: 17px;
-    color: #3e4754;
 }
 
 .mr-8{margin-right:-8px;}
@@ -674,3 +716,32 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
         display: none;
     }
 }
+.menu_box{    border: 2px solid #c3e5b5;
+    padding: 0 20px 10px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+    height: 150px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+.menu_box a{color: #007946;}
+.menu_box_link a{color:#0d3349;}
+.menu_box a:hover{color: #000; text-decoration: none;}
+.menu_box_label{}
+.menu_box_result{font-size: 20px;
+    font-weight: 500;
+    color: #007946;}
+.contact_ul li{
+    font-size: 19px;
+    color: #555;
+}
+.contact_ul li a{
+    color: #555;
+}
+.contact_ul li i{
+    color: #76aF41;
+    font-size:15px;
+}
+.tour_action{margin-top:5px;}
+.tour_action a{padding:5px;}

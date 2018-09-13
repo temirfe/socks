@@ -182,7 +182,15 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+            $adminEmail=Yii::$app->db->createCommand("SELECT * FROM lookup WHERE title='email'")->queryOne();
+            if(!empty($adminEmail['text'])){
+                $text=str_replace(';',',',$adminEmail['text']);
+                $expl=explode(',',$text);
+                $email=$expl[0];
+            }else{
+                $email=Yii::$app->params['adminEmail'];
+            }
+            if ($model->sendEmail($email)) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');

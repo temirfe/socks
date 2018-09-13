@@ -16,6 +16,7 @@ use frontend\models\Page;
 use frontend\models\Destination;
 use frontend\models\Category;
 use frontend\models\Tour;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -76,8 +77,31 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'editor-upload' => [
+                'class' => 'vova07\imperavi\actions\UploadFileAction',
+                'url' => '/images/editor/', // Directory URL address, where files are stored.
+                'path' => Yii::getAlias('@webroot').'/images/editor', // Or absolute path to directory where files are stored.
+                'uploadOnlyImage' => true, // For any kind of files uploading.
+            ],
+            'editor-browse' => [
+                'class' => 'vova07\imperavi\actions\GetImagesAction',
+                'url' => '/images/editor/', // Directory URL address, where files are stored.
+                'path' =>  Yii::getAlias('@webroot').'/images/editor', // Or absolute path to directory where files are stored.
+                'options' => ['only' => ['*.jpg', '*.jpeg', '*.png', '*.gif', '*.ico']], // These options are by default.
+            ],
         ];
     }
+
+
+    /*public function actionEditorUpload(){
+        $file=UploadedFile::getInstanceByName('upload');
+        $imageName=time().'.'.$file->extension;
+        $dir=Yii::getAlias('@webroot')."/images/editor";
+        $file->saveAs($dir.'/' . $imageName);
+    }
+    public function actionEditorBrowse(){
+        return $dir=Yii::getAlias('@webroot')."/images/editor";
+    }*/
 
     /**
      * Displays homepage.

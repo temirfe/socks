@@ -72,7 +72,7 @@ else if($curLang=='ru-RU'){$ru='';}
 else if($curLang=='ko-KR'){$ko='';}
 
 $isAdmin=Yii::$app->user->can('userIndex');
-if($isAdmin){$adminPanel="<div class='pull-right phone'>".Html::a('Admin panel',['/admin'])."</div>";}
+if($isAdmin){$adminPanel="<div class='pull-right phone'>".Html::a(Yii::t('app','Admin panel'),['/admin'])."</div>";}
 else{$adminPanel='';}
 
 ?>

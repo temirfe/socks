@@ -3,12 +3,16 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\PriceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Prices');
 $this->params['breadcrumbs'][] = $this->title;
+$dao=Yii::$app->db;
+$tourRows = $dao->createCommand("SELECT id,title FROM tour ORDER BY id DESC")->queryAll();
+$tours=ArrayHelper::map($tourRows,'id','title');
 ?>
 <div class="price-index">
 
@@ -25,19 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            ['attribute' => 'id', 'contentOptions'=>['width'=>80]],
+            [
+                'attribute'=>'tour_id',
+                'format'=>'raw',
+                'value'=>function($model){
+                    return $model->tour->title;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'tour_id', $tours,['class'=>'form-control','prompt' => Yii::t('app','All')]),
+            ],
             'title',
-            'title_ru',
-            'title_ko',
+            //'title_ru',
+            //'title_ko',
             'note',
             //'note_ru',
             //'note_ko',
-            //'date_start',
-            //'date_end',
-            //'price',
+            'date_start',
+            'date_end',
+            'price',
             //'currency',
-            //'tour_id',
             //'group_of',
 
             ['class' => 'yii\grid\ActionColumn'],

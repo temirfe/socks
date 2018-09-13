@@ -21,16 +21,18 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'text')->widget(Widget::className(), [
         'settings' => [
-            'lang' => 'ru',
             'minHeight' => 200,
-            'maxHeight' => 300,
+            //'maxHeight' => 400,
+            'imageUpload' => Url::to(['/site/editor-upload']),
+            'imageManagerJson' => Url::to(['/site/editor-browse']),
             'plugins' => [
                 'clips',
                 'fullscreen',
+                'imagemanager',
+                'table',
             ],
         ],
-    ]);
-    ?>
+    ]); ?>
 
     <?php
     $model_name='page';
@@ -68,16 +70,18 @@ use yii\helpers\Url;
             <?= $form->field($model, 'title_ru')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'text_ru')->widget(Widget::className(), [
                 'settings' => [
-                    'lang' => 'ru',
                     'minHeight' => 200,
-                    'maxHeight' => 300,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
-            ]);
-            ?>
+            ]); ?>
         </div>
     </div>
 
@@ -91,16 +95,18 @@ use yii\helpers\Url;
             <?= $form->field($model, 'title_ko')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'text_ko')->widget(Widget::className(), [
                 'settings' => [
-                    'lang' => 'ru',
                     'minHeight' => 200,
-                    'maxHeight' => 300,
+                    //'maxHeight' => 400,
+                    'imageUpload' => Url::to(['/site/editor-upload']),
+                    'imageManagerJson' => Url::to(['/site/editor-browse']),
                     'plugins' => [
                         'clips',
                         'fullscreen',
+                        'imagemanager',
+                        'table',
                     ],
                 ],
-            ]);
-            ?>
+            ]); ?>
         </div>
     </div>
 

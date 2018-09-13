@@ -86,39 +86,56 @@ $isAdmin=Yii::$app->user->can('userIndex');
                 $d=1;
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour program')."</span></h3>";
                 echo "<div class='full_content closed clearfix mb20 '>";
-                foreach($days as $day){
-                    ?>
-                    <div class="mt15 mb15">
-                        <div class="tour_day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
-                        <div class="day_info">
-                            <h4 class="title"><?=$day->title?></h4>
-                            <?php if($day->itinerary){
-                                echo "<h4>".Yii::t('app','Itinerary')."</h4>";
-                                echo $day->itinerary;
-                            }?>
-                            <?php if($day->meals){
-                                echo "<h4>".Yii::t('app','Meals')."</h4>";
-                                echo $day->meals;
-                            }?>
-                            <?php if($day->accommodation){
-                                echo "<h4>".Yii::t('app','Accommodation')."</h4>";
-                                echo $day->accommodation;
-                            }?>
+                    foreach($days as $day){
+                        ?>
+                        <div class="mt15 mb15">
+                            <div class="pull-left">
+                                <div class="tour_day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
+                                <div class="tour_action">
+                                    <?= Html::a("<span class='glyphicon glyphicon-pencil'></span>", ['/day/update', 'id' => $day->id]) ?>
+                                    <?= Html::a("<span class='glyphicon glyphicon-trash'></span>", ['/day/delete', 'id' => $day->id], [
+                                        'class' => 'red',
+                                        'data' => [
+                                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                            'method' => 'post',
+                                        ],
+                                    ]) ?>
+                                </div>
+                            </div>
+
+                            <div class="day_info">
+                                <h4 class="title"><?=$day->title?></h4>
+                                <?php if($day->itinerary){
+                                    echo "<h4>".Yii::t('app','Itinerary')."</h4>";
+                                    echo $day->itinerary;
+                                }?>
+                                <?php if($day->meals){
+                                    echo "<h4>".Yii::t('app','Meals')."</h4>";
+                                    echo $day->meals;
+                                }?>
+                                <?php if($day->accommodation){
+                                    echo "<h4>".Yii::t('app','Accommodation')."</h4>";
+                                    echo $day->accommodation;
+                                }?>
+                            </div>
                         </div>
-                    </div>
 
-            <?php
-                    $d++;
-                }
-                ?>
+                    <?php
+                        $d++;
+                    }
+                    ?>
 
-                <div class="gradient" style="display: block;"></div>
-                <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
-                <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
-        </div>
+                    <div class="gradient" style="display: block;"></div>
+                    <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
+                    <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
+                </div>
             <?php
             }
-            if($model->package){
+            if($isAdmin){
+                echo "<div class='clearfix mt5 mb5'>".Html::a(Yii::t('app','Add day'),['/day/create','tour_id'=>$model->id],['class'=>'btn btn-default btn-sm'])."</div>";
+            }
+
+            if($model->package && ($model->package->included || $model->package->not_included)){
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour package')."</span></h3>";
                 ?>
                 <div class="row clearfix mb20 full_content closed">
@@ -141,6 +158,11 @@ $isAdmin=Yii::$app->user->can('userIndex');
                     <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
                 </div>
             <?php
+            }
+            if($isAdmin){
+                if($model->package){$pact='Update'; $pdo='update';}
+                else {$pact='Add'; $pdo='create';}
+                echo "<div class='clearfix mt5 mb5'>".Html::a(Yii::t('app',"{$pact} package"),["/package/".$pdo,'id'=>$model->package->id],['class'=>'btn btn-default btn-sm'])."</div>";
             }
             if($model->prices){
                 echo "<h3 class='bb' id='prices'><span>".Yii::t('app','Tour offers')."</span></h3>";
@@ -192,6 +214,10 @@ $isAdmin=Yii::$app->user->can('userIndex');
                     </div>
                 <?php
                     }
+            }
+
+            if($isAdmin){
+                echo Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id, 'ref'=>'view'], ['class' => 'btn btn-sm btn-default']);
             }
             ?>
         </div>

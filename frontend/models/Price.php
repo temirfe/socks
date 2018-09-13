@@ -83,13 +83,15 @@ class Price extends \yii\db\ActiveRecord
     {
         parent::afterFind();
         $curLang=Yii::$app->language;
-        if($curLang=='ru-RU'){
-            $this->title=$this->title_ru;
-            $this->note=$this->note_ru;
-        }
-        else if($curLang=='ko-KR'){
-            $this->title=$this->title_ko;
-            $this->note=$this->note_ko;
+        if(Yii::$app->controller->action->id!='update'){
+            if($curLang=='ru-RU'){
+                $this->title=$this->title_ru;
+                $this->note=$this->note_ru;
+            }
+            else if($curLang=='ko-KR'){
+                $this->title=$this->title_ko;
+                $this->note=$this->note_ko;
+            }
         }
     }
 }

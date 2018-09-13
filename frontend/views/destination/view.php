@@ -15,6 +15,12 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Destinations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $isAdmin=Yii::$app->user->can('userIndex');
+if(strlen($model->text)>555){
+    $full='full_content closed mb20';
+}
+else{
+    $full=false;
+}
 ?>
 <div class="destination-view">
     <p class="pull-right mr5a">
@@ -56,17 +62,28 @@ $isAdmin=Yii::$app->user->can('userIndex');
     }
     ?>
 
-    <div class="country_desc readable">
+    <div class="country_desc readable clearfix <?=$full?>">
+
         <?=$model->text?>
+
+        <?php
+            if($full){
+                ?>
+                <div class="gradient" style="display: block;"></div>
+                <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
+                <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
+        <?php
+            }
+        ?>
     </div>
 
     <h2 class="text-center mb25 mt35">Tours</h2>
     <?=ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'tour_card col-sm-4 col-xs-6'],
-        'emptyText' => Yii::t('app', 'No results found'),
+        'itemOptions' => ['class' => 'tour_card x-md-33 x-sm-33 x-xs-50'],
+        'emptyText' => Yii::t('app', 'Tours are coming soon..'),
         'summary'=>'',
-        'options'=>['class'=>'item-view row'],
+        'options'=>['class'=>'flex flex-wrap mr-30 xs-mr-15'],
         'itemView' => function ($model, $key, $index, $widget) {
             return $this->render('/tour/_view',['tour' => $model]);
         },

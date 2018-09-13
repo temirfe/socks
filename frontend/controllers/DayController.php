@@ -68,7 +68,7 @@ class DayController extends Controller
         $model = new Day();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/tour/view', 'id' => $model->tour_id]);
         }
 
         return $this->render('create', [
@@ -88,7 +88,7 @@ class DayController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/tour/view', 'id' => $model->tour_id]);
         }
 
         return $this->render('update', [
@@ -105,9 +105,10 @@ class DayController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+            $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['/tour/view','id'=>$model->tour_id]);
     }
 
     /**

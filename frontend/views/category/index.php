@@ -23,8 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'title',
-                'title_ru',
-                'title_ko',
+                //'title_ru',
+                //'title_ko',
+                [
+                    'header'=>'Countries',
+                    'format'=>'raw',
+                    'value'=>function($model){
+                        return $this->render('_description',['model' => $model]);
+                    }
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{addDesc} &nbsp;{view}&nbsp; {update}&nbsp; {delete}',
@@ -34,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 '<span class="glyphicon glyphicon-plus-sign"></span>',
                                 ['description/create', 'category_id' => $model->id],
                                 [
-                                    'title' => 'Add description',
+                                    'title' => 'Add country',
                                     'data-pjax' => '0',
                                 ]
                             );

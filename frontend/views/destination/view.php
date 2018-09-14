@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use frontend\assets\SwiperAsset;
 use yii\widgets\ListView;
 use frontend\assets\PhotoSwipeAsset;
@@ -93,5 +92,4 @@ else{
     ]) ?>
 
 </div>
-<?php
-include_once($webroot.'/photoswipe/_swipe.php');?>
+<?php include_once($webroot.'/photoswipe/_swipe.php');?>

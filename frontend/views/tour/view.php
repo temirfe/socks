@@ -1,13 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use frontend\assets\SwiperAsset;
+use frontend\assets\PhotoSwipeAsset;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Tour */
 
 SwiperAsset::register($this);
+PhotoSwipeAsset::register($this);
+$webroot=Yii::getAlias('@webroot');
+
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tours'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -61,7 +64,7 @@ $lowest_currency='';
                 $banners=explode(';',$model->images);
                 if(count($banners)>1){
                 ?>
-                <div class="banner-container swiper-container mb20" data-count="<?=count($banners)?>">
+                <div class="banner-container swiper-container js_photoswipe_wrap mb20" data-count="<?=count($banners)?>">
                     <div class="swiper-wrapper">
                         <?php
                         foreach($banners as $banner){
@@ -232,6 +235,5 @@ $lowest_currency='';
             ?>
         </div>
     </div>
-
-
 </div>
+<?php include_once($webroot.'/photoswipe/_swipe.php');?>

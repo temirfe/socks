@@ -64,7 +64,7 @@ else{
     }
     ?>
 
-    <div class="country_desc readable clearfix <?=$full?>">
+    <div class="country_desc readable clearfix <?=$full?> js_more_less">
 
         <?=$model->text?>
 
@@ -72,8 +72,8 @@ else{
             if($full){
                 ?>
                 <div class="gradient" style="display: block;"></div>
-                <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
-                <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
+                <div class="full_toggle more"><?=Html::a(Yii::t('app','Show more'),'#',['class'=>'js_more'])?></div>
+                <div class="full_toggle less"><?=Html::a(Yii::t('app','Show less'),'#',['class'=>'js_less'])?></div>
         <?php
             }
         ?>

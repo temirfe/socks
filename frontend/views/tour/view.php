@@ -19,81 +19,83 @@ $lowest_price=0;
 $isAdmin=Yii::$app->user->can('userIndex');
 $lowest_currency='';
 ?>
-<div class="tour-view">
-    <p class="pull-right mr5a xs-block">
-        <?php
+    <div class="tour-view">
+        <p class="pull-right mr5a xs-block">
+            <?php
             if($isAdmin){
                 echo Html::a(Yii::t('app', 'Add price'), ['price/create', 'tour_id' => $model->id, 'ref'=>'view'], ['class' => 'btn btn-sm btn-default']);
                 echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-sm btn-primary']);
                 echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                            'class' => 'btn btn-sm btn-danger',
-                            'data' => [
-                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                'method' => 'post',
-                            ],
-                        ]);
+                    'class' => 'btn btn-sm btn-danger',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                ]);
             }
-        ?>
-    </p>
-    <h1><?= Html::encode($this->title) ?></h1>
-
-
-    <div class="tour_params row mb20 mt20">
-        <?php if($model->destination){
             ?>
-            <div class="col-sm-3 col-xs-4">
-                <div><?=Yii::t('app','Country')?>:</div>
-                <span><?=$model->destination->title?></span>
-            </div>
-            <?php
-        } ?>
-
-        <div class="col-sm-3 col-xs-4">
-            <div><?=Yii::t('app','Tour type')?>:</div><span><?=$model->category->title?></span>
-        </div>
-        <div class="col-sm-3 col-xs-4">
-            <div><?=Yii::t('app','Duration')?>:</div><span><?=$model->days?> <?=Yii::t('app','days')?></span>
-        </div>
-    </div>
+        </p>
+        <h1><?= Html::encode($this->title) ?></h1>
 
 
-    <div class="row">
-        <div class="col-sm-8">
-            <?php
-            if($model->images){
-                $banners=explode(';',$model->images);
-                if(count($banners)>1){
+        <div class="tour_params row mb20 mt20">
+            <?php if($model->destination){
                 ?>
-                <div class="banner-container swiper-container js_photoswipe_wrap mb20" data-count="<?=count($banners)?>">
-                    <div class="swiper-wrapper">
-                        <?php
-                        foreach($banners as $banner){
-                            echo Html::img('/images/tour/'.$model->id.'/'.$banner,['class'=>'swiper-slide']);
-                        }
-                        ?>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                <div class="col-sm-3 col-xs-4">
+                    <div><?=Yii::t('app','Country')?>:</div>
+                    <span><?=$model->destination->title?></span>
                 </div>
                 <?php
-                }
-                else echo "<div class='swiper-container mb20'>".Html::img('/images/tour/'.$model->id.'/'.$model->images,['class'=>'img-responsive'])."</div>";
-            }
-            ?>
-            <h3 class="bb"><span><?=Yii::t('app','Tour description')?></span></h3>
-            <p><?=$model->description?></p>
+            } ?>
 
-            <?php
-            if($days=$model->day){
+            <div class="col-sm-3 col-xs-4">
+                <div><?=Yii::t('app','Tour type')?>:</div><span><?=$model->category->title?></span>
+            </div>
+            <div class="col-sm-3 col-xs-4">
+                <div><?=Yii::t('app','Duration')?>:</div><span><?=$model->days?> <?=Yii::t('app','days')?></span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-8">
+                <?php
+                if($model->images){
+                    $banners=explode(';',$model->images);
+                    if(count($banners)>1){
+                        ?>
+                        <div class="banner-container swiper-container js_photoswipe_wrap mb20" data-count="<?=count($banners)?>">
+                            <div class="swiper-wrapper">
+                                <?php
+                                foreach($banners as $banner){
+                                    echo Html::img('/images/tour/'.$model->id.'/'.$banner,['class'=>'swiper-slide']);
+                                }
+                                ?>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                        <?php
+                    }
+                    else echo "<div class='swiper-container mb20 js_photoswipe_wrap'>".Html::img('/images/tour/'.$model->id.'/'.$model->images,['class'=>'img-responsive'])."</div>";
+                }
+                ?>
+                <h3 class="bb"><span><?=Yii::t('app','Tour description')?></span></h3>
+                <p><?=$model->description?></p>
+
+                <?php
+                if($days=$model->day){
                 $d=1;
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour program')."</span></h3>";
-                echo "<div class='full_content closed clearfix mb20 '>";
-                    foreach($days as $day){
-                        ?>
-                        <div class="mt15 mb15">
-                            <div class="pull-left">
-                                <div class="tour_day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
+                echo "<div class='full_content closed js_more_less clearfix mb20 '>";
+                foreach($days as $day){
+                    ?>
+                    <div class="mt15 mb15">
+                        <div class="pull-left">
+                            <div class="tour_day"><?=Yii::t('app','Day')?><span><?=$d?></span></div>
+                            <?php if($isAdmin){
+                                ?>
                                 <div class="tour_action">
                                     <?= Html::a("<span class='glyphicon glyphicon-pencil'></span>", ['/day/update', 'id' => $day->id]) ?>
                                     <?= Html::a("<span class='glyphicon glyphicon-trash'></span>", ['/day/delete', 'id' => $day->id], [
@@ -104,34 +106,36 @@ $lowest_currency='';
                                         ],
                                     ]) ?>
                                 </div>
-                            </div>
-
-                            <div class="day_info">
-                                <h4 class="title"><?=$day->title?></h4>
-                                <?php if($day->itinerary){
-                                    echo "<h4>".Yii::t('app','Itinerary')."</h4>";
-                                    echo $day->itinerary;
-                                }?>
-                                <?php if($day->meals){
-                                    echo "<h4>".Yii::t('app','Meals')."</h4>";
-                                    echo $day->meals;
-                                }?>
-                                <?php if($day->accommodation){
-                                    echo "<h4>".Yii::t('app','Accommodation')."</h4>";
-                                    echo $day->accommodation;
-                                }?>
-                            </div>
+                            <?php
+                            }?>
                         </div>
 
-                    <?php
-                        $d++;
-                    }
-                    ?>
+                        <div class="day_info">
+                            <h4 class="title"><?=$day->title?></h4>
+                            <?php if($day->itinerary){
+                                echo "<h4>".Yii::t('app','Itinerary')."</h4>";
+                                echo $day->itinerary;
+                            }?>
+                            <?php if($day->meals){
+                                echo "<h4>".Yii::t('app','Meals')."</h4>";
+                                echo $day->meals;
+                            }?>
+                            <?php if($day->accommodation){
+                                echo "<h4>".Yii::t('app','Accommodation')."</h4>";
+                                echo $day->accommodation;
+                            }?>
+                        </div>
+                    </div>
 
-                    <div class="gradient" style="display: block;"></div>
-                    <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
-                    <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
-                </div>
+                    <?php
+                    $d++;
+                }
+                ?>
+
+                <div class="gradient" style="display: block;"></div>
+                <div class="full_toggle more"><?=Html::a(Yii::t('app','Show more'),'#',['class'=>'js_more'])?></div>
+                <div class="full_toggle less"><?=Html::a(Yii::t('app','Show less'),'#',['class'=>'js_less'])?></div>
+            </div>
             <?php
             }
             if($isAdmin){
@@ -141,7 +145,7 @@ $lowest_currency='';
             if($model->package && ($model->package->included || $model->package->not_included)){
                 echo "<h3 class='bb'><span>".Yii::t('app','Tour package')."</span></h3>";
                 ?>
-                <div class="row clearfix mb20 full_content closed">
+                <div class="clearfix mb20 full_content closed js_more_less">
                     <div class='col-sm-6 included'>
                         <h4 class="title2 mt0">
                             <i class="glyphicon glyphicon-ok green"></i>
@@ -157,10 +161,10 @@ $lowest_currency='';
                         <?=$model->package->not_included ?>
                     </div>
                     <div class="gradient" style="display: block;"></div>
-                    <div class="full_toggle link more js_more"><?=Yii::t('app','Show more')?></div>
-                    <div class="full_toggle link less js_less"><?=Yii::t('app','Show less')?></div>
+                    <div class="full_toggle more"><?=Html::a(Yii::t('app','Show more'),'#',['class'=>'js_more'])?></div>
+                    <div class="full_toggle less"><?=Html::a(Yii::t('app','Show less'),'#',['class'=>'js_less'])?></div>
                 </div>
-            <?php
+                <?php
             }
             if($isAdmin){
                 if($model->package){$pact='Update';  $pck_link_ar=["/package/update",'id'=>$model->package->id];}
@@ -214,8 +218,8 @@ $lowest_currency='';
                             <?=Html::a(Yii::t('app', 'Book Now'), ['book/create', 'price_id' => $price->id], ['class' => 'btn btn-success']);?>
                         </div>
                     </div>
-                <?php
-                    }
+                    <?php
+                }
             }
 
             if($isAdmin){
@@ -227,13 +231,13 @@ $lowest_currency='';
             if($model->prices){
                 ?>
                 <div class="right_book_box book_box_price">
-                <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$lowest_currency?></h3>
-                <?=Html::a(Yii::t('app', 'Book Now'), '#prices', ['class' => 'btn btn-success']);?>
+                    <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$lowest_currency?></h3>
+                    <?=Html::a(Yii::t('app', 'Book Now'), '#prices', ['class' => 'btn btn-success']);?>
                 </div>
                 <?php
             }
             ?>
         </div>
     </div>
-</div>
+    </div>
 <?php include_once($webroot.'/photoswipe/_swipe.php');?>

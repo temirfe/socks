@@ -314,7 +314,6 @@ a.desc:after {
     background: lawngreen;
 }
 h1{font-size:30px;}
-.tour_params{}
 .tour_params > div >div{text-transform: uppercase;
     font-size: 12px;
     color: #888;}
@@ -374,7 +373,6 @@ h1{font-size:30px;}
     clear: both;
     text-align: right;
     font-size: 17px;}
-.full_content{}
 .full_content.closed{    height: 240px;
     overflow: hidden;
     position: relative;}
@@ -390,18 +388,19 @@ h1{font-size:30px;}
 .less{
     text-transform: uppercase;
     font-size: 12px;}
+.more a:hover, .less a:hover {
+    text-decoration: none;}
 .gradient {
     width: 100%;
     height: 60px;
     background: linear-gradient(to top,#fff,rgba(255,255,255,.12));
     position: absolute;
-    bottom: 31px;
+    bottom: 16px;
     left: 0;
 }
-.link{color:#419641;}
-@media (pointer: fine) {
-    .link:hover{color:#007946; cursor:pointer;}
-}
+a{color:#00bd6d;}
+a:hover{color:#007946;}
+.hover{color:#419641;}
 .book_box_wrap{
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.09);
     overflow: hidden;}
@@ -420,7 +419,6 @@ h1{font-size:30px;}
 .book_box_info h3 .date{font-size: 15px;
     line-height: 27px;
     color: #888;}
-.book_box_info .note{}
 .book_box_info .booked{margin-top: 5px;
     font-size: 13px;
     font-style: italic;
@@ -475,7 +473,6 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     padding-right: 8px;
     margin-bottom: 8px;
     overflow: hidden;}
-.country_card a{}
 .country_card img{
     width: 100%;
     -webkit-transition: -webkit-transform .25s ease-out;
@@ -532,7 +529,6 @@ h2, .h2 {
 }
 .tour_card .image:hover .dimmer{display:block;}
 .tour_card .image:hover .tour_card_intro{display:block;}
-.tour_card_footer{}
 .tour_card_footer a{color:#01384C;}
 .no_decor,.no_decor:hover{text-decoration: none;}
 .tour_card_footer h4{margin-bottom: 5px;}
@@ -580,6 +576,7 @@ h1, .h1, h2,.h2,h4,.h4{font-family: Rubik, sans-serif; color:#01384C;}
     .swiper-button-prev, .swiper-container-rtl .swiper-button-next {left: 1px;}
     .swiper-button-next, .swiper-container-rtl .swiper-button-prev {right: 1px;}
     h4, .h4 {font-size: 14px;}
+    h3.bb {font-size:18px;}
 }
 
 @media (min-width: 420px){
@@ -736,7 +733,6 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 .menu_box a{color: #007946;}
 .menu_box_link a{color:#0d3349;}
 .menu_box a:hover{color: #000; text-decoration: none;}
-.menu_box_label{}
 .menu_box_result{font-size: 20px;
     font-weight: 500;
     color: #007946;}

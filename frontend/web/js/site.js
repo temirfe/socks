@@ -114,15 +114,19 @@ $(document).ready(function () {
     }
 });
 
-$(document).on('click','.js_more',function(){
-    $(this).parent().removeClass('closed');
+$(document).on('click','.js_more',function(e){
+    e.preventDefault();
+    let parent=$(this).parents('.js_more_less');
+    parent.removeClass('closed');
     $(this).hide();
-    $(this).siblings('.gradient').hide();
+    parent.find('.gradient').hide();
 });
-$(document).on('click','.js_less',function(){
-    $(this).parent().addClass('closed');
-    $(this).siblings('.gradient').show();
-    $(this).siblings('.js_more').show();
+$(document).on('click','.js_less',function(e){
+    e.preventDefault();
+    let parent=$(this).parents('.js_more_less');
+    parent.addClass('closed');
+    parent.find('.gradient').show();
+    parent.find('.js_more').show();
 });
 
 //region PhosoSwipe

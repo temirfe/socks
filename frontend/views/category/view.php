@@ -55,7 +55,7 @@ foreach($descs as $desc){
     <!--<h1 class="container"><?/*= Html::encode($this->title) */?></h1>-->
 
     <?php
-        if($desc_ar[$dest_id]){
+        if(!empty($desc_ar[$dest_id])){
             $img=Yii::getAlias('@web')."/images/description/".$desc_ar[$dest_id]['id'].'/'.$desc_ar[$dest_id]['image'];
             ?>
             <div class="jumbotron jumbo rel" style="background-image:url(<?=$img?>)">
@@ -80,7 +80,7 @@ foreach($descs as $desc){
             }
         }
         ?>
-        <h2 class="text-center mb25 mt35">Tours</h2>
+        <h2 class="text-center mb25 mt35"><?=$this->title?></h2>
         <?=ListView::widget([
             'dataProvider' => $dataProvider,
             'itemOptions' => ['class' => 'tour_card x-md-33 x-sm-33 x-xs-50'],

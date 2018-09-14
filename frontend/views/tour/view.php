@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $dao=Yii::$app->db;
 $lowest_price=0;
 $isAdmin=Yii::$app->user->can('userIndex');
-
+$lowest_currency='';
 ?>
 <div class="tour-view">
     <p class="pull-right mr5a xs-block">
@@ -160,19 +160,18 @@ $isAdmin=Yii::$app->user->can('userIndex');
             <?php
             }
             if($isAdmin){
-                if($model->package){$pact='Update'; $pdo='update';}
-                else {$pact='Add'; $pdo='create';}
-                echo "<div class='clearfix mt5 mb5'>".Html::a(Yii::t('app',"{$pact} package"),["/package/".$pdo,'id'=>$model->package->id],['class'=>'btn btn-default btn-sm'])."</div>";
+                if($model->package){$pact='Update';  $pck_link_ar=["/package/update",'id'=>$model->package->id];}
+                else {$pact='Add'; $pck_link_ar=["/package/create",'tour_id'=>$model->id];}
+                echo "<div class='clearfix mt5 mb5'>".Html::a(Yii::t('app',"{$pact} package"),$pck_link_ar,['class'=>'btn btn-default btn-sm'])."</div>";
             }
             if($model->prices){
                 echo "<h3 class='bb' id='prices'><span>".Yii::t('app','Tour offers')."</span></h3>";
-                $currency='';
                 foreach($model->prices as $price){
                     $booked_text='';$dates='';
-                    if($lowest_price){if($price->price<$lowest_price){$lowest_price=$price->price; $currency=$price->currency;}}
+                    if($lowest_price){if($price->price<$lowest_price){$lowest_price=$price->price; $lowest_currency=$price->currency;}}
                     else{
                         $lowest_price=$price->price;
-                        $currency=$price->currency;
+                        $lowest_currency=$price->currency;
                     }
                     if($price->date_start){
                         $dates=date('d.m.Y',strtotime($price->date_start)).' - '.date('d.m.Y',strtotime($price->date_end));
@@ -221,11 +220,16 @@ $isAdmin=Yii::$app->user->can('userIndex');
             }
             ?>
         </div>
-        <div class="col-sm-4 sm-hidden">
-            <div class="right_book_box book_box_price">
-                 <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$currency?></h3>
+        <div class="col-sm-4 sm-hidden"><?php
+            if($model->prices){
+                ?>
+                <div class="right_book_box book_box_price">
+                <h3><span><?=Yii::t('app','from')?></span><?=$lowest_price?> <?=$lowest_currency?></h3>
                 <?=Html::a(Yii::t('app', 'Book Now'), '#prices', ['class' => 'btn btn-success']);?>
-            </div>
+                </div>
+                <?php
+            }
+            ?>
         </div>
     </div>
 

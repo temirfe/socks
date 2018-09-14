@@ -124,3 +124,42 @@ $(document).on('click','.js_less',function(){
     $(this).siblings('.gradient').show();
     $(this).siblings('.js_more').show();
 });
+
+//region PhosoSwipe
+$(document).on('click','.js_photoswipe_wrap img',function(e){
+    e.preventDefault();
+    //let index=$(this).attr('data-index');
+    let index=$('.js_photoswipe_wrap img').index(this);
+    openPhotoSwipe(index);
+});
+
+let openPhotoSwipe = function(ind)
+{
+    let pswpElement =document.querySelectorAll('.pswp')[0];
+
+    ind=parseInt(ind);
+    // define options (if needed)
+    let options = {
+        index: ind, // start at first slide
+        showHideOpacity:true,
+        getThumbBoundsFn:false,
+        bgOpacity:0.9,
+        closeOnScroll:false,
+        shareButtons: false
+    };
+    let items = [];
+    let image=new Image();
+    $(".js_photoswipe_wrap img").each(function() {
+        //let src=$(this).parent().attr('data-big');
+        let src=$(this).prop('src');
+        image.src=src;
+        let w=image.width;
+        let h=image.height;
+        items.push({src:src, w:w, h:h});
+    });
+
+    // Initializes and opens PhotoSwipe
+    let gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
+};
+//endregion

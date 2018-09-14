@@ -11,7 +11,7 @@ RewriteEngine On
     RewriteCond %{REQUEST_URI} ^/(admin)
     RewriteRule ^.*$ backend/web/index.php [L]
 
-RewriteCond %{REQUEST_URI} ^/(assets|css|images|files|upload|sitemap|swiper)
+RewriteCond %{REQUEST_URI} ^/(assets|css|images|files|upload|sitemap|swiper|photoswipe)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
 RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
@@ -19,9 +19,10 @@ RewriteRule ^upload/(.*)$ frontend/web/upload/$1 [L]
 RewriteRule ^files/(.*)$ frontend/web/files/$1 [L]
 RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
 RewriteRule ^swiper/(.*)$ frontend/web/swiper/$1 [L]
+RewriteRule ^photoswipe/(.*)$ frontend/web/photoswipe/$1 [L]
 RewriteRule ^sitemap.xml$ frontend/web/sitemap.xml [L]
 
-RewriteCond %{REQUEST_URI} !^/(frontend|backend|admin|api)/web/(assets|css|images|files|js|upload|swiper)/
+RewriteCond %{REQUEST_URI} !^/(frontend|backend|admin|api)/web/(assets|css|images|files|js|upload|swiper|photoswipe)/
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ frontend/web/index.php

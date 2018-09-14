@@ -15,9 +15,9 @@ class m180903_103355_day extends Migration
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('day', [
             'id' => $this->primaryKey(),
-            'title' => $this->string('50')->notNull(),
-            'title_ru' => $this->string('50')->notNull(),
-            'title_ko' => $this->string('50')->notNull(),
+            'title' => $this->string('255')->notNull(),
+            'title_ru' => $this->string('255')->notNull(),
+            'title_ko' => $this->string('255')->notNull(),
             'itinerary' => $this->text()->notNull(),
             'itinerary_ru' => $this->text()->notNull(),
             'itinerary_ko' => $this->text()->notNull(),

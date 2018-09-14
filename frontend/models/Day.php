@@ -43,8 +43,7 @@ class Day extends \yii\db\ActiveRecord
             [['title'], 'required'],
             [['itinerary', 'itinerary_ru', 'itinerary_ko'], 'string'],
             [['tour_id'], 'integer'],
-            [['title', 'title_ru', 'title_ko'], 'string', 'max' => 50],
-            [['meals', 'meals_ru', 'meals_ko'], 'string', 'max' => 255],
+            [['meals', 'meals_ru', 'meals_ko','title', 'title_ru', 'title_ko'], 'string', 'max' => 255],
             [['accommodation', 'accommodation_ru', 'accommodation_ko'], 'string', 'max' => 250],
             [['tour_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tour::className(), 'targetAttribute' => ['tour_id' => 'id']],
         ];

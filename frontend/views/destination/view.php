@@ -4,12 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use frontend\assets\SwiperAsset;
 use yii\widgets\ListView;
+use frontend\assets\PhotoSwipeAsset;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Destination */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 SwiperAsset::register($this);
+PhotoSwipeAsset::register($this);
+$webroot=Yii::getAlias('@webroot');
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Destinations'), 'url' => ['index']];
@@ -45,7 +48,7 @@ else{
         $banners=explode(';',$model->images);
         if(count($banners)>1){
             ?>
-            <div class="country_swiper swiper-container mb20" data-count="<?=count($banners)?>">
+            <div class="country_swiper swiper-container mb20 js_photoswipe_wrap" data-count="<?=count($banners)?>">
                 <div class="swiper-wrapper">
                     <?php
                     foreach($banners as $banner){
@@ -90,3 +93,5 @@ else{
     ]) ?>
 
 </div>
+<?php
+include_once($webroot.'/photoswipe/_swipe.php');?>

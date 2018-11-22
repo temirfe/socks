@@ -10,66 +10,25 @@ use frontend\models\Lookup;
 use frontend\models\Category;
 use frontend\models\Destination;
 
-$categories = Yii::$app->cache->getOrSet('category', function () {
-    return Category::find()->all();
-}, 0);
-$destinations = Yii::$app->cache->getOrSet('destination', function () {
-    return Destination::find()->all();
-}, 0);
-$ctgItems=[];$countryItems=[];
-foreach($categories as $category){
-    if($ctgItems){$ctgItems[]='<li class="divider"></li>';}
-    $ctgItems[]=['label' => $category->title, 'url' => ['/category/view','id'=>$category->id, 't'=>$category->title]];
-}
-foreach($destinations as $dest){
-    if($countryItems){$countryItems[]='<li class="divider"></li>';}
-    $countryItems[]=['label' => $dest->title, 'url' => ['/destination/view','id'=>$dest->id, 't'=>$dest->title]];
-}
+require_once('_lookups.php');
 
 $menuItems = [
-    ['label' => Yii::t('app','About us'), 'url' => ['/about']],
     [
-        'label' => Yii::t('app','Countries'),
-        //'url' => ['/countries'],
-        'items' => $countryItems,
+        'label' => Yii::t('app','Socks'),
+        'url' => ['/socks'],
     ],
     [
-        'label' => Yii::t('app','Type of tours'),
-        //'url' => ['/tours'],
-        'items' => $ctgItems,
+        'label' => Yii::t('app','Singlets'),
+        'url' => ['/singlets'],
     ],
-    ['label' => Yii::t('app','Contact us'), 'url' => ['/contact']],
+    [
+        'label' => Yii::t('app','Underwear'),
+        'url' => ['/underwear'],
+    ],
 ];
 
-$lookups = Yii::$app->cache->getOrSet('lookup', function () {
-    return Lookup::find()->all();
-}, 0);
-$phone='';$email='';$fa_email='';$fa_phone='';
-foreach($lookups as $lookup){
-    if($lookup->title=='phone'){
-        $phones=explode(',',$lookup->text);
-        foreach($phones as $ph){
-            $phone.="<a href='tel:".preg_replace("/[^\+\d]/", "", $ph)."'>".$ph."</a>";
-            $fa_phone.="<a href='tel:".preg_replace("/[^\+\d]/", "", $ph)."'><span class='fas fa-phone mr5'></span></a>";
-        }
-    }
-    else if($lookup->title=='email'){
-        $emails=explode(',',$lookup->text);
-        foreach($emails as $em){
-            $email.="<a href='mailto:".$em."'>".$em."</a>";
-            $fa_email="<a href='mailto:".$em."'><span class='fas fa-envelope mr5'></span></a>";
-        }
-    }
-}
 
 //if(Yii::$app->user->can('userIndex')){include_once('adminpanel.php');}
-$curLang=Yii::$app->language;
-$eng=Html::a(Html::img('/images/gbr.png'),['site/lang','to'=>'en-US'],['title'=>'English']);
-$ru=Html::a(Html::img('/images/rus.png'),['site/lang','to'=>'ru-RU'],['title'=>'Русский']);
-$ko=Html::a(Html::img('/images/kor.png'),['site/lang','to'=>'ko-KR'],['title'=>'한국어']);
-if($curLang=='en-US'){$eng='';}
-else if($curLang=='ru-RU'){$ru='';}
-else if($curLang=='ko-KR'){$ko='';}
 
 $isAdmin=Yii::$app->user->can('userIndex');
 if($isAdmin){$adminPanel="<div class='pull-right phone'>".Html::a(Yii::t('app','Admin panel'),['/admin'])."</div>";}
@@ -78,7 +37,6 @@ else{$adminPanel='';}
 ?>
 <div class="top_contact rubik">
     <div class="container">
-        <div class="lang pull-right"><?=$eng?><?=$ru?><?=$ko?></div>
         <div class="email pull-right"><?=$fa_email?><span><?=$email?></span></div>
         <div class="phone pull-right"><?=$fa_phone?><span><?=$phone?></span></div>
         <?=$adminPanel?>
@@ -86,7 +44,7 @@ else{$adminPanel='';}
 </div>
 <?php
 NavBar::begin([
-    'brandLabel' => Html::img('/images/ok_logo_horizont.png'),
+    'brandLabel' => Html::img('/images/logo.jpg'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar mynav',
@@ -94,9 +52,9 @@ NavBar::begin([
 ]);
 
 ?>
-
 <?=Nav::widget([
-    'options' => ['class' => 'navbar-nav rubik upper'],
+    'options' => ['class' => 'navbar-nav upper'],
     'items' => $menuItems,
 ]);?>
+<a class="pull-right" href="/contacts"><?=Yii::t('app','Contact us')?></a>
 <?php NavBar::end(); ?>

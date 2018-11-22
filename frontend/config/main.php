@@ -10,8 +10,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'name'=>'OK Tour',
-    //'language'=>'ru-RU',
+    'name'=>'Prestige Socks',
+    'language'=>'ru-RU',
     'controllerNamespace' => 'frontend\controllers',
     'on beforeRequest' => function ($event) {
         $cookies = Yii::$app->request->cookies;

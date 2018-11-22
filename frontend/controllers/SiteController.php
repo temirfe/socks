@@ -111,25 +111,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout='wide';
-        //$page = Page::find()->where(['category'=>'main'])->one();
-        $page = Yii::$app->cache->getOrSet('page-main', function () {
-            return Page::find()->where(['category'=>'main'])->one();
-        }, 0);
-        $destinations = Yii::$app->cache->getOrSet('destination', function () {
-            return Destination::find()->all();
-        }, 0);
-        $categories= Yii::$app->cache->getOrSet('category', function () {
-            return Category::find()->all();
-        }, 0);
 
-        $tours=Tour::find()->orderBy('id DESC')->limit(12)->all();
-
-        return $this->render('index',[
-            'page'=>$page,
-            'destinations'=>$destinations,
-            'categories'=>$categories,
-            'tours'=>$tours
-        ]);
+        return $this->render('index');
     }
 
     public function actionAdmin()

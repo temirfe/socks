@@ -31,31 +31,27 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Html::img('/images/ok_logo_r.png')."<span> | Admin</span>",
+        'brandLabel' => Html::img('/images/logo_clean_red.svg')."<span> | Admin</span>",
         'brandUrl' => '/admin',
         'options' => [
             'class' => 'backend_bar navbar-default',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Main page', 'url' => ['/']],
-        ['label' => 'Tours', 'url' => ['/tour']],
-        ['label' => 'Tour types', 'url' => ['/category']],
-        ['label' => 'Prices', 'url' => ['/price']],
-        ['label' => 'Bookings', 'url' => ['/book']],
-        ['label' => 'Countries', 'url' => ['/destination']],
-        ['label' => 'Pages', 'url' => ['/page']],
-        ['label' => 'Lookups', 'url' => ['/lookup']],
-        ['label' => 'Users', 'url' => ['/user']],
+        ['label' => 'Главная', 'url' => ['/']],
+        ['label' => 'Баннеры', 'url' => ['/banner']],
+        ['label' => 'Страницы', 'url' => ['/page']],
+        ['label' => 'Данные', 'url' => ['/lookup']],
+        ['label' => 'Пользователи', 'url' => ['/user']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Выйти (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()

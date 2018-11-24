@@ -10,7 +10,9 @@ use frontend\models\Lookup;
 use frontend\models\Category;
 use frontend\models\Destination;
 
+$user=Yii::$app->user;
 require_once('_lookups.php');
+if($user->can('userIndex')){require_once('adminpanel.php');}
 
 $menuItems = [
     [
@@ -27,34 +29,25 @@ $menuItems = [
     ],
 ];
 
+$logo_clean=Html::tag('div','',['class'=>'the_logo']);
+$logo_line=Html::tag('div','',['class'=>'the_logo_line']);
+$logo=Html::tag('div',$logo_clean.$logo_line,['class'=>'the_logo_wrap']);
 
-//if(Yii::$app->user->can('userIndex')){include_once('adminpanel.php');}
-
-$isAdmin=Yii::$app->user->can('userIndex');
-if($isAdmin){$adminPanel="<div class='pull-right phone'>".Html::a(Yii::t('app','Admin panel'),['/admin'])."</div>";}
-else{$adminPanel='';}
-
-?>
-<div class="top_contact rubik">
-    <div class="container">
-        <div class="email pull-right"><?=$fa_email?><span><?=$email?></span></div>
-        <div class="phone pull-right"><?=$fa_phone?><span><?=$phone?></span></div>
-        <?=$adminPanel?>
-    </div>
-</div>
-<?php
 NavBar::begin([
-    'brandLabel' => Html::img('/images/logo.jpg'),
+    'brandLabel' => Html::tag('div',$logo,['class'=>'rel brand_wrap']),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar mynav',
     ],
 ]);
 
-?>
-<?=Nav::widget([
-    'options' => ['class' => 'navbar-nav upper'],
-    'items' => $menuItems,
-]);?>
-<a class="pull-right" href="/contacts"><?=Yii::t('app','Contact us')?></a>
-<?php NavBar::end(); ?>
+    try {
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav upper'],
+            'items' => $menuItems,
+        ]);
+    } catch (Exception $e) {}
+
+    echo Html::a(Yii::t('app','Contact us'),['/contacts'],['class'=>'nav_link']);
+
+ NavBar::end();

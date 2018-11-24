@@ -28,10 +28,13 @@ $banners=Yii::$app->db->createCommand("SELECT * FROM banner WHERE `type`=0 AND `
                     ?>
                     <div class="swiper-slide">
                         <?php $img=Html::img('/images/banner/'.$banner['id'].'/'.$banner['image']);
-                        if($link=$banner['link']){
-                            $img=Html::a($img,$link);
-                        }
                         echo $img;
+                        if($banner['title']){
+                            echo Html::tag('div',$banner['title'],['class'=>'banner_text']);
+                        }
+                        if($link=$banner['link']){
+                            echo Html::a(Html::tag('span','',['class'=>'false_link']),$link);
+                        }
                         ?>
                     </div>
                     <?php

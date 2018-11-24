@@ -65,7 +65,7 @@ class MyModel extends \yii\db\ActiveRecord
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
         $this->imageFiles = UploadedFile::getInstances($this, 'imageFiles');
 
-        if (Yii::$app->request->serverName=='center.loc') {
+        if (Yii::$app->request->serverName=='noski.loc') {
             Image::$driver = [Image::DRIVER_GD2];
         }
 
@@ -87,8 +87,8 @@ class MyModel extends \yii\db\ActiveRecord
 
                 $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                 if($model_name=='banner'){
-                    $imagine->thumbnail(new Box(1000, 600))->save($tosave.'/'.$imageName);
-                    Image::thumbnail($tosave.'/'.$imageName,800, 360)->save($tosave.'/'.$imageName);
+                    $imagine->thumbnail(new Box(1500, 1500))->save($tosave.'/'.$imageName,['quality'=>100]);
+                    Image::thumbnail($tosave.'/'.$imageName,1400, 400)->save($tosave.'/'.$imageName,['quality'=>100]);
                 }
                 else{
                     $imagine->thumbnail(new Box(600, 600))->save($tosave.'/'.$imageName);

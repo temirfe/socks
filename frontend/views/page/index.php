@@ -10,7 +10,6 @@ $this->title = Yii::t('app', 'Pages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

@@ -7,7 +7,7 @@ use frontend\models\Lookup;
 
 $lookups = Yii::$app->cache->getOrSet('lookup', function () {
     return Lookup::find()->all();
-}, 0);
+});
 $phone='';$email='';$fa_email='';$fa_phone=''; $slogan='';
 foreach($lookups as $lookup){
     if($lookup->title=='phone'){

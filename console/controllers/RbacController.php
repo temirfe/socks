@@ -24,16 +24,11 @@ class RbacController extends Controller
         $auth->assign($roleAdmin, 1);
 
         //permissions
-        $p_userView = $auth->createPermission('userView');
-        $p_userView->description = 'View a User';
-        $auth->add($p_userView);
-
         $p_userIndex = $auth->createPermission('userIndex');
-        $p_userIndex->description = 'open index page of user (list of users)';
+        $p_userIndex->description = 'Просмотр пользователей';
         $auth->add($p_userIndex);
 
         //children
         $auth->addChild($roleAdmin, $p_userIndex);
-        $auth->addChild($roleAdmin, $p_userView);
     }
 }

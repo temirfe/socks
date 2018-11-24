@@ -176,9 +176,11 @@ a.desc:after {
 }
 .mynav {
     margin-bottom: 0;
-    border-bottom:1px solid #ddd;
-    -webkit-box-shadow: 0 0 40px rgba(200, 200, 200, 0.2);
-    box-shadow: 0 0 40px rgba(200, 200, 200, 0.2);
+    /* border-bottom: 1px solid #ddd; */
+    /* -webkit-box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
+    /* box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
+    background-color: #ee1c25;
+    border-radius: 0;
 }
 .navbar-brand {
     height: auto;
@@ -190,24 +192,31 @@ a.desc:after {
     display: block;
     width: 115px;
 }
-.mynav .navbar-nav > li > a {
-    color: #01516e;
-    font-weight: 500;
+.mynav .navbar-nav > li > a,
+.nav_link{
+    color: #fff;
     transition: color 0.2s ease;
-    padding-top:20px;
+    font-family: 'Comfortaa', cursive
+}
+.nav_link{
+    display: block;
+    text-transform: uppercase;
+    float: right;    padding-top: 15px;
 }
 
 @media (min-width: 992px){
     .mynav .navbar-nav > li > a {
-        padding: 20px 40px 15px;
+        padding: 15px 40px 15px;
     }
     .jumbotron{
         background-attachment:fixed;
     }
 }
-.mynav .navbar-nav > li > a:hover, .mynav .navbar-nav > li > a:focus {
-    color: #76aF41;
+.mynav .navbar-nav > li > a:hover, .mynav .navbar-nav > li > a:focus,
+.nav_link:hover, .nav_link:focus{
+    color: #fbcacc;
     background-color: transparent;
+    text-decoration: none;
 }
 .mynav .navbar-nav .caret {
     margin-top:-2px;
@@ -231,7 +240,7 @@ a.desc:after {
     color: #999;
 }
 .backend_bar .navbar-brand > img {
-    width: 105px;
+    width: 105px;    margin-top: 2px;
 }
 .file-drop-zone-title {
     padding: 15px 10px;
@@ -290,10 +299,9 @@ a.desc:after {
 }
 .upper{text-transform:uppercase;}
 .gray8{color:#888;}
-.admin_panel{background-color:#000;padding: 4px 0;}
-.admin_panel a{color:#fff; margin-right:15px; padding: 3px;}
-.admin_panel a:hover{color:gold;
-    text-decoration: none;}
+.admin_panel{padding: 4px 0;}
+.admin_panel a{margin-right:15px; padding: 3px;display: inline-block; color:#777;}
+.admin_panel a:hover{color:#ee1c25;text-decoration: none;}
 .iblock{display:inline-block;}
 .hint-block {
     margin-top: 1px;
@@ -302,16 +310,27 @@ a.desc:after {
 
 .swiper-container {
     width: 100%;
-    height: 313px;
 }
 @media (max-width: 600px){
-    .swiper-container {height: 190px;}
+    .swiper-container {}
 }
 
 .swiper-wrapper{align-items:center;}
-.swiper-slide{height:auto;}
+.swiper-slide{height:auto; text-align:center;
+    position: relative;background-color: #ee1c25; }
+.swiper-slide img{max-width:100%;}
 .swiper-pagination-bullet-active {
-    background: lawngreen;
+    background: #ee1c25;
+}
+.banner_text{
+    background-color: rgba(238,28,37,0.7);
+    color: #fff;
+    font-size: 39px;
+    max-width: 600px;
+    text-align: left;
+    padding: 20px 20px 25px 30px;
+    bottom: 20px;
+    position: absolute;
 }
 h1{font-size:30px;}
 .tour_params > div >div{text-transform: uppercase;
@@ -348,6 +367,7 @@ h1{font-size:30px;}
 .white{color:#fff;}
 .red{color:red;}
 .red2{color:#ac6f7e;}
+.prime_red{color:#ee1c25;}
 .included ul,.not_included ul{
     list-style: none;
     padding: 0;
@@ -398,9 +418,8 @@ h1{font-size:30px;}
     bottom: 16px;
     left: 0;
 }
-a{color:#00bd6d;}
-a:hover{color:#007946;}
-.hover{color:#419641;}
+
+.hover{color:#ee1c25;}
 .book_box_wrap{
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.09);
     overflow: hidden;}
@@ -446,7 +465,7 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     padding: 50px 25px;}
 
 @media (min-width: 992px){
-    .swiper-container,.right_book_box {height: 360px;}
+    .swiper-container,.right_book_box {}
 }
 .right_book_box h3{    margin-top: 0;    color: #fff;
     text-transform: uppercase;}
@@ -749,3 +768,37 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 }
 .tour_action{margin-top:5px;}
 .tour_action a{padding:5px;}
+.the_logo_wrap{
+    position: absolute;
+    top: -41px;
+    background-color: #ee1c25;
+    width: 120px;
+    height: 120px;
+    box-sizing: content-box;
+    z-index: 3;
+}
+.the_logo{
+    height: 64%;
+    width: 88%;
+    background: url('/images/prestige_clean.svg'),linear-gradient(transparent, transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-position: center;
+    top: 13%;
+    left: 4%;
+    z-index: 2;
+}
+.the_logo_line{
+
+    position: absolute;
+    height: 19%;
+    width: 84%;
+    background: url('/images/line.svg'),linear-gradient(transparent, transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 51%;
+    left: 7%;
+}
+.brand_wrap{width:150px;}

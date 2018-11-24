@@ -47,6 +47,10 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
 
             <div class="col-sm-4 col-xs-12">
                 <?=Html::img('/images/ok_logo_white.png',['class'=>'logo_footer'])?>
+                <?php
+                if(!$user->id){echo Html::a(Yii::t('app','Log in'),['/site/login']);}
+
+                ?>
             </div>
         </div>
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>

@@ -16,3 +16,10 @@ $this->params['breadcrumbs'][] = $page->title;
     <?=$page->text?>
 
 </div>
+<div class="rel" style="width:400px;">
+    <img src="/images/logo.jpg" />
+    <div class="the_logo_wrap">
+        <div class="the_logo"></div>
+        <div class="the_logo_line"></div>
+    </div>
+</div>

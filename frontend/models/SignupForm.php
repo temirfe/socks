@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use Yii;
 
 /**
  * Signup form
@@ -33,6 +34,19 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'role_id' => Yii::t('app', 'Role'),
+            'password' => Yii::t('app', 'Password'),
+            'name' => Yii::t('app', 'Username'),
+            'email' => Yii::t('app', 'Email'),
         ];
     }
 

@@ -110,6 +110,11 @@ class MyModel extends \yii\db\ActiveRecord
                     $imagine->thumbnail(new Box(1500, 1000))->save($tosave.'/' .$imageName);
                     $imagine->thumbnail(new Box(400, 250))->save($tosave.'/s_'.$imageName);
                     //Image::thumbnail($tosave.'/'.$imageName,250, 250)->save($tosave.'/s_'.$imageName);
+                    $images[]=$imageName;
+                }
+                if($model_name=='product'){
+                    $images_str=implode(';',$images);
+                    Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$images_str}' WHERE id='{$this->id}'")->execute();
                 }
             }
         }

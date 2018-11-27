@@ -33,6 +33,22 @@ class ProductController extends Controller
      * Lists all Product models.
      * @return mixed
      */
+    public function actionAdmin()
+    {
+        $this->layout='backend';
+        $searchModel = new ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('admin', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Product models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new ProductSearch();
@@ -65,6 +81,7 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
+        $this->layout='backend';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

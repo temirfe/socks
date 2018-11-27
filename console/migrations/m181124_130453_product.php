@@ -15,7 +15,7 @@ class m181124_130453_product extends Migration
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('product', [
             'id' => $this->primaryKey(),
-            'image' =>$this->string('200')->notNull(),
+            'images' =>$this->string('500')->notNull(),
             'public' =>$this->boolean(),
             'title' => $this->string('500')->notNull(),
             'description' => $this->text(),

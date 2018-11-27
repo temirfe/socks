@@ -25,11 +25,11 @@ return [
     'Update Customer' => 'Редактироват карточку клиента',
     'Delete Customer' => 'Удалить карточку клиента',
 
-    'Product' => 'Продукт',
-    'Products' => 'Продукты',
-    'Create Product' => 'Добавить продукт',
-    'Update Product' => 'Редактироват продукт',
-    'Delete Product' => 'Удалить продукт',
+    'Product' => 'Товар',
+    'Products' => 'Товары',
+    'Create Product' => 'Добавить товар',
+    'Update Product' => 'Редактироват товар',
+    'Delete Product' => 'Удалить товар',
 
     'Role' => 'Роль',
     'Roles' => 'Роли',
@@ -68,6 +68,12 @@ return [
     'Create Banner' => 'Добавить баннер',
     'Update Banner: ' => 'Редактировать баннер',
     'Update {modelClass}: '=>'Редактировать {modelClass}: ',
+
+    'Categories' => 'Категории',
+    'Category' => 'Категория',
+    'Create Category' => 'Добавить категорию',
+    'Update Category: ' => 'Редактировать категорию',
+
 
     'Name'=>'Имя',
     'Surname'=>'Фамилия',
@@ -192,5 +198,7 @@ return [
     'Register'=>'Регистрация',
     'Reset password'=>'Восстановление пароля',
     'Please choose your new password:'=>'Пожалуйста, придумайте новый пароль:',
+    'Description'=>'Описание',
+    'Sex'=>'Пол',
     ''=>'',
 ];

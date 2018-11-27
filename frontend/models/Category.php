@@ -11,11 +11,8 @@ use yii\helpers\Html;
  *
  * @property int $id
  * @property string $title
- * @property string $title_ru
- * @property string $title_ko
  *
- * @property Description[] $descriptions
- * @property Tour[] $tours
+ * @property Product[] $product
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -34,7 +31,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title','title_ru','title_ko'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,59 +42,25 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title (en)'),
-            'title_ru' => Yii::t('app', 'Title (ru)'),
-            'title_ko' => Yii::t('app', 'Title (ko)'),
+            'title' => Yii::t('app', 'Title'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDescriptions()
+    public function getProduct()
     {
-        return $this->hasMany(Description::className(), ['category_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTours()
-    {
-        return $this->hasMany(Tour::className(), ['category_id' => 'id']);
+        return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
 
     public static function getList(){
         return ArrayHelper::map(Category::find()->select(['id','title'])->asArray()->all(),'id','title');
     }
 
-    function afterFind()
-    {
-        parent::afterFind();
-        $curLang=Yii::$app->language;
-        if(Yii::$app->controller->action->id!='update'){
-            if($curLang=='ru-RU'){
-                $this->title=$this->title_ru;
-            }
-            else if($curLang=='ko-KR'){
-                $this->title=$this->title_ko;
-            }
-        }
-
-    }
 
     public function afterSave($insert, $changedAttributes){
         parent::afterSave($insert, $changedAttributes);
         Yii::$app->cache->delete('category');
-    }
-
-    public function getImage($size='s_',$class=''){
-        $descriptions= Yii::$app->cache->getOrSet('descriptions'.$this->id, function () {
-            return $this->descriptions;
-        }, 0);
-        foreach($descriptions as $desc){
-            if($desc->image){return Html::img('/images/description/'.$desc->id.'/'.$size.$desc->image,['class'=>$class]);}
-        }
-        return '';
     }
 }

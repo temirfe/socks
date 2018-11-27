@@ -32,13 +32,14 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Html::img('/images/logo_clean_red.svg')."<span> | Admin</span>",
-        'brandUrl' => '/admin',
+        'brandUrl' => '/',
         'options' => [
             'class' => 'backend_bar navbar-default',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Главная', 'url' => ['/']],
+        ['label' => 'Товары', 'url' => ['/product/admin']],
+        ['label' => 'Категории', 'url' => ['/category']],
         ['label' => 'Баннеры', 'url' => ['/banner']],
         ['label' => 'Страницы', 'url' => ['/page']],
         ['label' => 'Данные', 'url' => ['/lookup']],

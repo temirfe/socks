@@ -54,19 +54,8 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
-        $this->layout='wide';
-        $dataProvider = new ActiveDataProvider([
-            'query' => Tour::find()->where(['category_id'=>$id])->andFilterWhere(['destination_id'=>Yii::$app->request->get('cid')]),
-            //'pagination' => ['pageSize' => 50],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'dataProvider'=>$dataProvider
         ]);
     }
 
@@ -80,7 +69,7 @@ class CategoryController extends Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -100,7 +89,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

@@ -130,20 +130,19 @@ $(document).on('click','.js_less',function(e){
 });
 
 //region PhosoSwipe
-$(document).on('click','.js_photoswipe_wrap img',function(e){
+$(document).on('click','.js_photo_swipe',function(e){
     e.preventDefault();
-    //let index=$(this).attr('data-index');
-    let index=$('.js_photoswipe_wrap img').index(this);
+    var index=$(this).attr('data-index');
     openPhotoSwipe(index);
 });
 
-let openPhotoSwipe = function(ind)
+var openPhotoSwipe = function(ind)
 {
-    let pswpElement =document.querySelectorAll('.pswp')[0];
+    var pswpElement =document.querySelectorAll('.pswp')[0];
 
     ind=parseInt(ind);
     // define options (if needed)
-    let options = {
+    var options = {
         index: ind, // start at first slide
         showHideOpacity:true,
         getThumbBoundsFn:false,
@@ -151,19 +150,47 @@ let openPhotoSwipe = function(ind)
         closeOnScroll:false,
         shareButtons: false
     };
-    let items = [];
-    let image=new Image();
-    $(".js_photoswipe_wrap img").each(function() {
-        //let src=$(this).parent().attr('data-big');
-        let src=$(this).prop('src');
+    var items = [];
+    var image=new Image();
+    $(".js_img").each(function() {
+        var src=$(this).parent().attr('data-big');
         image.src=src;
-        let w=image.width;
-        let h=image.height;
+        var w=image.width;
+        var h=image.height;
         items.push({src:src, w:w, h:h});
     });
 
     // Initializes and opens PhotoSwipe
-    let gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
 };
+//endregion
+
+//region gallery
+$(document).on('click', '.js_prevent_default',function(e){
+    e.preventDefault();
+});
+$(document).on('click','.js_open_thumb',function(e){
+    e.preventDefault();
+    $('.js_prevent_default').attr('class','js_open_thumb');
+    $(this).attr('class','js_prevent_default active_thumb');
+    $('.js_main_img').attr('src',$(this).attr('data-big'));
+
+    let ind=$(this).attr('data-index');
+    $('.js_photo_swipe').attr('data-index',ind);
+});
+
+$('.js_main_img').click(function(){
+    let active_thumb_link=$('.js_prevent_default');
+    active_thumb_link.attr('class','js_open_thumb');
+    let next=active_thumb_link.parent().next().find('a');
+    if(next.length===0){
+        next=active_thumb_link.parents('ul').find('li:first-child a');
+    }
+    $(this).attr('src',next.attr('data-big'));
+    next.attr('class','js_prevent_default active_thumb');
+
+    let ind=next.attr('data-index');
+    $('.js_photo_swipe').attr('data-index',ind);
+});
 //endregion

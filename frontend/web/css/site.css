@@ -175,7 +175,6 @@ a.desc:after {
     outline: none;
 }
 .mynav {
-    margin-bottom: 0;
     /* border-bottom: 1px solid #ddd; */
     /* -webkit-box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
     /* box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
@@ -317,7 +316,7 @@ a.desc:after {
 
 .swiper-wrapper{align-items:center;}
 .swiper-slide{height:auto; text-align:center;
-    position: relative;background-color: #ee1c25; }
+    position: relative;background-color: #fafafa; }
 .swiper-slide img{max-width:100%;}
 .swiper-pagination-bullet-active {
     background: #ee1c25;
@@ -360,7 +359,7 @@ h1{font-size:30px;}
 .font16, p.font16{font-size:16px;}
 .rel{position: relative;}
 .abs{position: absolute;}
-.ohidden{overflow: hidden;}
+.ohidden, .oh{overflow: hidden;}
 .zind2{z-index:2;}
 .zind3{z-index:3;}
 .green{color:#007946;}
@@ -488,82 +487,11 @@ h3.bb span{border-bottom: 2px solid #d1e5a6;
     font-size: 13px;
     padding-bottom: 1px;
 }
-.country_card{
-    padding-right: 8px;
-    margin-bottom: 8px;
-    overflow: hidden;}
-.country_card img{
-    width: 100%;
-    -webkit-transition: -webkit-transform .25s ease-out;
-    transition: -webkit-transform .25s ease-out;
-    transition: transform .25s ease-out;
-    transition: transform .25s ease-out,-webkit-transform .25s ease-out;
-}
-.country_card:hover  img{
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    transform: scale(1.05);
-}
-.card_bottom{
-    background: linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
-    bottom:0;
-    padding:10px;
-    font-size: 19px;
-    color:#fff;
-    width: 100%;
-}
+
 h2, .h2 {
     font-size: 26px;
 }
-.tour_card{font-family: Rubik, sans-serif; padding-right: 30px;
-    margin-bottom: 25px;}
-.tour_card .image{
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-.tour_card .image a{width: 100%;}
-.tour_card img{width:100%;-webkit-transition: transform 400ms;
-    -moz-transition: transform 400ms;
-    -o-transition: transform 400ms;
-    transition: transform 400ms;}
-/*.tour_card_intro{    position: absolute;
-    padding: 20px;
-    color: #fff;
-    font-size: 16px;
-    font-family: rubik, sans-serif;
-    display:none;
-    z-index:2;
-}
-.tour_card_intro a,.tour_card_intro a:hover{
-    text-decoration: none;
-    color:#fff;
-}*/
-.tour_card_intro{
-    font-size: 15px;
-    margin-top: 10px;
-    max-height: 104px;
-    overflow: hidden;
-    color:#777;
-}
-.tour_card .image:hover .dimmer{display:block;}
-.tour_card .image:hover .tour_card_intro{display:block;}
-.tour_card_footer a{color:#01384C;}
-.no_decor,.no_decor:hover{text-decoration: none;}
-.tour_card_footer h4{margin-bottom: 5px;}
-.tour_card_footer .price{ font-weight: 500; color: #76aF41;}
-.tour_card_footer .days{color: #888;margin-left: 5px;}
-.tour_card_dest{
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 0 0 10px 0;
-    color: #fff;
-    padding: 2px 8px;
-    background-color: rgba(118,175,65,0.7);
-    font-size: 13px;
-    z-index: 2;
-}
+
 h1, .h1, h2,.h2,h4,.h4{font-family: Rubik, sans-serif; color:#01384C;}
 .hiddeniraak{display:none;}
 .dimmer2{background-color: rgba(0,0,0,0.7);    transition: background-color 300ms;}
@@ -771,7 +699,6 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 .the_logo_wrap{
     position: absolute;
     top: -41px;
-    background-color: #ee1c25;
     width: 120px;
     height: 120px;
     box-sizing: content-box;
@@ -802,3 +729,37 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     left: 7%;
 }
 .brand_wrap{width:150px;}
+.open_gallery{display: none;right: 20px;top: 20px;}
+.view_img_wrap:hover .open_gallery{display: block;}
+
+.open_gallery span{background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 26px;
+    opacity: 0.8;
+    padding: 11px 16px;}
+.open_gallery span:hover{ opacity: 1;}
+.w20{width:20px;}
+.w30{width:30px;}
+.w200{width:200px;}
+.w80{width:80px;}
+.mw500{max-width:500px;}
+.thumbs_wrap{ overflow: hidden;
+    margin-right: 5px;}
+.thumbs_wrap ul{margin: 0;padding: 0;}
+.thumbs_wrap li{list-style-type: none;margin-bottom: 5px;}
+.thumbs_wrap a{border: 2px solid #fff;display: block;
+    height: 37px;
+    overflow: hidden;
+    width: 53px;}
+.thumbs_wrap a:hover{border-color:#f8a411;}
+.thumbs_wrap a.active_thumb{border-color:#f8a411;}
+.vtop{vertical-align:top;}
+.real_img_wrap{overflow: hidden; max-width:500px;
+    display: flex;
+    justify-content: center;}
+.real_img_wrap img{
+    max-height: 450px;}
+.pswp__bg {
+    background: #fff;
+}

@@ -8,15 +8,16 @@ use Yii;
  * This is the model class for table "product".
  *
  * @property int $id
- * @property string $image
+ * @property string $images
  * @property int $public
  * @property string $title
  * @property string $description
  * @property int $category_id
  * @property int $price
  * @property int $sex
+ * @property string $mainImg
  */
-class Product extends \yii\db\ActiveRecord
+class Product extends MyModel
 {
     /**
      * {@inheritdoc}
@@ -31,13 +32,14 @@ class Product extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['image', 'title'], 'required'],
+        $local= [
+            [['title'], 'required'],
             [['public', 'category_id', 'price', 'sex'], 'integer'],
             [['description'], 'string'],
-            [['image'], 'string', 'max' => 200],
+            [['images'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 500],
         ];
+        return array_merge($local, parent::rules());
     }
 
     /**
@@ -45,15 +47,38 @@ class Product extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
+        $local=  [
             'id' => Yii::t('app', 'ID'),
             'image' => Yii::t('app', 'Image'),
             'public' => Yii::t('app', 'Public'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category_id' => Yii::t('app', 'Category'),
             'price' => Yii::t('app', 'Price'),
             'sex' => Yii::t('app', 'Sex'),
         ];
+        return array_merge($local, parent::attributeLabels());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function getMainImg(){
+        if($this->images){
+            return explode(';',$this->images)[0];
+        }
+        return '';
+    }
+
+    public static function getImg($images){
+        if($images){
+            return explode(';',$images)[0];
+        }
+        return '';
     }
 }

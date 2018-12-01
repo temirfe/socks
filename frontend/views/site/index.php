@@ -16,8 +16,10 @@ $alias=Yii::getAlias('@web');
 //$banner=Html::img($file,['class'=>'img-responsive']);
 $lang=Yii::$app->language;
 $dao=Yii::$app->db;
-$banners=Yii::$app->db->createCommand("SELECT * FROM banner WHERE `type`=0 AND `public`=1 ORDER BY weight DESC")->queryAll();
-$socks=Yii::$app->db->createCommand("SELECT * FROM product WHERE `category_id`=1 AND `public`=1 ORDER BY id DESC")->queryAll();
+$banners=$dao->createCommand("SELECT * FROM banner WHERE `type`=0 AND `public`=1 ORDER BY weight DESC")->queryAll();
+$socks=$dao->createCommand("SELECT * FROM product WHERE `category_id`=1 AND `public`=1 ORDER BY id DESC LIMIT 4")->queryAll();
+$underwear=$dao->createCommand("SELECT * FROM product WHERE `category_id`=3 AND `public`=1 ORDER BY id DESC LIMIT 4")->queryAll();
+$singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `public`=1 ORDER BY id DESC LIMIT 4")->queryAll();
 ?>
 <style type="text/css">
     .the_logo_wrap {
@@ -68,12 +70,27 @@ $socks=Yii::$app->db->createCommand("SELECT * FROM product WHERE `category_id`=1
                         <div class="box_img_wrap"><img src="/images/product/<?=$sock['id']?>/s_<?=$img?>" class="img-responsive"></div>
                         <div class="box_title"><?=$sock['title']?></div>
                         <div class="box_price"><?=$sock['price']?> сом</div>
+                        <?=Html::a("<span class='false_link'></span>",['/product/view','id'=>$sock['id']])?>
                     </div>
             <?php
                 }
             ?>
         </div>
 
+        <div class="flex flex-wrap mr-8">
+            <?php
+            foreach($underwear as $sock){
+                $img=Product::getImg($sock['images']);
+                ?>
+                <div class="pull-left box">
+                    <div class="box_img_wrap"><img src="/images/product/<?=$sock['id']?>/s_<?=$img?>" class="img-responsive"></div>
+                    <div class="box_title"><?=$sock['title']?></div>
+                    <div class="box_price"><?=$sock['price']?> сом</div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
         <!--<h2 class="text-center mb25 mt35"><?/*=Yii::t('app','Underwear');*/?></h2>-->
 
     </div>

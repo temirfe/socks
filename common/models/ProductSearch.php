@@ -47,6 +47,12 @@ class ProductSearch extends Product
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize' => 24],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -65,6 +71,15 @@ class ProductSearch extends Product
             'price' => $this->price,
             'sex' => $this->sex,
         ]);
+        if(!empty($params['show'])){
+            $ctg='';
+            switch($params['show']){
+                case "socks":$ctg=1;break;
+                case "singlets":$ctg=2;break;
+                case "underwear":$ctg=3;break;
+            }
+            $query->andFilterWhere(['category_id' => $ctg]);
+        }
 
         $query->andFilterWhere(['like', 'images', $this->images])
             ->andFilterWhere(['like', 'title', $this->title])

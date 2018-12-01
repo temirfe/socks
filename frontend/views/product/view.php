@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use frontend\assets\SwiperAsset;
 use frontend\assets\PhotoSwipeAsset;
+use yii\widgets\ListView;
 
 SwiperAsset::register($this);
 PhotoSwipeAsset::register($this);
@@ -13,6 +14,7 @@ include_once($webroot.'/photoswipe/_swipe.php');
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Product */
+/* @var $relatedProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
@@ -36,7 +38,7 @@ $imgs=explode(';',$model->images);
         <?= Html::a(Yii::t('app', 'Products'), ['admin'], ['class' => 'btn btn-default pull-right']) ?>
         <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success pull-right mr10']) ?>
     </p>
-    <div class="row">
+    <div class="row mb25">
         <?php
         if($imgs){
             ?>
@@ -79,5 +81,32 @@ $imgs=explode(';',$model->images);
         </div>
 
     </div>
+
+
+    <div class="clear mb25 oh mt20"></div>
+    <?php
+        if($related_count=$relatedProvider->getTotalCount())
+        {
+            ?>
+            <h2>Похожие товары</h2>
+            <div class="swiper-container related-container" data-count="<?=$related_count?>">
+                <?php
+                try {
+                    echo ListView::widget([
+                        'dataProvider' => $relatedProvider,
+                        'itemOptions' => ['class' => 'oh mb20 gridbox swiper-slide'],
+                        'emptyText' => Yii::t('app', 'No results found'),
+                        'summary' => '',
+                        'options' => ['class' => "item-view swiper-wrapper"],
+                        'itemView' => function ($model, $key, $index, $widget) {
+                            return $this->render('/product/_view', ['model' => $model]);
+                        },
+                    ]);
+                } catch (Exception $e) {
+                } ?>
+                <div class="swiper-pagination related-pagination"></div>
+            </div>
+    <?php
+        }?>
 
 </div>

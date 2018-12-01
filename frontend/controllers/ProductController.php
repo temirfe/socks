@@ -8,6 +8,7 @@ use common\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -45,20 +46,35 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Lists all Product models.
-     * @return mixed
-     */
+
     public function actionIndex()
     {
+        return $this->showIndex(Yii::$app->request->queryParams);
+    }
+
+    public function actionSocks()
+    {
+        return $this->showIndex(['show'=>'socks']);
+    }
+    public function actionSinglets()
+    {
+        return $this->showIndex(['show'=>'singlets']);
+    }
+    public function actionUnderwear()
+    {
+        return $this->showIndex(['show'=>'underwear']);
+    }
+
+    protected function showIndex($params){
         $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Displays a single Product model.
@@ -68,8 +84,14 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $model=$this->findModel($id);
+        $relatedProvider = new ActiveDataProvider([
+            'query' => Product::find()->where("id<>{$model->id} AND category_id={$model->category_id} AND public=1")->limit(16),
+            'pagination' => false,
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'relatedProvider'=>$relatedProvider
         ]);
     }
 

@@ -59,28 +59,22 @@ $socks=Yii::$app->db->createCommand("SELECT * FROM product WHERE `category_id`=1
     ?>
 
     <div class="body-content container">
-        <h2 class="text-center mb25"><?=Yii::t('app','Socks')?></h2>
         <div class="flex flex-wrap mr-8">
             <?php
                 foreach($socks as $sock){
                     $img=Product::getImg($sock['images']);
                     ?>
                     <div class="pull-left box">
-                        <img src="/images/product/<?=$sock['id']?>/s_<?=$img?>">
-                        <div class="hp"><?=$sock['title']?></div>
-                        <div class="hp"><?=$sock['price']?></div>
+                        <div class="box_img_wrap"><img src="/images/product/<?=$sock['id']?>/s_<?=$img?>" class="img-responsive"></div>
+                        <div class="box_title"><?=$sock['title']?></div>
+                        <div class="box_price"><?=$sock['price']?> сом</div>
                     </div>
             <?php
                 }
             ?>
-
-        </div>
-        <h2 class="text-center mb25 mt35"><?=Yii::t('app','Underwear');?></h2>
-        <div class="xrow">
         </div>
 
-        <h2 class="text-center mb25 mt35"><?=Yii::t('app','Singlets')?></h2>
-        <div class="flex flex-wrap mr-30 xs-mr-15">
-        </div>
+        <!--<h2 class="text-center mb25 mt35"><?/*=Yii::t('app','Underwear');*/?></h2>-->
+
     </div>
 </div>

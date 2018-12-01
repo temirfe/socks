@@ -39,7 +39,9 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'verifyCode' => 'Введите код с картины',
+            'name' => 'Имя',
+            'body' => 'Сообщение',
         ];
     }
 
@@ -59,11 +61,11 @@ class ContactForm extends Model
             ->send();*/
         return Yii::$app->mailer->compose()
             ->setTo($email)
-            ->setFrom(['clients@temirbek.com' => 'OkTour mailer'])
-            ->setSubject('User from oktour sent message using contact form')
-            ->setTextBody('Name: '.$this->name.'
+            ->setFrom(['info@prestigesocks.kg' => 'Prestige Socks'])
+            ->setSubject('Пользователь отпрвил письмо')
+            ->setTextBody('Имя: '.$this->name.'
             E-mail: '.$this->email.'
-            Message: '.$this->body)
+            Сообщение: '.$this->body)
             ->send();
     }
 }

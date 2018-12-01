@@ -74,6 +74,12 @@ return [
     'Create Category' => 'Добавить категорию',
     'Update Category: ' => 'Редактировать категорию',
 
+    'Lookups' => 'Данные',
+    'Lookup' => 'Данный',
+    'Create Lookup' => 'Добавить',
+    'Delete Lookup' => 'Удалить',
+    'Update Lookup: ' => 'Редактировать',
+
 
     'Name'=>'Имя',
     'Surname'=>'Фамилия',
@@ -155,7 +161,6 @@ return [
     'Body'=>'Текст',
     'Submit'=>'Отправить',
     'Thank you for contacting us. We will respond to you as soon as possible.'=>'Ваш вопрос принят. Мы ответим вам в ближайщее время.',
-    'Category'=>'Категория',
     'Text'=>'Текст',
     'Provided By'=>'Выполнен кем',
     'Lifetime'=>'Срок жизни',

@@ -171,7 +171,7 @@ class Page extends \yii\db\ActiveRecord
         }
     }
 
-    function afterFind()
+    /*function afterFind()
     {
         parent::afterFind();
         $curLang=Yii::$app->language;
@@ -185,5 +185,5 @@ class Page extends \yii\db\ActiveRecord
                 $this->text=$this->text_ko;
             }
         }
-    }
+    }*/
 }

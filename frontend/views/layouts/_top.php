@@ -48,6 +48,6 @@ NavBar::begin([
         ]);
     } catch (Exception $e) {}
 
-    echo Html::a(Yii::t('app','Contact us'),['/contacts'],['class'=>'nav_link']);
+    echo Html::a(Yii::t('app','Contact us'),['/contact'],['class'=>'nav_link']);
 
  NavBar::end();

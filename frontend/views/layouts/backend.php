@@ -24,6 +24,11 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title>Admin | <?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css">
+        body {
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 <?php $this->beginBody() ?>

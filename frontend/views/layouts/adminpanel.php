@@ -11,6 +11,7 @@ use yii\helpers\Html;
         echo Html::a('Товары','/product/admin');
         echo Html::a('Категории','/category');
         echo Html::a('Баннеры','/banner');
+        echo Html::a('Страницы','/page');
         echo Html::a('Данные','/lookup');
         echo Html::a('Пользователи','/user');
         if($user->id){

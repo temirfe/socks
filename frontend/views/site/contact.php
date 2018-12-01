@@ -18,6 +18,9 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
     return Lookup::find()->all();
 }, 0);
 ?>
+<style type="text/css">
+    body{background-color: #fff;}
+</style>
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="row">
@@ -35,7 +38,7 @@ $lookups = Yii::$app->cache->getOrSet('lookup', function () {
                 ]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

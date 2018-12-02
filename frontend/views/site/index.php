@@ -91,6 +91,21 @@ $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `
             }
             ?>
         </div>
+
+        <div class="flex flex-wrap mr-8">
+            <?php
+            foreach($singlets as $sock){
+                $img=Product::getImg($sock['images']);
+                ?>
+                <div class="pull-left box">
+                    <div class="box_img_wrap"><img src="/images/product/<?=$sock['id']?>/s_<?=$img?>" class="img-responsive"></div>
+                    <div class="box_title"><?=$sock['title']?></div>
+                    <div class="box_price"><?=$sock['price']?> сом</div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
         <!--<h2 class="text-center mb25 mt35"><?/*=Yii::t('app','Underwear');*/?></h2>-->
 
     </div>

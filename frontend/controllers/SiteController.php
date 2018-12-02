@@ -118,7 +118,7 @@ class SiteController extends Controller
     public function actionAdmin()
     {
         $this->layout='backend';
-        return $this->render('admin');
+        return $this->render('index');
     }
 
     /**
@@ -174,9 +174,9 @@ class SiteController extends Controller
                 $email=Yii::$app->params['adminEmail'];
             }
             if ($model->sendEmail($email)) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                Yii::$app->session->setFlash('success', Yii::t('app','Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('error', Yii::t('app','There was an error sending your message.'));
             }
 
             return $this->refresh();

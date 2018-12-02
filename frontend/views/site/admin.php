@@ -9,7 +9,6 @@ $this->title = 'Admin Panel | OK Tour';
 $dao=Yii::$app->db;
 $today=date('Y-m-d');
 //$weekAgo=date('Y-m-d',strtotime('-1 week'));
-$books = $dao->createCommand("SELECT id FROM book WHERE date_format(FROM_UNIXTIME(`created_at`), '%Y-%m-%d')='{$today}'")->queryAll();
 
 ?>
 <div class="site-index">

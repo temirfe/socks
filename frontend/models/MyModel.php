@@ -101,7 +101,7 @@ class MyModel extends \yii\db\ActiveRecord
             if($this->imageFiles){
                 foreach($this->imageFiles as $image)
                 {
-                    $time=time().rand(1000, 100000);
+                    $time=time().'s'.rand(1, 100);
                     $extension=$image->extension;
                     $imageName=$time.'.'.$extension;
 
@@ -114,6 +114,7 @@ class MyModel extends \yii\db\ActiveRecord
                 }
                 if($model_name=='product'){
                     $images_str=implode(';',$images);
+                    $images_str.=';'.$this->images;
                     Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$images_str}' WHERE id='{$this->id}'")->execute();
                 }
             }

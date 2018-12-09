@@ -161,7 +161,6 @@ return [
     'Body'=>'Текст',
     'Submit'=>'Отправить',
     'Thank you for contacting us. We will respond to you as soon as possible.'=>'Ваш вопрос принят. Мы ответим вам в ближайщее время.',
-    'Thank you for contacting us. We will respond to you as soon as possible.'=>'Ваш вопрос принят. Мы ответим вам в ближайщее время.',
     'Text'=>'Текст',
     'Provided By'=>'Выполнен кем',
     'Lifetime'=>'Срок жизни',
@@ -206,5 +205,7 @@ return [
     'Please choose your new password:'=>'Пожалуйста, придумайте новый пароль:',
     'Description'=>'Описание',
     'Sex'=>'Пол',
+    'Select'=>'Выбрать',
+    'Soon'=>'Скоро',
     ''=>'',
 ];

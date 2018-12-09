@@ -176,6 +176,7 @@ a.desc:after {
     /* box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
     background-color: #ee1c25;
     border-radius: 0;
+    margin-bottom:0;
 }
 .navbar-brand {
     height: auto;
@@ -692,7 +693,7 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 }
 .tour_action{margin-top:5px;}
 .tour_action a{padding:5px;}
-.the_logo_wrap{
+/*.the_logo_wrap{
     position: absolute;
     top: -41px;
     width: 120px;
@@ -723,6 +724,37 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     background-position: center;
     top: 51%;
     left: 7%;
+}*/
+.the_logo_wrap {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 41px;
+    box-sizing: content-box;
+    z-index: 3;
+}
+.the_logo {
+    height: 70%;
+    width: 100%;
+    background: url(/images/prestige_clean.svg),linear-gradient(transparent, transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-position: center;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.the_logo_line {
+    position: absolute;
+    height: 56%;
+    width: 99%;
+    background: url(/images/line.svg),linear-gradient(transparent, transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 1%;
+    bottom: -3px;
 }
 .brand_wrap{width:150px;}
 .open_gallery{display: none;right: 20px;top: 20px;}
@@ -791,8 +823,29 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
 .prod_menu_ul{
     display: inline-block;
 }
-.prod_menu_ul a{ padding:10px 20px; text-decoration: none;}
-.prod_menu_ul a:hover{text-decoration: none; color:#000;}
-.prod_menu_ul a.active{color:#ee1c25;}
+.prod_menu_ul a{    margin: 10px 20px;text-decoration: none;padding-bottom: 2px; color:#000;}
+.prod_menu_ul a:hover{text-decoration: none; color:#000;border-bottom: 2px solid #ee1c25;}
+.prod_menu_ul a.active{    color: #000; border-bottom: 2px solid #ee1c25;}
 .comforta{font-family:'Comfortaa', cursive;}
 .gridbox{width:260px; margin-right:10px;}
+.ctg_box {
+    position:relative;}
+.ctg_box_info {}
+.ctg_box_img_wrap {
+    max-height: 281px;
+    display: flex;
+    align-items: center;
+}
+.ctg_box_title{
+    font-size: 20px;
+    text-align: center;
+    background-color: #ee1c25;
+    padding: 10px;
+}
+.ctg_box_title a{color: white;transition: color 0.2s ease;}
+.ctg_box_title a:hover{text-decoration: none;color:black;}
+.mynav .open > a, .mynav .open > a:hover, .mynav .open > a:focus {
+    background-color: transparent;
+    border-color: #337ab7;
+}
+.under_construction{font-size:18px; background-color:yellow; padding:15px; text-align:center;}

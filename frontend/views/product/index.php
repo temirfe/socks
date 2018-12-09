@@ -1,21 +1,37 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\widgets\ListView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Products');
-$this->params['breadcrumbs'][] = $this->title;
-
+$title = Yii::t('app', 'Products');
+//$this->params['breadcrumbs'][] = $this->title;
+$queryCtg=Yii::$app->request->get('category_id');
+$categories= Yii::$app->cache->getOrSet('category', function () {
+    return Yii::$app->db->createCommand("SELECT * FROM category")->queryAll();
+});
+$ctgMenu=[];$parent_id=null;
+foreach($categories as $category){
+    if($category['id']==$queryCtg){
+        if($category['parent_id']){$parent_id=$category['parent_id'];}
+    }
+}
+foreach($categories as $category){
+    if($category['id']==$queryCtg && !$category['parent_id'] || $category['id']==$parent_id ){
+        $ctgMenu[0]=['id'=>$category['id'],'title'=>'Все '.$category['title']]; $title=$category['title'];}
+    else if($category['parent_id']==$queryCtg || ($parent_id && $category['parent_id']==$parent_id)){
+        $ctgMenu[]=['id'=>$category['id'],'title'=>$category['title']];}
+    else if($category['id']==$queryCtg){$ctgMenu[]=['id'=>$category['id'],'title'=>$category['title']];}
+}
+$this->title =$title;
 ?>
 <?php if(Yii::$app->user->can('userIndex')){
     ?>
     <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success mt10']) ?>
     </p>
 <?php
 }?>
@@ -37,10 +53,21 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     <div class="flex prod_menu">
         <ul class="myul prod_menu_ul comforta">
-            <li class="pull-left"><a href="/product" class="<?=$all?>">Все</a> </li>
-            <li class="pull-left"><a href="/product?show=socks" class="<?=$c1?>">Носки</a> </li>
-            <li class="pull-left"><a href="/product?show=singlets" class="<?=$c2?>">Майки</a> </li>
-            <li class="pull-left"><a href="/product?show=underwear" class="<?=$c3?>">Трусы</a> </li>
+            <!--<li class="pull-left"><a href="/product" class="<?/*=$all*/?>">Все</a> </li>
+            <li class="pull-left"><a href="/product?show=socks" class="<?/*=$c1*/?>">Носки</a> </li>
+            <li class="pull-left"><a href="/product?show=singlets" class="<?/*=$c2*/?>">Майки</a> </li>
+            <li class="pull-left"><a href="/product?show=underwear" class="<?/*=$c3*/?>">Трусы</a> </li>-->
+            <?php
+                if($ctgMenu){
+                    foreach($ctgMenu as $ctgli){
+                        if($queryCtg==$ctgli['id']){$act='active';}else{$act='';}
+                        echo Html::tag('li',
+                            Html::a($ctgli['title'],['index','category_id'=>$ctgli['id']],['class'=>$act]),
+                            ['class'=>'pull-left']
+                        );
+                    }
+                }
+            ?>
         </ul>
     </div>
 
@@ -48,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
     try {
         echo ListView::widget([
             'dataProvider' => $dataProvider,
-            'emptyText' => Yii::t('app', 'No results found'),
+            'emptyText' => Yii::t('app', 'Soon'),
             'summary' => '',
             'layout' => '{items}<div class="clear">{pager}</div>{summary}',
             'itemView' => function ($model, $key, $index, $widget) {

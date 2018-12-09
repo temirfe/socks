@@ -271,20 +271,34 @@ class SiteController extends Controller
     {
         $key=Yii::$app->request->post('key');
         $webroot=Yii::getAlias('@webroot');
-        if(is_dir($dir=$webroot."/images/{$model_name}/".$id))
-        {
-            if(is_file($dir.'/'.$key)){
-                @unlink($dir.'/'.$key);
-                @unlink($dir.'/s_'.$key);
-                $dao=Yii::$app->db;
-                $row = $dao->createCommand("SELECT images FROM {$model_name} WHERE id='{$id}'")->queryOne();
-                $exp=explode(';',$row['images']);
-                $newSet=[];
-                foreach($exp as $img){
-                    if($img!=$key){$newSet[]=$img;}
+        if($model_name=='category'){
+
+            if(is_dir($dir=$webroot."/images/{$model_name}/".$id))
+            {
+                $name=explode('s_',$key);
+                if(is_file($dir.'/'.$key)){
+                    @unlink($dir.'/'.$key);
+                    @unlink($dir.'/s_'.$key);
+                    if(isset($name[1])){@unlink($dir.'/'.$name[1]);}
+                    Yii::$app->db->createCommand("UPDATE {$model_name} SET image='' WHERE id='{$id}'")->execute();
                 }
-                $newSetStr=implode(';',$newSet);
-                Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$newSetStr}' WHERE id='{$id}'")->execute();
+            }
+        }else{
+            if(is_dir($dir=$webroot."/images/{$model_name}/".$id))
+            {
+                if(is_file($dir.'/'.$key)){
+                    @unlink($dir.'/'.$key);
+                    @unlink($dir.'/s_'.$key);
+                    $dao=Yii::$app->db;
+                    $row = $dao->createCommand("SELECT images FROM {$model_name} WHERE id='{$id}'")->queryOne();
+                    $exp=explode(';',$row['images']);
+                    $newSet=[];
+                    foreach($exp as $img){
+                        if($img!=$key){$newSet[]=$img;}
+                    }
+                    $newSetStr=implode(';',$newSet);
+                    Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$newSetStr}' WHERE id='{$id}'")->execute();
+                }
             }
         }
         Yii::$app->response->format=\yii\web\Response::FORMAT_JSON;
@@ -313,9 +327,9 @@ class SiteController extends Controller
     }
 
     public function actionTest(){
-        $webroot=Yii::getAlias('@webroot');
-        $scan=scandir($dir=$webroot."/images/destination/3");
-        print_r($scan);
+
+        $withChildren=Category::withChildren(3);
+        print_r($withChildren);
     }
 
     public function actionLang($to){

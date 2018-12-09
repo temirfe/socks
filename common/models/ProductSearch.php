@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use frontend\models\Product;
+use frontend\models\Category;
 
 /**
  * ProductSearch represents the model behind the search form of `frontend\models\Product`.
@@ -79,6 +80,10 @@ class ProductSearch extends Product
                 case "underwear":$ctg=3;break;
             }
             $query->andFilterWhere(['category_id' => $ctg]);
+        }
+        if(!empty($params['category_id'])){
+            $withChildren=Category::withChildren($params['category_id']);
+            $query->where(['category_id'=>$withChildren]);
         }
 
         $query->andFilterWhere(['like', 'images', $this->images])

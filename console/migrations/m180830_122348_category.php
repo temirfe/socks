@@ -15,7 +15,12 @@ class m180830_122348_category extends Migration
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->createTable('category', [
             'id' => $this->primaryKey(),
-            'title' => $this->string('255')->notNull(),
+            'parent_id'=>$this->integer(11),
+            'title' => $this->string('255'),
+            'description' => $this->string('500'),
+            'image' =>$this->string('200'),
+            'public' =>$this->boolean(),
+            'weight'=>$this->integer(2)->notNull()->defaultValue(0),
         ],$tableOptions);
     }
 

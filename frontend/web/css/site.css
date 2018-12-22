@@ -176,7 +176,6 @@ a.desc:after {
     /* box-shadow: 0 0 40px rgba(200, 200, 200, 0.2); */
     background-color: #ee1c25;
     border-radius: 0;
-    margin-bottom:0;
 }
 .navbar-brand {
     height: auto;
@@ -307,9 +306,6 @@ a.desc:after {
 .swiper-container {
     width: 100%;
 }
-@media (max-width: 600px){
-    .swiper-container {}
-}
 
 .swiper-wrapper{align-items:center;}
 .swiper-slide{height:auto; text-align:center;
@@ -319,15 +315,37 @@ a.desc:after {
     background: #ee1c25;
 }
 .banner_text{
-    background-color: rgba(238,28,37,0.7);
+   /* background-color: rgba(238,28,37,0.7);
     color: #fff;
     font-size: 39px;
     max-width: 600px;
     text-align: left;
     padding: 20px 20px 25px 30px;
     bottom: 20px;
+    position: absolute;*/
+    /* background-color: rgba(238,28,37,0.7); */
+    background-color: rgba(255,255,255,0.9);
+   /* background-image: linear-gradient(white,transparent);*/
+    color: black;
+    font-size: 39px;
+    padding: 20px 20px 25px 30px;
+    width: 100%;
+    top: 0;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+.banner_text > div{
+    width:100%;
+}
+.banner_text > span{
+    font-size: 23px;
+    max-width: 645px;
+    line-height: 1.3;
+    margin-top: 10px;text-shadow: 0 0 2px white;
+}
+
 h1{font-size:30px;}
 .tour_params > div >div{text-transform: uppercase;
     font-size: 12px;
@@ -801,11 +819,18 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     color: #111;
     height: 430px;
 }
+
+.white_box{
+    position: relative;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 .box_img_wrap{    width: 200px;
     height: 250px;
     overflow: hidden;}
 .box_img_wrap img{ display: inline-block;}
-.box_title{margin: 40px 0 10px; width:200px;}
+.box_title{margin: 40px 0 10px; width:200px;height: 48px;}
 .box_price{}
 .white_thang{background-color: #fff;    padding: 10px 30px 100px;
     border: 1px solid #f1f1f1;}
@@ -836,6 +861,12 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     display: flex;
     align-items: center;
 }
+.ctg_box_img_wrap img {width:100%;height:100%;    -webkit-transition: transform 400ms;
+    -moz-transition: transform 400ms;
+    -o-transition: transform 400ms;
+    transition: transform 400ms;}
+.ctg_box_img_wrap:hover img {transform:scale(1.2);}
+
 .ctg_box_title{
     font-size: 20px;
     text-align: center;
@@ -843,9 +874,66 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     padding: 10px;
 }
 .ctg_box_title a{color: white;transition: color 0.2s ease;}
-.ctg_box_title a:hover{text-decoration: none;color:black;}
+.ctg_box_title a:hover{text-decoration: none;}
 .mynav .open > a, .mynav .open > a:hover, .mynav .open > a:focus {
     background-color: transparent;
     border-color: #337ab7;
 }
 .under_construction{font-size:18px; background-color:yellow; padding:15px; text-align:center;}
+
+@media (max-width: 600px){
+    .swiper-container {}
+    .prod_menu {margin-top: 0; margin-bottom:5px;}
+    .mob_hidden{display:none;}
+    .prod_menu_ul a { margin: 5px; display:block;}
+    .product_box {padding: 5px;margin: 5px;}
+    .box_img_wrap {
+        display: flex;
+        align-items: center;
+    }
+    .box_title {
+        margin: 10px 0 10px;
+        height: 40px;
+    }
+    .wrap > .container {
+        padding: 0 10px 20px;
+    }
+    .banner_text {
+        font-size: 23px;
+        padding: 10px;
+    }
+    .banner_text > span {
+        font-size: 14px;
+        line-height: 1.25;
+        margin-top: 4px;
+    }
+    .nav_link {
+        float: left;
+        padding-top: 0;
+        padding-bottom: 15px;
+    }
+    .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+}
+
+@media (max-width: 420px){
+    .product_box {height: 340px; padding: 5px;font-size: 18px;}
+    .box_img_wrap {width: 177px;height: 236px;}
+    .box_title { width: 177px;
+        height: 46px;}
+}
+@media (max-width: 412px){
+    .box_img_wrap {width: 175px;}
+    .box_title { width: 175px;}
+}
+@media (max-width: 375px){
+    .product_box {height: 300px; padding: 5px;font-size: 16px;}
+    .box_img_wrap {width: 157px;height: 202px;}
+    .box_title { width: 157px;}
+}
+@media (max-width: 330px){
+    .product_box {height: 265px; padding: 5px;font-size: 14px;}
+    .box_img_wrap {width: 130px;height: 166px;}
+    .box_title { width: 130px;}
+}

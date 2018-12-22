@@ -17,6 +17,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $component_id
  * @property string $title
  * @property string $component
+ * @property string $description
  */
 class Banner extends MyModel
 {
@@ -36,7 +37,7 @@ class Banner extends MyModel
         $rules= [
             [['public', 'type', 'weight','component_id'], 'integer'],
             [['image', 'link','component'], 'string', 'max' => 200],
-            [['title'], 'string', 'max' => 500],
+            [['title','description'], 'string', 'max' => 500],
             [['weight'], 'default','value' => 0],
         ];
 
@@ -56,6 +57,7 @@ class Banner extends MyModel
             'link' => Yii::t('app', 'Link'),
             'weight' => Yii::t('app', 'Weight'),
             'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
         ];
 
         return ArrayHelper::merge(parent::attributeLabels(),$rules);

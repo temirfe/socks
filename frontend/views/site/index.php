@@ -22,6 +22,9 @@ $categories=$dao->createCommand("SELECT * FROM category WHERE `parent_id` IS NUL
 $underwear=$dao->createCommand("SELECT * FROM product WHERE `category_id`=3 AND `public`=1 ORDER BY id DESC LIMIT 4")->queryAll();
 $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `public`=1 ORDER BY id DESC LIMIT 4")->queryAll();*/
 ?>
+<style type="text/css">
+    .mynav {margin-bottom:0; }
+</style>
 <div class="site-index">
 
     <?php
@@ -36,7 +39,12 @@ $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `
                         <?php $img=Html::img('/images/banner/'.$banner['id'].'/'.$banner['image']);
                         echo $img;
                         if($banner['title']){
-                            echo Html::tag('div',$banner['title'],['class'=>'banner_text']);
+                            $bdesc='';
+                            $btitle="<div>".$banner['title']."</div>";
+                            if($banner['description']){
+                                $bdesc=Html::tag('span',$banner['description']);
+                            }
+                            echo Html::tag('div',$btitle.$bdesc,['class'=>'banner_text']);
                         }
                         if($link=$banner['link']){
                             echo Html::a(Html::tag('span','',['class'=>'false_link']),$link);
@@ -59,10 +67,12 @@ $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `
             ?>
             <div class="col-sm-4">
                 <div class="ctg_box_img_wrap oh">
-                    <img src="/images/category/<?=$category['id']?>/<?=$category['image']?>" class="img-responsive">
+                    <a href="/product/index?category_id<?=$category['id']?>">
+                        <img src="/images/category/<?=$category['id']?>/<?=$category['image']?>" class="img-responsive">
+                    </a>
                 </div>
-                <div class="ctg_box_info oh">
-                    <div class="ctg_box_title"><?=Html::a($category['title'].Html::tag('span','',['class'=>'false_link']),['/product/index','category_id'=>$category['id']])?></div>
+                <div class="ctg_box_info mb20 oh">
+                    <div class="ctg_box_title"><?=Html::a($category['title'],['/product/index','category_id'=>$category['id']])?></div>
                 </div>
             </div>
             <?php

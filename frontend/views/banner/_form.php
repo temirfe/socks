@@ -16,6 +16,7 @@ use kartik\file\FileInput;
     <?=$form->errorSummary($model)?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
     <?php

@@ -21,6 +21,7 @@ class m181118_064817_banner extends Migration
             'link' => $this->string('200')->notNull(),
             'weight' => $this->integer('11')->notNull()->defaultValue(0),
             'title' => $this->string('500')->notNull(),
+            'description' => $this->string('500')->notNull(),
             'component' => $this->string('50'),
             'component_id' => $this->integer('11'),
         ],$tableOptions);

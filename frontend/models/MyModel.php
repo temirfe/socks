@@ -88,7 +88,7 @@ class MyModel extends \yii\db\ActiveRecord
                 $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                 if($model_name=='banner'){
                     $imagine->thumbnail(new Box(1500, 1500))->save($tosave.'/'.$imageName,['quality'=>100]);
-                    Image::thumbnail($tosave.'/'.$imageName,1400, 400)->save($tosave.'/'.$imageName,['quality'=>100]);
+                    Image::thumbnail($tosave.'/'.$imageName,1400, 600)->save($tosave.'/'.$imageName,['quality'=>100]);
                 }
                 else{
                     $imagine->thumbnail(new Box(600, 600))->save($tosave.'/'.$imageName);

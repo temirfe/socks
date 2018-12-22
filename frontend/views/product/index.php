@@ -39,7 +39,7 @@ $this->title =$title;
 
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="mob_hidden"><?= Html::encode($this->title) ?></h1>
     <div class="clear"></div>
     <?php Pjax::begin(); ?>
     <?php

@@ -13,7 +13,16 @@ use kartik\file\FileInput;
 use vova07\imperavi\Widget;
 
 $ctgs=Category::find()->all();
-$catsel=\yii\helpers\ArrayHelper::map($ctgs,'id','title');
+$catsel=[]; $ctitles=[];
+foreach($ctgs as $ctg){
+    $ctitles[$ctg['id']]=$ctg['title'];
+    $ctitle=$ctg['title'];
+    if(!empty($ctg['parent_id'])){
+        if(!empty($ctitles[$ctg['parent_id']])){$ctitle=$ctitles[$ctg['parent_id']].' / '.$ctg['title'];}
+        else {$ctitle=' / '.$ctg['title'];}
+    }
+    $catsel[$ctg['id']]=$ctitle;
+}
 ?>
 
 <div class="product-form">

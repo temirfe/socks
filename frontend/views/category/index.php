@@ -12,7 +12,7 @@ $rows=Yii::$app->db->createCommand("SELECT id, title, parent_id FROM category")-
 $parents[0]="Только родители";
 $all=[];
 foreach($rows as $row){
-    if($row['parent']==0){$parents[$row['id']]=$row['title'];}
+    if($row['parent_id']==0){$parents[$row['id']]=$row['title'];}
     $all[$row['id']]=$row['title'];
 }
 ?>
@@ -24,7 +24,7 @@ foreach($rows as $row){
         <?= Html::a(Yii::t('app', 'Create Category'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?try {
+    <?php try {
         echo GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [

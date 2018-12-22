@@ -865,7 +865,7 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     -moz-transition: transform 400ms;
     -o-transition: transform 400ms;
     transition: transform 400ms;}
-.ctg_box_img_wrap:hover img {transform:scale(1.2);}
+.ctg_box_img_wrap:hover img {transform:scale(1.08);}
 
 .ctg_box_title{
     font-size: 20px;

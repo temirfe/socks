@@ -28,6 +28,7 @@ foreach($categories as $category){
 }
 $this->title =$title;
 ?>
+<script type="text/javascript" src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.js"></script>
 <?php if(Yii::$app->user->can('userIndex')){
     ?>
     <p>
@@ -77,6 +78,7 @@ $this->title =$title;
             'dataProvider' => $dataProvider,
             'emptyText' => Yii::t('app', 'Soon'),
             'summary' => '',
+            'itemOptions' => ['class' => 'product_item js_product_item'],
             'layout' => '{items}<div class="clear">{pager}</div>{summary}',
             'itemView' => function ($model, $key, $index, $widget) {
                 return $this->render('_view', ['model' => $model]);

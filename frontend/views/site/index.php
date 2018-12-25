@@ -67,7 +67,7 @@ $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `
             ?>
             <div class="col-sm-4">
                 <div class="ctg_box_img_wrap oh">
-                    <a href="/product/index?category_id<?=$category['id']?>">
+                    <a href="/product/index?category_id=<?=$category['id']?>">
                         <img src="/images/category/<?=$category['id']?>/<?=$category['image']?>" class="img-responsive">
                     </a>
                 </div>

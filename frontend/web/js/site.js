@@ -194,3 +194,12 @@ $('.js_main_img').click(function(){
     $('.js_photo_swipe').attr('data-index',ind);
 });
 //endregion
+ScrollReveal().reveal('.js_product_item .product_box',{
+    duration:1000,
+    origin:'bottom',
+    distance:'100px',
+    delay: 200,
+    useDelay: 'onload',
+    viewFactor:0.5,
+    interval:16
+});

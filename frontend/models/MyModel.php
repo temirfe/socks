@@ -105,8 +105,8 @@ class MyModel extends \yii\db\ActiveRecord
                     $extension=$image->extension;
                     $imageName=$time.'.'.$extension;
 
-                    $image->saveAs($tosave.'/' . $imageName);
-                    $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
+                    $image->saveAs($tosave.'/b_' . $imageName);
+                    $imagine=Image::getImagine()->open($tosave.'/b_'.$imageName);
                     $imagine->thumbnail(new Box(1500, 1000))->save($tosave.'/' .$imageName);
                     $imagine->thumbnail(new Box(400, 250))->save($tosave.'/s_'.$imageName);
                     //Image::thumbnail($tosave.'/'.$imageName,250, 250)->save($tosave.'/s_'.$imageName);

@@ -78,6 +78,7 @@ foreach($ctgs as $ctg){
         }
         echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
             'options' => ['accept' => 'image/*','multiple'=>true],
+            'resizeImages'=>true,
             'pluginOptions' => [
                 'showCaption' => false,
                 'showRemove' => false,
@@ -86,7 +87,8 @@ foreach($ctgs as $ctg){
                 'initialPreview'=>$iniImg2,
                 'previewFileType' => 'any',
                 'initialPreviewConfig' => $initialPreviewConfig2,
-
+                'maxImageWidth' => 1600,
+                'resizeImage' => true,
             ],
             'pluginEvents' => [
                 "filesorted" => "imgSorted",

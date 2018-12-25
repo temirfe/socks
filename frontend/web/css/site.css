@@ -794,9 +794,10 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     margin-right: 5px;}
 .thumbs_wrap ul{margin: 0;padding: 0;}
 .thumbs_wrap li{list-style-type: none;margin-bottom: 5px;}
-.thumbs_wrap a{border: 2px solid #fff;display: block;
+.thumbs_wrap a{border: 2px solid #fff;display: flex;
     height: 37px;
     overflow: hidden;
+    align-items:center;
     width: 53px;}
 .thumbs_wrap a:hover{border-color:#f8a411;}
 .thumbs_wrap a.active_thumb{border-color:#f8a411;}
@@ -937,3 +938,5 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     .box_img_wrap {width: 130px;height: 166px;}
     .box_title { width: 130px;}
 }
+.product_item{
+    visibility: hidden;}

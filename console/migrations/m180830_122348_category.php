@@ -21,6 +21,7 @@ class m180830_122348_category extends Migration
             'image' =>$this->string('200'),
             'public' =>$this->boolean(),
             'weight'=>$this->integer(2)->notNull()->defaultValue(0),
+            'has_product'=>$this->boolean()
         ],$tableOptions);
     }
 

@@ -28,6 +28,7 @@ foreach($ctgs as $ctg){
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
+    <?=$form->errorSummary($model)?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'category_id')->dropDownList($catsel,['prompt'=>'Выберите']); ?>
@@ -63,7 +64,6 @@ foreach($ctgs as $ctg){
         $model_name='product';
         $url = Url::to(['site/img-delete', 'id' => $model->id, 'model_name'=>$model_name]);
 
-
         //secondary images
         $iniImg2=false;
         $initialPreviewConfig2=[];
@@ -71,14 +71,15 @@ foreach($ctgs as $ctg){
             if($model->images && is_dir("images/{$model_name}/".$model->id)){
                 $imgs=explode(';',$model->images);
                 foreach($imgs as $img){
-                    $iniImg2[]=Html::img("@web/images/{$model_name}/".$model->id."/s_".$img, ['class'=>'file-preview-image img-responsive', 'alt'=>'']);
-                    $initialPreviewConfig2[] = ['width' => '80px', 'url' => $url, 'key' => $img, 'model_name'=>$model_name,'model_id'=>$model->id];
+                    if($img){
+                        $iniImg2[]=Html::img("@web/images/{$model_name}/".$model->id."/s_".$img, ['class'=>'file-preview-image img-responsive', 'alt'=>'']);
+                        $initialPreviewConfig2[] = ['width' => '80px', 'url' => $url, 'key' => $img, 'model_name'=>$model_name,'model_id'=>$model->id];
+                    }
                 }
             }
         }
-        echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
+        $fileInput=[
             'options' => ['accept' => 'image/*','multiple'=>true],
-            'resizeImages'=>true,
             'pluginOptions' => [
                 'showCaption' => false,
                 'showRemove' => false,
@@ -87,13 +88,22 @@ foreach($ctgs as $ctg){
                 'initialPreview'=>$iniImg2,
                 'previewFileType' => 'any',
                 'initialPreviewConfig' => $initialPreviewConfig2,
-                'maxImageWidth' => 1600,
-                'resizeImage' => true,
             ],
             'pluginEvents' => [
                 "filesorted" => "imgSorted",
             ],
-        ]);
+        ];
+
+        if(!$model->isNewRecord){
+            $resize=true;
+            $fileInput['resizeImages']=true;
+            $fileInput['pluginOptions']['uploadUrl']=Url::to(['/product/img-upload','id'=>$model->id]);
+            $fileInput['pluginOptions']['showUpload']=true;
+            $fileInput['pluginOptions']['resizeImage']=true;
+            $fileInput['pluginOptions']['maxImageWidth']=1500;
+        }
+
+        echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), $fileInput);
         ?>
     </div>
 

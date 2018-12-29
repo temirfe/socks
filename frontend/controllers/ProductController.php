@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Image\Box;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -162,5 +165,30 @@ class ProductController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    public function actionImgUpload(){
+        $files=UploadedFile::getInstancesByName('Product[imageFiles]');
+        $dir=Yii::getAlias('@webroot')."/images/product/";
+        $id=Yii::$app->request->get('id');
+        $tosave=$dir.$id;
+
+        foreach($files as $image)
+        {
+            $time=time().'s'.rand(1, 100);
+            $extension=$image->extension;
+            $imageName=$time.'.'.$extension;
+
+            $image->saveAs($tosave.'/' . $imageName);
+            $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
+            $imagine->thumbnail(new Box(400, 250))->save($tosave.'/s_'.$imageName);
+            $images[]=$imageName;
+        }
+        $images_str=implode(';',$images);
+        $images_field=Yii::$app->db->createCommand("SELECT images FROM product WHERE id='{$id}'")->queryScalar();
+        if($images_field){$images_str=$images_field.';'.$images_str;}
+        Yii::$app->db->createCommand("UPDATE product SET images='{$images_str}' WHERE id='{$id}'")->execute();
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return [];
     }
 }

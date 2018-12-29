@@ -43,9 +43,9 @@ class MyModel extends \yii\db\ActiveRecord
     {
         return [
             [['imageFile'], 'file', 'extensions' => 'jpg,jpeg,gif,png'],
-            [['imageFiles'], 'file', 'extensions' => 'jpg,jpeg,gif,png', 'maxSize'=>20*1024*1024, 'maxFiles'=>10],
+            [['imageFiles'], 'file', 'extensions' => 'jpg,jpeg,gif,png', 'maxSize'=>20*1024*1024, 'maxFiles'=>20],
             [['docFile'], 'file', 'extensions' => 'doc,docx,rtf,pdf,xls,xlsx'],
-            [['docFiles'], 'file', 'extensions' => 'doc,docx,rtf,pdf,xls,xlsx', 'maxSize'=>20*1024*1024, 'maxFiles'=>10]
+            [['docFiles'], 'file', 'extensions' => 'doc,docx,rtf,pdf,xls,xlsx', 'maxSize'=>20*1024*1024, 'maxFiles'=>20]
         ];
     }
     /**
@@ -105,8 +105,8 @@ class MyModel extends \yii\db\ActiveRecord
                     $extension=$image->extension;
                     $imageName=$time.'.'.$extension;
 
-                    $image->saveAs($tosave.'/b_' . $imageName);
-                    $imagine=Image::getImagine()->open($tosave.'/b_'.$imageName);
+                    $image->saveAs($tosave.'/' . $imageName);
+                    $imagine=Image::getImagine()->open($tosave.'/'.$imageName);
                     $imagine->thumbnail(new Box(1500, 1000))->save($tosave.'/' .$imageName);
                     $imagine->thumbnail(new Box(400, 250))->save($tosave.'/s_'.$imageName);
                     //Image::thumbnail($tosave.'/'.$imageName,250, 250)->save($tosave.'/s_'.$imageName);
@@ -114,7 +114,7 @@ class MyModel extends \yii\db\ActiveRecord
                 }
                 if($model_name=='product'){
                     $images_str=implode(';',$images);
-                    $images_str.=';'.$this->images;
+                    if($this->images){$images_str=$this->images.';'.$images_str;}
                     Yii::$app->db->createCommand("UPDATE {$model_name} SET images='{$images_str}' WHERE id='{$this->id}'")->execute();
                 }
             }

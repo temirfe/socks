@@ -16,6 +16,8 @@ use Yii;
  * @property int $price
  * @property int $sex
  * @property string $mainImg
+ *
+ * @property Category $category
  */
 class Product extends MyModel
 {
@@ -36,7 +38,7 @@ class Product extends MyModel
             [['title'], 'required'],
             [['public', 'category_id', 'price', 'sex'], 'integer'],
             [['description'], 'string'],
-            [['images'], 'string', 'max' => 200],
+            [['images'], 'string', 'max' => 500],
             [['title'], 'string', 'max' => 500],
         ];
         return array_merge($local, parent::rules());
@@ -80,5 +82,11 @@ class Product extends MyModel
             return explode(';',$images)[0];
         }
         return '';
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        Yii::$app->db->createCommand()->update('category',['has_product'=>1],['id'=>$this->category_id])->execute();
+        Yii::$app->db->createCommand()->update('category',['has_product'=>1],['id'=>$this->category->parent_id])->execute();
     }
 }

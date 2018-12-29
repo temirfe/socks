@@ -13,6 +13,7 @@ use yii\helpers\Html;
  * @property int $parent_id
  * @property int $public
  * @property int $weight
+ * @property int $has_product
  * @property string $title
  * @property string $description
  * @property string $image
@@ -37,7 +38,7 @@ class Category extends MyModel
     {
         $local= [
             [['title'], 'required'],
-            [['parent_id','public','weight'], 'number'],
+            [['parent_id','public','weight','has_product'], 'number'],
             [['title'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 500],
             [['image'], 'safe'],

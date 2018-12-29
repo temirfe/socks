@@ -64,17 +64,22 @@ $singlets=$dao->createCommand("SELECT * FROM product WHERE `category_id`=2 AND `
     <div class="ctg_menu oh">
         <?php
         foreach($categories as $category){
+            $img=Html::img('/images/category/'.$category['id'].'/'.$category['image'],['class'=>'img-responsive']);
+            $link=['/product/index','category_id'=>$category['id']];
+            $img_link=Html::a($img,$link);
+            $title_link=Html::a($category['title'],$link);
+            $title_div=Html::tag('div',$title_link,['class'=>'ctg_box_title']);
+
+            if($category['has_product']){$soon='';}
+            else{
+                $soon=Html::tag('div','Скоро..',['class'=>'soon']);
+            }
+
+            echo Html::beginTag('div',['class'=>'col-sm-4']);
+            echo Html::tag('div',$img_link.$soon,['class'=>'ctg_box_img_wrap oh']);
+            echo Html::tag('div',$title_div,['class'=>'ctg_box_info mb20  oh']);
+            echo Html::endTag('div');
             ?>
-            <div class="col-sm-4">
-                <div class="ctg_box_img_wrap oh">
-                    <a href="/product/index?category_id=<?=$category['id']?>">
-                        <img src="/images/category/<?=$category['id']?>/<?=$category['image']?>" class="img-responsive">
-                    </a>
-                </div>
-                <div class="ctg_box_info mb20 oh">
-                    <div class="ctg_box_title"><?=Html::a($category['title'],['/product/index','category_id'=>$category['id']])?></div>
-                </div>
-            </div>
             <?php
         }
         ?>

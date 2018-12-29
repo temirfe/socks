@@ -91,16 +91,21 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     //initialize swiper when document ready
-    let swiperCont=$('.country_swiper');
+    let swiperCont=$('.related_swiper');
     if(swiperCont.length){
         let scount=parseInt(swiperCont.attr("data-count"));
         if(scount>1){
-            let mySwiper = new Swiper ('.country_swiper', {
+            console.log('usrod');
+            let mySwiper = new Swiper ('.related_swiper', {
                 // Optional parameters
                 //loop:true,
-                slidesPerView: 3,
-                spaceBetween: 5,
+                slidesPerView: 4,
+                spaceBetween: 2,
                 freeMode: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
                 /*autoplay: {
                     delay: 4000,
                     disableOnInteraction: false,
@@ -195,6 +200,9 @@ $('.js_main_img').click(function(){
 });
 //endregion
 if($('.product-index').length){
+    reveal();
+}
+function reveal(){
     ScrollReveal().reveal('.js_product_item .product_box',{
         duration:1000,
         origin:'bottom',
@@ -205,3 +213,7 @@ if($('.product-index').length){
         interval:16
     });
 }
+
+$(document).on('pjax:success', function() {
+    reveal();
+});

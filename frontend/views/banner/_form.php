@@ -41,7 +41,6 @@ use kartik\file\FileInput;
             'showUpload' => false,
             'initialPreview'=>$iniImg,
             'previewFileType' => 'any',
-            'uploadUrl' => Url::to(['/site/img-upload','id'=>$model->id]),
             'initialPreviewConfig' => $initialPreviewConfig,
         ],
     ]);

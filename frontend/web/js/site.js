@@ -71,14 +71,15 @@ $(document).ready(function () {
             let mySwiper = new Swiper ('.banner-container', {
                 // Optional parameters
                 //direction: 'vertical',
-                effect: 'fade',
+                loop: true,
+                effect: 'coverflow',
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
                 //loop:true,
                 autoplay: {
-                    delay: 12500,
+                    delay: 4000,
                     disableOnInteraction: false,
                 },
                 navigation: {
@@ -88,18 +89,67 @@ $(document).ready(function () {
             })
         }
     }
+
+    let img_wrap=$('.real_img_wrap');
+    if(img_wrap.length){
+        let img_count=parseInt(img_wrap.attr("data-count"));
+        if(img_count>1){
+            let imgSwiper = new Swiper ('.real_img_wrap', {
+                // Optional parameters
+                //direction: 'vertical',
+                effect: 'coverflow',
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                //loop:true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+
+            $('.js_img_swiper_item').click(function(){
+                openPhotoSwipe(imgSwiper.activeIndex);
+            });
+
+            imgSwiper.on('slideChange', function () {
+                $('.js_photo_swipe').attr('data-index',imgSwiper.activeIndex);
+                $('.js_prevent_default').attr('class','js_open_thumb');
+                $(".js_open_thumb[data-index='"+imgSwiper.activeIndex+"']").attr('class','js_prevent_default active_thumb');
+            });
+
+
+            $(document).on('click','.js_open_thumb',function(e){
+                e.preventDefault();
+                $('.js_prevent_default').attr('class','js_open_thumb');
+                $(this).attr('class','js_prevent_default active_thumb');
+                //$('.js_main_img').attr('src',$(this).attr('data-big'));
+
+                let ind=$(this).attr('data-index');
+                $('.js_photo_swipe').attr('data-index',ind);
+                imgSwiper.slideTo(ind);
+
+            });
+
+        }
+    }
+
 });
 $(document).ready(function () {
     //initialize swiper when document ready
+    let slides=2;
+    if($(document).width()>600){
+        slides=4;
+    }
     let swiperCont=$('.related_swiper');
     if(swiperCont.length){
         let scount=parseInt(swiperCont.attr("data-count"));
         if(scount>1){
-            console.log('usrod');
             let mySwiper = new Swiper ('.related_swiper', {
                 // Optional parameters
                 //loop:true,
-                slidesPerView: 4,
+                slidesPerView: slides,
                 spaceBetween: 2,
                 freeMode: true,
                 pagination: {
@@ -175,15 +225,6 @@ var openPhotoSwipe = function(ind)
 $(document).on('click', '.js_prevent_default',function(e){
     e.preventDefault();
 });
-$(document).on('click','.js_open_thumb',function(e){
-    e.preventDefault();
-    $('.js_prevent_default').attr('class','js_open_thumb');
-    $(this).attr('class','js_prevent_default active_thumb');
-    $('.js_main_img').attr('src',$(this).attr('data-big'));
-
-    let ind=$(this).attr('data-index');
-    $('.js_photo_swipe').attr('data-index',ind);
-});
 
 $('.js_main_img').click(function(){
     let active_thumb_link=$('.js_prevent_default');
@@ -209,7 +250,7 @@ function reveal(){
         distance:'100px',
         delay: 200,
         useDelay: 'onload',
-        viewFactor:0.5,
+        viewFactor:0.2,
         interval:16
     });
 }

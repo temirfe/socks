@@ -21,26 +21,31 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 
 $imgs=explode(';',$model->images);
+$user=Yii::$app->user;
 ?>
 <div class="product-view">
 
+    <?php
+    if($user->can('userIndex')){
+        echo Html::beginTag('p');
+            echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary mob_hidden']);
+            echo Html::a('Ред.', ['update', 'id' => $model->id], ['class' => 'btn btn-primary mob_visible']);
+            echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]);
+            echo Html::a(Yii::t('app', 'Products'), ['admin'], ['class' => 'btn btn-default pull-right']);
+            echo Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success pull-right mr10 mob_hidden']);
+            echo Html::a('+', ['create'], ['class' => 'btn btn-success pull-right mr10 mob_visible']);
+        echo Html::endTag('p');
+    }
+    ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-
-        <?= Html::a(Yii::t('app', 'Products'), ['admin'], ['class' => 'btn btn-default pull-right']) ?>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success pull-right mr10 mob_hidden']) ?>
-        <?= Html::a('+', ['create'], ['class' => 'btn btn-success pull-right mr10 mob_visible']) ?>
-    </p>
-    <div class="row mb25">
-        <div class="col-sm-12">
+    <div class="row mb25 mob_mar_0">
+        <div class="col-sm-12 mob_pad_0">
             <div class="white_box oh mob_pad_0">
                 <?php
                 if($imgs){

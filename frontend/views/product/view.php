@@ -36,12 +36,12 @@ $imgs=explode(';',$model->images);
         ]) ?>
 
         <?= Html::a(Yii::t('app', 'Products'), ['admin'], ['class' => 'btn btn-default pull-right']) ?>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success pull-right mr10']) ?>
+        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success pull-right mr10 mob_hidden']) ?>
+        <?= Html::a('+', ['create'], ['class' => 'btn btn-success pull-right mr10 mob_visible']) ?>
     </p>
     <div class="row mb25">
         <div class="col-sm-12">
-            <div class="white_box oh">
-
+            <div class="white_box oh mob_pad_0">
                 <?php
                 if($imgs){
                     ?>
@@ -51,7 +51,7 @@ $imgs=explode(';',$model->images);
                         if(count($imgs)>0){
                             ?>
 
-                            <div class='thumbs_wrap pull-left'>
+                            <div class='thumbs_wrap pull-left mob_hidden'>
                                 <ul>
                                     <?php
                                     $img_index = 0;
@@ -67,9 +67,18 @@ $imgs=explode(';',$model->images);
                             <?php
                         }
                         ?>
-                        <div class="real_img_wrap">
-                            <div class='abs open_gallery'><?=Html::a("<span class='glyphicon glyphicon-zoom-in'></span>", '#', ['class' => 'js_photo_swipe', 'data-index' => '0']);?></div>
-                            <?=Html::img('/images/product/'.$model->id.'/'.$imgs[0],['class'=>'img-responsive js_main_img']); ?>
+                        <div class="real_img_wrap swiper-container" data-count="<?=count($imgs)?>">
+                            <!--<div class='abs open_gallery'><?/*=Html::a("<span class='glyphicon glyphicon-zoom-in'></span>", '#', ['class' => 'js_photo_swipe', 'data-index' => '0']);*/?></div>-->
+                            <div class="swiper-wrapper">
+                                <?php
+                                foreach($imgs as $img){
+                                    echo Html::img('/images/product/'.$model->id.'/'.$img,['class'=>'img-responsive swiper-slide js_img_swiper_item']);
+                                }
+                                ?>
+                            </div>
+                            <div class="swiper-pagination mob_visible"></div>
+                            <div class="swiper-button-next mob_hidden"></div>
+                            <div class="swiper-button-prev mob_hidden"></div>
                         </div>
 
                     </div>
@@ -78,7 +87,7 @@ $imgs=explode(';',$model->images);
                 ?>
 
                 <div class="col-sm-6">
-                    <h2 class="mt0"><?= Html::encode($this->title) ?></h2>
+                    <h2 class="mt0 mob_mt_25 mob_mb_20 mob_bold"><?= Html::encode($this->title) ?></h2>
                     <?php if($model->price){echo Html::tag('h1 ',$model->price. ' сом');}?>
                     <?=$model->description?>
                 </div>

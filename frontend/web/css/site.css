@@ -909,6 +909,7 @@ h3.box_title_ru-RU{font-family: 'Lobster', cursive;}
     .mob_hidden{display:none;}
     .mob_visible{display:initial;}
     .mob_pad_0{padding:0;}
+    .mob_mar_0{margin:0;}
     .mob_mt_25{margin-bottom:25px;}
     .mob_mb_20{margin-top:20px;}
     .mob_bold{ font-weight: bold;}

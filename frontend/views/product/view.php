@@ -19,8 +19,8 @@ include_once($webroot.'/photoswipe/_swipe.php');
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-$imgs=explode(';',$model->images);
+$images=rtrim($model->images,";");
+$imgs=explode(';',$images);
 $user=Yii::$app->user;
 ?>
 <div class="product-view">

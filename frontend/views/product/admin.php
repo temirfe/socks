@@ -32,8 +32,6 @@ $ctgs=ArrayHelper::map($categories,'id','title');
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-
                 ['attribute' => 'id', 'contentOptions' => ['width' => 80]],
                 [
                     'attribute' => 'title',
@@ -44,14 +42,16 @@ $ctgs=ArrayHelper::map($categories,'id','title');
                         return $img.$model->title;
                     },
                 ],
-                'title',
                 'price',
                 //'sex',
                 [
                     'attribute' => 'category_id',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->category->title;
+                     'value' => function ($model) use($ctgs) {
+                        //return $model->category->title;
+                         if(isset( $ctgs[$model->category_id])){
+                             return  $ctgs[$model->category_id];
+                         }
+                        return $model->category_id;
                     },
                     'filter' => Html::activeDropDownList($searchModel, 'category_id', $ctgs, ['class' => 'form-control', 'prompt' => Yii::t('app', 'All')]),
                 ],
@@ -59,17 +59,18 @@ $ctgs=ArrayHelper::map($categories,'id','title');
                     'attribute' => 'public',
                     'format' => 'raw',
                     'value' => function ($model) {
-                            $public=['нет','да'];
+                        $public=['нет','да'];
                         return $public[$model->public];
                     },
                     'filter' => Html::activeDropDownList($searchModel, 'public', ['нет','да'], ['class' => 'form-control', 'prompt' => Yii::t('app', 'All')]),
                 ],
 
+
                 ['class' => 'yii\grid\ActionColumn'],
             ],
         ]);
     } catch (Exception $e) {
-        var_dump($e);
+        //var_dump($e);
     } ?>
     <?php Pjax::end(); ?>
 </div>
